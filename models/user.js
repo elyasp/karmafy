@@ -29,7 +29,10 @@ const schema = new mongoose.Schema({
   }
 });
 
-schema.statics.register = "statics/registration.js";
-schema.statics.login = "statics/login.js";
+const registerStatic = require("./statics/registration.js");
+const logInStatic = require("./statics/login.js");
+
+schema.statics.register = registerStatic;
+schema.statics.logIn = logInStatic;
 
 module.exports = mongoose.model("User", schema);

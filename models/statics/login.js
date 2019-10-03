@@ -5,14 +5,14 @@ const bcrypt = require("bcryptjs");
 const logIn = (email, password) => {
   const Model = this;
 
-  let globalUser;
+  let auxUser;
 
   return Model.findOne({ email })
     .then(user => {
       if (!user) {
         throw new Error("NO USER FOUND");
       } else {
-        globalUser = user;
+        auxUser = user;
         return bcrypt.compare(password, user.password);
       }
     })
@@ -20,7 +20,7 @@ const logIn = (email, password) => {
       if (!found) {
         throw new Error("INCORRECT CREDENTIALS");
       } else {
-        return Promise.resolve(globalUser);
+        return Promise.resolve(auxUser);
       }
     })
     .catch(error => {
