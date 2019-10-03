@@ -29,6 +29,7 @@ const schema = new mongoose.Schema({
   }
 });
 
-// == ADD STATICS LATER FOR PASSPORT
+schema.statics.register = "statics/registration.js";
+schema.statics.login = "statics/login.js";
 
 module.exports = mongoose.model("User", schema);
