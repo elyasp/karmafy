@@ -1,45 +1,59 @@
 import React, { Component } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Form, Button } from "react-bootstrap";
 
-export default class SignUpView extends Component {
+import * as AuthenticationServices from "./../services/auth-service";
+
+export default class RegisterView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      name: "",
+      email: "",
       password: ""
     };
+    this.onValueChange = this.onValueChange.bind(this);
+  }
+
+  onValueChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({
+      [name]: value
+    });
   }
 
   render() {
     return (
-      <div>
-        <h1>Sign Up</h1>
-        <Form>
-          <Form.Group>
-            <Form.Label>Username</Form.Label>
-            <Form.Control placeholder="Username" name="username" />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
+      <div className="registerfields">
+        <Form className="registerfields" onSubmit={}>
+          <Form.Group controlId="formGroupName">
+            <Form.Label>Name</Form.Label>
             <Form.Control
-              placeholder="Password"
-              name="password"
-              type="password"
+              type="text"
+              name="name"
+              value={this.state.name}
+              placeholder="What is your name?"
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Campus</Form.Label>
-            <Form.Control as="select" placeholder="Campus" name="campus">
-              <option value="" disabled>
-                Choose a Campus
-              </option>
-            </Form.Control>
+          <Form.Group controlId="formGroupEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={this.state.email}
+              placeholder="Enter your email"
+            />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Course</Form.Label>
+          <Form.Group controlId="formGroupPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={this.state.password}
+              placeholder="Choose a password"
+            />
           </Form.Group>
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit">Register</Button>
         </Form>
       </div>
     );

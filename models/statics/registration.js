@@ -2,17 +2,10 @@
 
 const bcrypt = require("bcryptjs");
 
-const register = (
-  name,
-  email,
-  password,
-  latitude,
-  longitude,
-  profilePhoto,
-  count
-) => {
+module.exports = function({ name, email, password }) {
   const Model = this;
 
+  //   console.log("THE USER IS", name, email, password);
   return Model.findOne({ email })
     .then(user => {
       if (user) {
@@ -25,10 +18,7 @@ const register = (
       return Model.create({
         name,
         email,
-        password: hash,
-        location: [latitude, longitude],
-        profilePhoto,
-        count
+        password: hash
       });
     })
     .then(user => {
@@ -39,5 +29,3 @@ const register = (
       return Promise.reject(error);
     });
 };
-
-module.exports = register;
