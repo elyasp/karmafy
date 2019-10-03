@@ -35,7 +35,7 @@ export default class ItemView extends Component {
             />
           </Carousel.Item>
         </Carousel>
-        <Card.Body>
+        <Card.Body className="px-0">
           <Card.Title className="mt-3" style={{ fontSize: "2.6rem" }}>
             Card Title
           </Card.Title>

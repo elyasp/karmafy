@@ -1,36 +1,35 @@
-'use strict';
+"use strict";
 
-require('dotenv').config();
+require("dotenv").config();
 
-const debug = require('debug')('final-project:server');
-const app = require('./../app');
-const database = require('./database');
+const debug = require("debug")("final-project:server");
+const app = require("./../app");
+const database = require("./database");
 
 const PORT = parseInt(process.env.PORT, 10);
 const URI = process.env.MONGODB_URI;
 
 const terminate = () => {
-  debug('Terminating node app.');
-  database.disconnect()
-    .then(() => {
-      debug('Disconnect from database');
-      process.exit(0);
-    });
+  debug("Terminating node app.");
+  database.disconnect().then(() => {
+    debug("Disconnect from database");
+    process.exit(0);
+  });
 };
 
-process.on('SIGINT', terminate);
-process.on('SIGTERM', terminate);
+process.on("SIGINT", terminate);
+process.on("SIGTERM", terminate);
 
 const onError = error => {
   const { syscall, port, code } = error;
-  if (syscall !== 'listen') throw error;
+  if (syscall !== "listen") throw error;
   switch (code) {
-    case 'EADDRINUSE':
-      console.error(`Port ${ port } is already in use`);
+    case "EADDRINUSE":
+      console.error(`Port ${port} is already in use`);
       process.exit(1);
       break;
-    case 'EACCES':
-      console.error(`Port ${ port } requires elevated privileges`);
+    case "EACCES":
+      console.error(`Port ${port} requires elevated privileges`);
       process.exit(1);
       break;
     default:
@@ -40,24 +39,25 @@ const onError = error => {
 
 const onListening = server => {
   const { port } = server.address();
-  debug(`Node server listening on ${ port }`);
+  debug(`Node server listening on ${port}`);
 };
 
 const initiate = () => {
-  app.set('port', PORT);
-  
+  app.set("port", PORT);
+
   const server = app.listen(PORT);
-  server.on('error', error => onError(error));
-  server.on('listening', () => onListening(server));
+  server.on("error", error => onError(error));
+  server.on("listening", () => onListening(server));
 };
 
-database.connect(URI)
+database
+  .connect(URI)
   .then(() => {
-    debug(`Database connected to URI "${ URI }"`);
+    debug(`Lost and Found Database connected to URI "${URI}"`);
     initiate();
   })
   .catch(error => {
-    console.error(`There was an error connecting the database to URI "${ URI }"`);
+    console.error(`There was an error connecting the database to URI "${URI}"`);
     debug(error);
     process.exit(1);
   });

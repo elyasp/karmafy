@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 export default class HomeView extends Component {
   render() {
     return (
-      <div>
+      <div className="container mx-auto text-center">
+        <h1 className="text-center">Lost and Found</h1>
         <Link to="/login" className="btn">
           <h3>Log In</h3>
         </Link>

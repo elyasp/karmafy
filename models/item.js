@@ -21,12 +21,11 @@ const schema = new mongoose.Schema(
     ],
     location: {
       type: String,
-      required: true,
+      // required: true,
       trim: true
     },
-    itemType: {
-      required: true,
-      enum: ["Lost", "Found"]
+    itemStatus: {
+      type: String
     },
     resolved: {
       type: Boolean,
