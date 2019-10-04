@@ -29,12 +29,10 @@ export default class ItemAddView extends Component {
   }
 
   addItem() {
-    console.log("state", this.state.item);
     const item = this.state.item;
     add(item)
       .then(item => {
-        console.log("Did it");
-        this.props.history.push(`/item/${item._id}`);
+        this.props.history.push(`/item/${item.data.data.item._id}`);
       })
       .catch(error => {
         console.log(error);
@@ -42,6 +40,7 @@ export default class ItemAddView extends Component {
   }
 
   render() {
+    // console.log(req.body.user);
     return (
       <div className="container">
         <h1 className="text-center">Add Item</h1>

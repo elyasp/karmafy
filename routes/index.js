@@ -36,7 +36,7 @@ router.patch("/item/:id/edit", (req, res, next) => {
   const { title, description } = req.body;
   Item.findOneAndUpdate(
     {
-      _id: id
+      id: id
     },
     {
       ...(title && { title }),
@@ -59,9 +59,7 @@ router.patch("/item/:id/edit", (req, res, next) => {
 router.delete("/item/:id/delete", (req, res, next) => {
   const id = req.params.id;
   Item.findOneAndDelete({
-    _id: id
-    // ,
-    // user: req.user._id
+    id: id
   })
     .then(item => {
       if (item) {
@@ -78,7 +76,7 @@ router.delete("/item/:id/delete", (req, res, next) => {
 router.get("/item/:id", (req, res, next) => {
   const id = req.params.id;
   Item.findById(id)
-    .populate("user")
+    // .populate("user")
     .then(item => {
       res.json({ type: "success", data: { item } });
     })

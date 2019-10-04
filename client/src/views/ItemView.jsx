@@ -89,7 +89,7 @@ export default class ItemView extends Component {
             </Link>
             <div>
               <Link
-                to="/item/:id/edit"
+                to={`/item/${item._id}/edit`}
                 className="mx-3 btn btn-danger"
                 variant="primary"
               >
