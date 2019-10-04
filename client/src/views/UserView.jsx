@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -13,6 +14,12 @@ export default class Profile extends Component {
       <div>
         <h1>Hi there {this.state.name} </h1>
         <h3> Toggle between loser and founder above</h3>
+
+        <h2>Or view some items here</h2>
+
+        <Link to="/item" className="btn">
+          <h3>Item</h3>
+        </Link>
       </div>
     );
   }

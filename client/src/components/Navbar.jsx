@@ -20,7 +20,7 @@ const NavbarItem = () => {
       <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
         <Nav className="">
           <Link to="/user" className="text-white">
-            My Items
+            Dashboard
           </Link>
           <Link to="/register" className="text-white">
             Register

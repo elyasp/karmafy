@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-||||||| merged common ancestors
-import { Link } from "react-router-dom";
-=======
 // import { Link } from "react-router-dom";
->>>>>>> 6f37cd01e816a836c3ed745f8c2b0b6fccd171af
 
 // import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
