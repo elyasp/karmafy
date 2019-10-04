@@ -75,4 +75,16 @@ router.delete("/item/:id/delete", (req, res, next) => {
     });
 });
 
+router.get("/item/:id", (req, res, next) => {
+  const id = req.params.id;
+  Item.findById(id)
+    .populate("user")
+    .then(item => {
+      res.json({ type: "success", data: { item } });
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
 module.exports = router;

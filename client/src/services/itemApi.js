@@ -23,7 +23,7 @@ export const load = id => {
     itemApi
       .get(`/item/${id}`)
       .then(response => {
-        resolve(response);
+        resolve(response.data.data.item);
       })
       .catch(error => {
         reject(error);
