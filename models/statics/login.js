@@ -2,7 +2,7 @@
 
 const bcrypt = require("bcryptjs");
 
-const logIn = (email, password) => {
+const logIn = function({ email, password }) {
   const Model = this;
 
   let auxUser;

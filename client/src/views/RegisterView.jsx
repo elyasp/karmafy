@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+import * as AuthenticationServices from "./../services/auth-service";
+
+=======
+import * as AuthenticationServices from "./../services/authServices";
+
+>>>>>>> 6f37cd01e816a836c3ed745f8c2b0b6fccd171af
 export default class RegisterView extends Component {
   constructor(props) {
     super(props);
@@ -10,26 +18,53 @@ export default class RegisterView extends Component {
       password: ""
     };
     this.onValueChange = this.onValueChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onValueChange(e) {
+    console.log(e.target);
     const name = e.target.name;
+    // const email = e.target.email;
     const value = e.target.value;
     this.setState({
       [name]: value
+      // [email]: value
     });
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    const { name, email, password } = this.state;
+    AuthenticationServices.registerService({
+      name,
+      email,
+      password
+    })
+      .then(() => {
+        this.props.history.push("/user");
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render() {
     return (
       <div className="registerfields">
+<<<<<<< HEAD
         <Form className="registerfields">
+||||||| merged common ancestors
+        <Form className="registerfields" onSubmit={}>
+=======
+        <Form className="registerfields" onSubmit={this.onSubmit}>
+>>>>>>> 6f37cd01e816a836c3ed745f8c2b0b6fccd171af
           <Form.Group controlId="formGroupName">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
               name="name"
               value={this.state.name}
+              onChange={this.onValueChange}
               placeholder="What is your name?"
             />
           </Form.Group>
@@ -39,6 +74,7 @@ export default class RegisterView extends Component {
               type="email"
               name="email"
               value={this.state.email}
+              onChange={this.onValueChange}
               placeholder="Enter your email"
             />
           </Form.Group>
@@ -48,6 +84,7 @@ export default class RegisterView extends Component {
               type="password"
               name="password"
               value={this.state.password}
+              onChange={this.onValueChange}
               placeholder="Choose a password"
             />
           </Form.Group>

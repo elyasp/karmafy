@@ -32,7 +32,6 @@ export default class List extends Component {
       <div>
         {this.state.items.map(post => (
           // <Link to={`/item/${item._id}`} key={item._id}>
-          <Link to="/">
             <Card
               className="mt-5 border-0 mx-auto text-center"
               style={{ width: "90%" }}
