@@ -6,9 +6,18 @@ const router = Router();
 
 const Item = require("./../models/item");
 
+router.get("/all", (req, res, next) => {
+  Item.find()
+    .then(items => {
+      res.json({ type: "success", data: { items } });
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
 router.post("/item/add", (req, res, next) => {
   const { title, description, itemStatus } = req.body;
-  console.log(title);
   Item.create({
     title,
     description,
@@ -16,6 +25,50 @@ router.post("/item/add", (req, res, next) => {
   })
     .then(item => {
       res.json({ type: "success", data: { item } });
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.patch("/item/:id/edit", (req, res, next) => {
+  const id = req.params.id;
+  const { title, description } = req.body;
+  Item.findOneAndUpdate(
+    {
+      _id: id
+    },
+    {
+      ...(title && { title }),
+      ...(description && { description })
+    },
+    { new: true }
+  )
+    .then(item => {
+      if (item) {
+        res.json({ type: "success", data: { item } });
+      } else {
+        next(new Error("POST_COULD_NOT_BE_EDITED"));
+      }
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.delete("/item/:id/delete", (req, res, next) => {
+  const id = req.params.id;
+  Item.findOneAndDelete({
+    _id: id
+    // ,
+    // user: req.user._id
+  })
+    .then(item => {
+      if (item) {
+        res.json({ type: "success" });
+      } else {
+        next(new Error("ITEM_COULD_NOT_BE_DELETED"));
+      }
     })
     .catch(error => {
       next(error);

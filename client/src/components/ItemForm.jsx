@@ -8,12 +8,21 @@ export default class ItemFormView extends Component {
   constructor(props) {
     super(props);
     this.onValueChange = this.onValueChange.bind(this);
+    this.onButtonValueChange = this.onButtonValueChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onValueChange(event) {
     const name = event.target.name;
     const value = event.target.value;
+    this.props.onValueChange({
+      [name]: value
+    });
+  }
+
+  onButtonValueChange(event) {
+    const name = event.target.name;
+    const value = event.target.id;
     this.props.onValueChange({
       [name]: value
     });
@@ -28,27 +37,29 @@ export default class ItemFormView extends Component {
     return (
       <Form onSubmit={this.onFormSubmit}>
         <Form.Group>
-          <div class="form-check form-check-inline">
-            <Form.Check
-              class="form-check-input"
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input "
               type="radio"
-              name="Lost"
-              id="inlineRadio1"
-              value={this.props.value.itemStatus}
-              onChange={this.onValueChange}
+              name="itemStatus"
+              id="Found"
+              onChange={this.onButtonValueChange}
             />
-            Lost
+            <label className="form-check-label" for="exampleRadios1">
+              Found Item
+            </label>
           </div>
-          <div class="form-check form-check-inline">
-            <Form.Check
-              class="form-check-input"
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
               type="radio"
-              name="Found"
-              id="inlineRadio2"
-              value={this.props.value.itemStatus}
-              onChange={this.onValueChange}
+              name="itemStatus"
+              id="Lost"
+              onChange={this.onButtonValueChange}
             />
-            Found
+            <label className="form-check-label" for="exampleRadios2">
+              Lost Item
+            </label>
           </div>
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlInput1">

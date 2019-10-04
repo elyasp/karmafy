@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 
 export default class ItemView extends Component {
   render() {

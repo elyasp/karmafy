@@ -7,9 +7,10 @@ const itemApi = axios.create({
 export const list = () => {
   return new Promise((resolve, reject) => {
     itemApi
-      .get("/")
+      .get("/all")
       .then(response => {
-        resolve(response);
+        console.log("This is all", response.data.data);
+        resolve(response.data.data.items);
       })
       .catch(error => {
         reject(error);
@@ -33,7 +34,7 @@ export const load = id => {
 export const edit = (id, updatedItem) => {
   return new Promise((resolve, reject) => {
     itemApi
-      .patch(`/item/${id}`, updatedItem)
+      .patch(`/item/${id}/edit`, updatedItem)
       .then(response => {
         resolve(response);
       })
@@ -46,7 +47,7 @@ export const edit = (id, updatedItem) => {
 export const remove = id => {
   return new Promise((resolve, reject) => {
     itemApi
-      .delete(`/item/${id}`)
+      .delete(`/item/${id}/delete`)
       .then(() => {
         resolve();
       })
@@ -61,7 +62,6 @@ export const add = itemData => {
     itemApi
       .post("/item/add", itemData)
       .then(response => {
-        console.log(response);
         resolve(response);
       })
       .catch(error => {

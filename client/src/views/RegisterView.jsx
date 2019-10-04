@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 
-import * as AuthenticationServices from "./../services/auth-service";
-
 export default class RegisterView extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +23,7 @@ export default class RegisterView extends Component {
   render() {
     return (
       <div className="registerfields">
-        <Form className="registerfields" onSubmit={}>
+        <Form className="registerfields">
           <Form.Group controlId="formGroupName">
             <Form.Label>Name</Form.Label>
             <Form.Control
