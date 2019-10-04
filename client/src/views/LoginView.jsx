@@ -31,7 +31,7 @@ export default class LoginView extends Component {
       password
     })
       .then(() => {
-        this.props.history.push("/profile");
+        this.props.history.push("/user");
       })
       .catch(error => {
         console.log(error);
