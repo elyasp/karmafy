@@ -5,7 +5,6 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeView from "./views/HomeView";
 import LoginView from "./views/LoginView";
-import LogoutView from "./views/LogoutView";
 import RegisterView from "./views/RegisterView";
 import UserView from "./views/UserView";
 import ItemView from "./views/ItemView";
@@ -24,7 +23,6 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomeView} />
           <Route path="/login" exact component={LoginView} />
-          <Route path="/logout" exact component={LogoutView} />
           <Route path="/register" exact component={RegisterView} />
           <Route path="/user" exact component={UserView} />
           <Route path="/all" component={ListView} />

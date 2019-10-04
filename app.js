@@ -35,7 +35,7 @@ app.use(
   })
 );
 
-app.use("/", authRouter);
+app.use("/", authRouter); ////////////////// POSSIBLE BUG
 app.use("/", indexRouter);
 
 // Catch missing routes and forward to error handler

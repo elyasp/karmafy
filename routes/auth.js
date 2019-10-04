@@ -11,6 +11,6 @@ const logOutController = require("./../controllers/auth/logout");
 
 router.post("/register", routeGuardMiddleware(false), registerController);
 router.post("/login", routeGuardMiddleware(false), logInController);
-router.post("/logout", routeGuardMiddleware(true), logOutController);
+router.post("/logout", logOutController);
 
 module.exports = router;
