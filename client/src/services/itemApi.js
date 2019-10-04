@@ -9,7 +9,6 @@ export const list = () => {
     itemApi
       .get("/all")
       .then(response => {
-        console.log("This is all", response.data.data);
         resolve(response.data.data.items);
       })
       .catch(error => {
