@@ -11,6 +11,8 @@ const expressSession = require("express-session");
 const MongoStore = require("connect-mongo")(expressSession);
 const mongoose = require("mongoose");
 
+const deserializer = require("./middleware/deserializer");
+
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 
@@ -34,6 +36,8 @@ app.use(
     })
   })
 );
+
+app.use(deserializer);
 
 app.use("/", authRouter); ////////////////// POSSIBLE BUG, two routers, one path
 app.use("/", indexRouter);

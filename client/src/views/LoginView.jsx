@@ -30,7 +30,8 @@ export default class LoginView extends Component {
       email,
       password
     })
-      .then(() => {
+      .then(user => {
+        this.props.loadUser(user);
         this.props.history.push("/user");
       })
       .catch(error => {
