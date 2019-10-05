@@ -5,6 +5,9 @@ import Button from "react-bootstrap/Button";
 import ItemForm from "./../components/ItemForm";
 import { add } from "./../services/itemApi";
 
+/////// IMPORT HERE THE ADD LOST N FOUND COMPONENTS<
+/// SWITCH COMPONENT BASED ON LOST OR FOUND CHECKBOX, and therefore the form changes
+
 export default class ItemAddView extends Component {
   constructor(props) {
     super(props);

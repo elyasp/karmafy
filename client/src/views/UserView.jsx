@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
+
+// import Importer from "./ItemAddView";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -14,9 +17,9 @@ export default class Profile extends Component {
       <div>
         <h1>Hi there {this.state.name} </h1>
         <h3> Toggle between loser and founder above</h3>
+        <p>===============TEST ENV FOUND ITEM FORM ===================</p>
 
-        <h2>Or view some items here</h2>
-
+        <p>============================================</p>
         <Link to="/item" className="btn">
           <h3>Item</h3>
         </Link>

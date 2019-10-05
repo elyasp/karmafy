@@ -32,7 +32,7 @@ export const logInService = ({ email, password }) =>
 
 //////////////////////
 
-export const loggedIn = () =>
+export const verifyService = () =>
   new Promise((resolve, reject) => {
     authAPI
       .get("/loggedin")

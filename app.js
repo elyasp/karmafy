@@ -35,7 +35,7 @@ app.use(
   })
 );
 
-app.use("/", authRouter); ////////////////// POSSIBLE BUG
+app.use("/", authRouter); ////////////////// POSSIBLE BUG, two routers, one path
 app.use("/", indexRouter);
 
 // Catch missing routes and forward to error handler

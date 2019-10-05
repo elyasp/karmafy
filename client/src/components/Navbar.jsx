@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import * as AuthenticationServices from "./../services/authServices";
 
-export default class NavbarItem extends Component {
+class NavbarItem extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -52,3 +52,5 @@ export default class NavbarItem extends Component {
     );
   }
 }
+
+export default withRouter(NavbarItem);
