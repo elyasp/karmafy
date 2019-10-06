@@ -17,6 +17,19 @@ export const registerService = ({ name, email, password }) =>
       });
   });
 
+// export const getName = ({ name }) =>
+//   new Promise((resolve, reject) => {
+//     authAPI
+//       .get("/login", { name })
+//       .then(response => {
+//         const name = response.data.user.name;
+//         resolve(name);
+//       })
+//       .catch(error => {
+//         reject("PLAN FAILED", error);
+//       });
+//   });
+
 export const logInService = ({ email, password }) =>
   new Promise((resolve, reject) => {
     authAPI
@@ -53,6 +66,7 @@ export const logOutService = () =>
       .post("/logout")
       .then(() => {
         resolve();
+        console.log("USER LOGGED OUT FROM THE SERVICE");
       })
       .catch(error => {
         reject(error);

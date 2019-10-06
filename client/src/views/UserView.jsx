@@ -1,29 +1,68 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+
+import styled, { keyframes } from "styled-components";
 
 // import Importer from "./ItemAddView";
 
-export default class Profile extends Component {
+//////////////////// STYLE //////////////////////
+// const change = keyframes`
+//  0% {
+//       background-position: 0 50%;
+//     }
+//     50% {
+//       background-position: 150% 50%;
+//     }
+//     100% {
+//       background-position: 0 50%;
+//     }
+// `;
+
+const UserWrapper = styled.div`
+  border-top: 10px double white;
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+`;
+
+const Button = styled.button`
+  margin: 20px;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid white;
+  background: none;
+  &:hover {
+    color: black;
+    background: white;
+  }
+`;
+
+////////////////////////////////////////////////////
+
+export default class UserView extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: "{this.state.name34}" //test, change later
-    };
   }
 
   render() {
     return (
-      <div>
-        <h1>Hi there {this.state.name} </h1>
-        <h3> Toggle between loser and founder above</h3>
-        <p>===============TEST ENV FOUND ITEM FORM ===================</p>
+      <UserWrapper>
+        <img />
+        <h1>{this.props.user.name}</h1>
 
-        <p>============================================</p>
-        <Link to="/item" className="btn">
-          <h3>Item</h3>
+        <Button>Found Items</Button>
+        <Button>Lost Items</Button>
+
+        <Link to="/all" className="btn">
+          <h3>View Items</h3>
         </Link>
-      </div>
+      </UserWrapper>
     );
   }
 }

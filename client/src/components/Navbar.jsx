@@ -1,8 +1,17 @@
 import React, { Component, Fragment } from "react";
-import { Navbar, Nav, Form, Button } from "react-bootstrap";
-import { Link, withRouter } from "react-router-dom";
+import { Navbar, Nav, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import * as AuthenticationServices from "./../services/authServices";
+const Button = styled.button`
+  border: none;
+  background: none;
+`;
+
+const Right = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
 
 export default class NavbarItem extends Component {
   constructor(props) {
@@ -12,9 +21,9 @@ export default class NavbarItem extends Component {
   render() {
     return (
       <div>
-        <Navbar className="sticky-top" bg="light" expand="lg">
+        <Navbar className="sticky-top" expand="sm">
           <Link to="/" className="btn">
-            Home
+            <h5>Home</h5>
           </Link>
           {(!this.props.user && (
             <Fragment>
@@ -29,19 +38,21 @@ export default class NavbarItem extends Component {
             <Fragment>
               <Navbar.Collapse
                 className="justify-content-end"
-                id="basic-navbar-nav"
+                id="responsive-navbar-nav"
               >
-                <Nav className="">
+                <Nav>
                   <Link
                     to={`/user/${this.props.user.name}`}
                     className="text-white"
                   >
                     <span className="btn">
-                      Welcome {this.props.user && this.props.user.name}
+                      <h5>Welcome {this.props.user.name}</h5>
                     </span>
                   </Link>
                   <Form onSubmit={this.props.logOut}>
-                    <Button type="submit">Log Out</Button>
+                    <Button type="submit">
+                      <img src="./../../logout.png" width="30" height="30" />
+                    </Button>
                   </Form>
                 </Nav>
               </Navbar.Collapse>
