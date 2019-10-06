@@ -68,3 +68,16 @@ export const add = itemData => {
       });
   });
 };
+
+export const uploadImage = theFile => {
+  return new Promise((resolve, reject) => {
+    itemApi
+      .post("/upload", theFile)
+      .then(response => {
+        resolve(response);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};

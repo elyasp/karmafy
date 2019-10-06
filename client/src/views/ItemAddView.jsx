@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 
 import ItemForm from "./../components/ItemForm";
 import { add } from "./../services/itemApi";
+import { uploadImage } from "./../services/itemApi";
 
 export default class ItemAddView extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class ItemAddView extends Component {
       item: {
         title: "",
         description: "",
-        itemStatus: ""
+        itemStatus: "",
+        imageUrl: ""
       }
     };
     this.onFormValueChange = this.onFormValueChange.bind(this);

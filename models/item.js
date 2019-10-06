@@ -14,11 +14,14 @@ const schema = new mongoose.Schema(
       required: true,
       trim: true
     },
-    images: [
-      {
-        imageUrl: String
-      }
-    ],
+    // images: [
+    //   {
+    //     imageUrl: String
+    //   }
+    // ],
+    imageUrl: {
+      type: String
+    },
     location: {
       type: String,
       // required: true,

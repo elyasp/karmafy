@@ -55,11 +55,11 @@ export default class ItemView extends Component {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src="https://source.unsplash.com/1600x900/?key"
+                src={item.imageUrl}
                 alt="First slide"
               />
             </Carousel.Item>
-            <Carousel.Item>
+            {/* <Carousel.Item>
               <img
                 className="d-block w-100"
                 src="https://source.unsplash.com/1600x900/?key"
@@ -72,7 +72,7 @@ export default class ItemView extends Component {
                 src="https://source.unsplash.com/1600x900/?key"
                 alt="Third slide"
               />
-            </Carousel.Item>
+            </Carousel.Item> */}
           </Carousel>
           <Card.Body className="px-0">
             <Card.Title className="mt-3" style={{ fontSize: "2.6rem" }}>

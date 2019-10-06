@@ -13,6 +13,8 @@ const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
+const imageRouter = require("./routes/fileUpload");
+const cors = require("cors");
 
 const app = express();
 
@@ -22,6 +24,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(serveFavicon(join(__dirname, "public/images", "favicon.ico")));
 app.use(express.static(join(__dirname, "public")));
+
+// allow access to the API from different domains/origins
+app.use(
+  cors({
+    // this could be multiple domains/origins, but we will allow just our React app
+    origin: ["http://localhost:3000"]
+  })
+);
+
 app.use(
   expressSession({
     secret: process.env.SESSION_SECRET,
@@ -37,6 +48,7 @@ app.use(
 
 app.use("/", authRouter);
 app.use("/", indexRouter);
+app.use("/", imageRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

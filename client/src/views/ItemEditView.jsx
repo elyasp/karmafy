@@ -54,8 +54,7 @@ export default class ItemEditView extends Component {
     const item = this.state.item;
     edit(id, item)
       .then(item => {
-        // this.props.history.push(`/item/${item._id}`);
-        this.props.history.push(`/`);
+        this.props.history.push(`/item/${id}`);
       })
       .catch(error => {
         console.log(error);
@@ -67,7 +66,7 @@ export default class ItemEditView extends Component {
     console.log("this is delete id", id);
     remove(id)
       .then(item => {
-        this.props.history.push("/");
+        this.props.history.push(`/`);
       })
       .catch(error => {
         console.log(error);
