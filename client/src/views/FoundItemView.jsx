@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
 
-import { edit } from "./../services/itemApi";
-import { load } from "./../services/itemApi";
+import { edit } from "../services/itemApi";
+import { load } from "../services/itemApi";
 
-export default class ItemView extends Component {
+export default class FoundItemView extends Component {
   constructor(props) {
     super(props);
     this.state = {

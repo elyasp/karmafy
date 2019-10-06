@@ -30,14 +30,16 @@ export const logInService = ({ email, password }) =>
       });
   });
 
-//////////////////////
-
-export const loggedIn = () =>
+export const verifyService = () =>
   new Promise((resolve, reject) => {
     authAPI
-      .get("/loggedin")
+      .get("/verify")
       .then(response => {
-        const user = response.data.user;
+        const user = response.data.user.user;
+        console.log(
+          "USER DATA SUCCES FROM verifyservice in auth",
+          response.data.user
+        );
         resolve(user);
       })
       .catch(error => {

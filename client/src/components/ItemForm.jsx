@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { uploadImage } from "./../services/itemApi";
 
+//;'[]
+
 export default class ItemFormView extends Component {
   constructor(props) {
     super(props);
