@@ -14,6 +14,10 @@ export default class HomeView extends Component {
         <Link to="/register" className="btn">
           <h3>Register</h3>
         </Link>
+        <Link to="/item/add" className="btn">
+          <h3>Add Found Item</h3>
+        </Link>
+
         <ListView />
       </div>
     );

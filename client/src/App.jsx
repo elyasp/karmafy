@@ -111,7 +111,9 @@ export default class App extends Component {
                 path="/item/add"
                 verify={this.checkAuthed}
                 exact
-                render={props => <ItemAddView {...props} />}
+                render={props => (
+                  <ItemAddView {...props} user={this.state.user} />
+                )}
               />
               <RouteProtector
                 path="/item/:id/edit"

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Button from "react-bootstrap/Button";
 
-import ItemForm from "./../components/ItemForm";
+import FoundItemForm from "../components/FoundItemForm";
 import { add } from "./../services/itemApi";
 import { uploadImage } from "./../services/itemApi";
 
@@ -14,6 +14,7 @@ export default class ItemAddView extends Component {
     super(props);
     this.state = {
       item: {
+        user: this.props.user._id,
         title: "",
         description: "",
         itemStatus: "",
@@ -25,6 +26,7 @@ export default class ItemAddView extends Component {
   }
 
   onFormValueChange(data) {
+    console.log("this is item", data);
     this.setState({
       item: {
         ...this.state.item,
@@ -35,6 +37,7 @@ export default class ItemAddView extends Component {
 
   addItem() {
     const item = this.state.item;
+
     add(item)
       .then(item => {
         this.props.history.push(`/item/${item.data.data.item._id}`);
@@ -45,17 +48,18 @@ export default class ItemAddView extends Component {
   }
 
   render() {
-    // console.log(req.body.user);
+    const user = this.props.user;
+
     return (
       <div className="container">
         <h1 className="text-center">Add Item</h1>
-        <ItemForm
+        <FoundItemForm
           value={this.state.item}
           onValueChange={this.onFormValueChange}
           onFormSubmit={this.addItem}
         >
           <Button type="submit">Add Item</Button>
-        </ItemForm>
+        </FoundItemForm>
       </div>
     );
   }

@@ -28,6 +28,7 @@ export default class RegisterView extends Component {
   onSubmit(event) {
     event.preventDefault();
     const { name, email, password } = this.state;
+    console.log(name, email, password);
     AuthenticationServices.registerService({
       name,
       email,
@@ -44,7 +45,7 @@ export default class RegisterView extends Component {
   render() {
     return (
       <div className="registerfields">
-        <Form className="registerfields">
+        <Form onSubmit={this.onSubmit} className="registerfields">
           <Form.Group controlId="formGroupName">
             <Form.Label>Name</Form.Label>
             <Form.Control
