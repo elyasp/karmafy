@@ -78,7 +78,8 @@ export default class LoginView extends Component {
     return (
       <div>
         <Positioner>
-          <h3>Log In Here</h3>
+          <h3>Log In</h3>
+
           <Form onSubmit={this.onSubmit} className="entries">
             <Form.Group>
               <Form.Label>Email address</Form.Label>

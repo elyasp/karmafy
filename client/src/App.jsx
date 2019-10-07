@@ -8,6 +8,7 @@ import HomeView from "./views/HomeView";
 import LoginView from "./views/LoginView";
 import RegisterView from "./views/RegisterView";
 import UserView from "./views/UserView";
+import EditUserView from "./views/EditUserView";
 import FoundItemView from "./views/FoundItemView";
 import ItemEditView from "./views/ItemEditView";
 import ItemAddView from "./views/ItemAddView";
@@ -33,7 +34,7 @@ const change = keyframes`
 
 const UniStyle = styled.div`
   color: #fff;
-  height: 100vh;
+  height: 130vh;
   color: white;
   background: linear-gradient(
     45deg,
@@ -46,7 +47,7 @@ const UniStyle = styled.div`
 
   background-size: 400% 400%;
   position: relative;
-  animation: ${change} 50s linear infinite;
+  animation: ${change} 40s linear infinite;
 `;
 
 /////////////////// END OF STYLE   /////////////////////
@@ -97,7 +98,7 @@ export default class App extends Component {
         this.setState({
           user: null
         });
-        this.props.history.push("/register");
+        this.props.history.push("/");
         console.log("PROPS HISTORY CALLED FROM LOGOUT()", this.props.history);
       })
       .catch(error => {
@@ -146,6 +147,14 @@ export default class App extends Component {
                   exact
                   render={props => (
                     <UserView {...props} user={this.state.user} />
+                  )}
+                />
+                <RouteProtector
+                  path="/user/:name/edit"
+                  exact
+                  verify={this.checkAuthed}
+                  render={props => (
+                    <EditUserView {...props} user={this.state.user} />
                   )}
                 />
                 <Route path="/all" component={ListView} />

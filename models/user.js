@@ -24,7 +24,7 @@ const schema = new mongoose.Schema({
   profilePhoto: {
     type: String
   },
-  count: {
+  karmaCount: {
     type: Number
   }
 });
