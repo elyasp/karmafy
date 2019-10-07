@@ -8,6 +8,7 @@ import HomeView from "./views/HomeView";
 import LoginView from "./views/LoginView";
 import RegisterView from "./views/RegisterView";
 import UserView from "./views/UserView";
+import EditUserView from "./views/EditUserView";
 import FoundItemView from "./views/FoundItemView";
 import ItemEditView from "./views/ItemEditView";
 import ItemAddView from "./views/ItemAddView";
@@ -146,6 +147,14 @@ export default class App extends Component {
                   exact
                   render={props => (
                     <UserView {...props} user={this.state.user} />
+                  )}
+                />
+                <RouteProtector
+                  path="/user/:name/edit"
+                  exact
+                  verify={this.checkAuthed}
+                  render={props => (
+                    <EditUserView {...props} user={this.state.user} />
                   )}
                 />
                 <Route path="/all" component={ListView} />

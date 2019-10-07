@@ -4,6 +4,8 @@ const User = require("../../models/user");
 
 module.exports = (req, res, next) => {
   const name = req.body.name;
+  const password = req.body.password;
+
   User.findByIdAndUpdate(
     req.user._id,
     {

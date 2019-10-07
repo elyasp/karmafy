@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import HomeView from "./HomeView";
-import EditUserView from "./EditUserView";
 
 import styled from "styled-components";
 
@@ -38,7 +37,7 @@ const Button = styled.button`
 
 ////////////////////////////////////////////////////
 
-export default class UserView extends Component {
+export default class EditUserView extends Component {
   constructor(props) {
     super(props);
   }
@@ -49,13 +48,11 @@ export default class UserView extends Component {
         {(this.props.user && (
           <div>
             <ViewWrapper>
-              <Link to={`${this.props.user.name}/edit`}>
-                <Button>Edit Profile</Button>
-              </Link>
+              <Button>Edit Profile</Button>
               <ProfileWrapper>
-                <img src="./../../profilepic.png" width="200" height="200" />
-                <h1>{this.props.user.name}</h1>
-                <h6>Karmalevel: 0</h6>
+                <h4>Name</h4>
+                <h4>Email</h4>
+                <h4>Change Password</h4>
               </ProfileWrapper>
             </ViewWrapper>
           </div>
