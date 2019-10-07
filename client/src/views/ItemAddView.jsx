@@ -35,7 +35,11 @@ export default class ItemAddView extends Component {
         title: "",
         description: "",
         itemStatus: "",
-        imageUrl: ""
+        imageUrl: [
+          {
+            image: ""
+          }
+        ]
       }
     };
     this.onFormValueChange = this.onFormValueChange.bind(this);

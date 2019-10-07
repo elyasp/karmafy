@@ -54,24 +54,24 @@ export default class FoundItemView extends Component {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src={item.imageUrl}
+                src={item.imageUrl[0].image}
                 alt="First slide"
               />
             </Carousel.Item>
-            {/* <Carousel.Item>
+            <Carousel.Item>
               <img
                 className="d-block w-100"
-                src="https://source.unsplash.com/1600x900/?key"
+                src={item.imageUrl[1].image}
                 alt="Third slide"
               />
             </Carousel.Item>
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src="https://source.unsplash.com/1600x900/?key"
+                src={item.imageUrl[2].image}
                 alt="Third slide"
               />
-            </Carousel.Item> */}
+            </Carousel.Item>
           </Carousel>
           <Card.Body className="px-0">
             <Card.Title className="mt-3" style={{ fontSize: "2.6rem" }}>
