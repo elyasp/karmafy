@@ -39,7 +39,6 @@ export default class ItemFormView extends Component {
     uploadData.append("imageUrl", e.target.files[0]);
     uploadImage(uploadData)
       .then(response => {
-        // this.setState({ imageUrl: response.data.secure_url });
         const name = "imageUrl";
         const value = response.data.secure_url;
         this.props.onValueChange({
@@ -54,38 +53,19 @@ export default class ItemFormView extends Component {
   render() {
     return (
       <Form onSubmit={this.onFormSubmit}>
-        <Form.Group>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input "
-              type="radio"
-              name="itemStatus"
-              id="Found"
-              onChange={this.onButtonValueChange}
-            />
-            <label className="form-check-label" for="exampleRadios1">
-              Found Item
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="itemStatus"
-              id="Lost"
-              onChange={this.onButtonValueChange}
-            />
-            <label className="form-check-label" for="exampleRadios2">
-              Lost Item
-            </label>
-          </div>
-        </Form.Group>
+        <h1>Lost Item</h1>
+        <h4>
+          Lost something? Poor you! Describe it below and redeem your karma
+          points.
+        </h4>
+
         <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Title</Form.Label>
+          <Form.Label>What did you lose?</Form.Label>
           <Form.Control
             type="text"
             name="title"
-            placeholder="Post Title"
+            placeholder="e.g. Green Cotton Wallet near Central Park"
+            size="lg"
             value={this.props.value.title}
             onChange={this.onValueChange}
           />
@@ -94,9 +74,9 @@ export default class ItemFormView extends Component {
           <Form.Label>Description</Form.Label>
           <Form.Control
             as="textarea"
-            rows="5"
+            rows="4"
             name="description"
-            placeholder="Add a detailed description"
+            placeholder="Add as much detail as you can"
             size="lg"
             value={this.props.value.description}
             onChange={this.onValueChange}
@@ -104,7 +84,9 @@ export default class ItemFormView extends Component {
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Upload Your Images</Form.Label>
+          <Form.Label>
+            Upload An Image Optional, but it would help a possible finder
+          </Form.Label>
           <Form.Control
             as="input"
             type="file"
@@ -112,9 +94,18 @@ export default class ItemFormView extends Component {
             size="lg"
             className="btn-lg pl-0"
             onChange={e => this.handleFileUpload(e)}
-            // value={this.props.value.imageUrl}
           />
         </Form.Group>
+
+        <Form.Group>
+          <Form.Label>Where did you lose it?</Form.Label>
+          <Form.Text className="text-muted">
+            If you can't remember one specific place, widen the searchradius to
+            include all the places you've been.
+          </Form.Text>
+          <h5>"HERE BE GOOGLE MAPS"</h5>
+        </Form.Group>
+
         {this.props.children}
       </Form>
     );

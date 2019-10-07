@@ -83,7 +83,7 @@ export default class List extends Component {
                     {/* <Link className="mx-3 btn btn-danger" variant="primary">
                       Claim!
                     </Link> */}
-                    <div>
+                    {/* <div>
                       <Link
                         to={`/item/${item._id}/edit`}
                         className="mx-3 btn btn-danger"
@@ -94,7 +94,7 @@ export default class List extends Component {
                       <Link className="mx-3 btn btn-danger" variant="primary">
                         Mark as Resolved
                       </Link>
-                    </div>
+                    </div> */}
                   </Card.Body>
                 </Card>
               </Link>

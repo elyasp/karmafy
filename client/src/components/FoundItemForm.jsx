@@ -39,7 +39,6 @@ export default class ItemFormView extends Component {
     uploadData.append("imageUrl", e.target.files[0]);
     uploadImage(uploadData)
       .then(response => {
-        // this.setState({ imageUrl: response.data.secure_url });
         const name = "imageUrl";
         const value = response.data.secure_url;
         this.props.onValueChange({
@@ -54,42 +53,19 @@ export default class ItemFormView extends Component {
   render() {
     return (
       <Form onSubmit={this.onFormSubmit}>
-        <Form.Group>
-          <h4>
-            Found something? Get some karma points and add your item here to
-            help us return it!
-          </h4>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input "
-              type="radio"
-              name="itemStatus"
-              id="Found"
-              onChange={this.onButtonValueChange}
-            />
-            <label className="form-check-label" for="exampleRadios1">
-              Found Item
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="itemStatus"
-              id="Lost"
-              onChange={this.onButtonValueChange}
-            />
-            <label className="form-check-label" for="exampleRadios2">
-              Lost Item
-            </label>
-          </div>
-        </Form.Group>
+        <h1>Found Item</h1>
+        <h4>
+          Found something? Get some karma points and add your item here to help
+          us return it!
+        </h4>
+
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>What Did You Find?</Form.Label>
           <Form.Control
             type="text"
             name="title"
-            placeholder="Post Title"
+            placeholder="e.g. size 39 red right shoe"
+            size="lg"
             value={this.props.value.title}
             onChange={this.onValueChange}
           />
@@ -98,7 +74,7 @@ export default class ItemFormView extends Component {
           <Form.Label>Description</Form.Label>
           <Form.Control
             as="textarea"
-            rows="5"
+            rows="4"
             name="description"
             placeholder="Add a detailed description"
             size="lg"
@@ -108,8 +84,13 @@ export default class ItemFormView extends Component {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Add some verification questions</Form.Label>
-          <Form.Control as="textarea" rows="4" />
+          <Form.Label>Verification Questions</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows="4"
+            size="lg"
+            placeholder="Add some verification questions"
+          />
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">
@@ -121,7 +102,6 @@ export default class ItemFormView extends Component {
             size="lg"
             className="btn-lg pl-0"
             onChange={e => this.handleFileUpload(e)}
-            // value={this.props.value.imageUrl}
           />
         </Form.Group>
         {this.props.children}
