@@ -1,12 +1,46 @@
 import React, { Component } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import styled from "styled-components";
 
 import * as AuthenticationServices from "./../services/authServices";
+
+/////////////// STYLES /////////////////
+
+const Positioner = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100vw;
+  margin-top: 40px;
+
+  .entries {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+  }
+`;
+
+const Button = styled.button`
+  color: white;
+  border-radius: 5px;
+  border: 2px solid white;
+  background: none;
+  &:hover {
+    color: black;
+    background: white;
+  }
+`;
+
+//////////// END OF STYLES //////////////
 
 export default class LoginView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       email: "",
       password: ""
     };
@@ -26,13 +60,14 @@ export default class LoginView extends Component {
   onSubmit(event) {
     event.preventDefault();
     const { email, password } = this.state;
+
     AuthenticationServices.logInService({
       email,
       password
     })
       .then(user => {
         this.props.loadUser(user);
-        this.props.history.push("/user");
+        this.props.history.push(`/all`);
       })
       .catch(error => {
         console.log(error);
@@ -42,34 +77,37 @@ export default class LoginView extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.onSubmit}>
-          <Form.Group>
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              name="email"
-              placeholder="Enter email"
-              value={this.state.email}
-              onChange={this.onValueChange}
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+        <Positioner>
+          <h3>Log In Here</h3>
+          <Form onSubmit={this.onSubmit} className="entries">
+            <Form.Group>
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                name="email"
+                placeholder="Enter email"
+                value={this.state.email}
+                onChange={this.onValueChange}
+              />
+              <Form.Text className="text-muted">
+                Your e-mail is safe with us
+              </Form.Text>
+            </Form.Group>
 
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.onValueChange}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Log In
-          </Button>
-        </Form>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.onValueChange}
+              />
+            </Form.Group>
+            <Button className="button" variant="primary" type="submit">
+              LOG IN
+            </Button>
+          </Form>
+        </Positioner>
       </div>
     );
   }
