@@ -39,7 +39,6 @@ export default class ItemFormView extends Component {
     uploadData.append("imageUrl", e.target.files[0]);
     uploadImage(uploadData)
       .then(response => {
-        // this.setState({ imageUrl: response.data.secure_url });
         const name = "imageUrl";
         const value = response.data.secure_url;
         this.props.onValueChange({
@@ -55,6 +54,7 @@ export default class ItemFormView extends Component {
     return (
       <Form onSubmit={this.onFormSubmit}>
         <Form.Group>
+          <h1>Found Item</h1>
           <h4>
             Found something? Get some karma points and add your item here to
             help us return it!
