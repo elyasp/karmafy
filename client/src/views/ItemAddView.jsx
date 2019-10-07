@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import styled from "styled-components";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import FoundItemForm from "../components/FoundItemForm";
@@ -9,22 +8,22 @@ import LostItemForm from "../components/LostItemForm";
 import { add } from "./../services/itemApi";
 import { uploadImage } from "./../services/itemApi";
 
-////////Styles////////
+//////Styles////////
 
-// const Button = styled.button`
-//   color: white;
-//   width: 35%;
-//   font-size: 3rem;
-//   margin: 2rem;
-//   padding: 1rem;
-//   border-radius: 5px;
-//   border: 2px solid white;
-//   background: none;
-//   &:hover {
-//     color: black;
-//     background: white;
-//   }
-// `;
+const Button = styled.button`
+  color: white;
+  width: 35%;
+  font-size: 1.5rem;
+  margin: 2rem;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 2px solid white;
+  background: none;
+  &:hover {
+    color: black;
+    background: hsla(59, 100%, 49%, 0.34);
+  }
+`;
 
 export default class ItemAddView extends Component {
   constructor(props) {
@@ -102,29 +101,16 @@ export default class ItemAddView extends Component {
     return (
       <div class="container">
         <h1 className="text-center ">Add Item</h1>
-
-        {!this.state.item.itemStatus && (
-          <div class="container mx-auto ">
-            <div class="row justify-content-center">
-              <Button
-                onClick={this.addLost}
-                class="col-6 my-3"
-                variant="light"
-                size="lg"
-              >
-                Add Lost Item
-              </Button>
-              <Button
-                onClick={this.addFound}
-                class="col-6"
-                variant="light"
-                size="lg"
-              >
-                Add Found Item
-              </Button>
-            </div>
+        <div class="container mx-auto ">
+          <div class="row justify-content-center">
+            <Button onClick={this.addLost} class="col-6 my-3" variant="light">
+              Lost
+            </Button>
+            <Button onClick={this.addFound} class="col-6" variant="light">
+              Found
+            </Button>
           </div>
-        )}
+        </div>
 
         {this.state.item.itemStatus === "Lost" && (
           <LostItemForm

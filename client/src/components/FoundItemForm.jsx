@@ -86,7 +86,7 @@ export default class ItemFormView extends Component {
     // We would use axios `.all()` method to perform concurrent image upload to cloudinary.
     axios.all(uploads).then(() => {
       // ... do anything after successful upload. You can setState() or save the data
-      console.log("Images have all being uploaded", uploads);
+      console.log("Images have all uploaded", uploads);
 
       console.log(final);
     });

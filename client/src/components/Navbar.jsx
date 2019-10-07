@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Navbar, Nav, Form } from "react-bootstrap";
+import ItemAddView from "./../views/ItemAddView";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -8,9 +9,19 @@ const Button = styled.button`
   background: none;
 `;
 
-const Right = styled.div`
+const AddButton = styled.button`
+  border: 0.5px solid #fff1c4;
+  border-radius: 3px;
   display: flex;
-  justify-content: flex-end;
+  justify-self: center;
+  font-size: 20px;
+  background: none;
+  color: #fff1c4;
+  &:hover {
+    background: hsla(59, 100%, 49%, 0.34);
+    color: black;
+    text-decoration: none;
+  }
 `;
 
 export default class NavbarItem extends Component {
@@ -25,6 +36,7 @@ export default class NavbarItem extends Component {
           <Link to="/" className="btn">
             <h4>KARMAFY</h4>
           </Link>
+
           {(!this.props.user && (
             <Fragment>
               <Link className="btn" to="/login">
@@ -41,6 +53,9 @@ export default class NavbarItem extends Component {
                 id="responsive-navbar-nav"
               >
                 <Nav>
+                  <Link to="/item/add">
+                    <AddButton> ADD OBJECT </AddButton>
+                  </Link>
                   <Link
                     to={`/user/${this.props.user.name}`}
                     className="text-white"

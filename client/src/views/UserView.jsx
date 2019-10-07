@@ -13,8 +13,8 @@ import styled from "styled-components";
 const ViewWrapper = styled.div`
   color: #fff;
   width: 100%;
-  height: 100vh;
-  background: hsla(254, 100%, 42%, 0.7);
+  height: 76.5vh;
+  background: hsla(49, 100%, 50%, 0.6);
 `;
 
 const ProfileWrapper = styled.div`
@@ -35,18 +35,18 @@ const Button = styled.button`
   background: none;
   &:hover {
     color: black;
-    background: white;
+    background: hsla(59, 100%, 49%, 0.34);
   }
 `;
 
 const ItemSection = styled.div`
-  border: 1px solid white;
-  height: 100vh;
-  margin-top: 20px;
+  height: 150vh;
+  margin-top: 30px;
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #96eaff;
+  background: none;
   color: #070424;
 `;
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ListView from "./ListView";
+import ItemCard from "./../components/ItemCard";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -22,10 +22,10 @@ export default class HomeView extends Component {
     return (
       <div>
         <PageWrapper>
-          <h1>Lost or Found something? </h1>
+          <h1>Lost or Found something?</h1>
           <h4>Return it or find it back in Karmafy's exchange</h4>
         </PageWrapper>
-        <ListView />
+        <ItemCard />
       </div>
     );
   }
