@@ -14,14 +14,17 @@ const ViewWrapper = styled.div`
   color: #fff;
   width: 100%;
   height: 100vh;
-  padding: 5px;
-  background: hsla(254, 100%, 42%, 0.8);
+  background: hsla(254, 100%, 42%, 0.7);
 `;
 
 const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 100px;
+  h1 {
+    font-weight: 200;
+  }
 `;
 
 const Button = styled.button`
@@ -34,6 +37,17 @@ const Button = styled.button`
     color: black;
     background: white;
   }
+`;
+
+const ItemSection = styled.div`
+  border: 1px solid white;
+  height: 100vh;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #96eaff;
+  color: #070424;
 `;
 
 ////////////////////////////////////////////////////
@@ -50,13 +64,18 @@ export default class UserView extends Component {
           <div>
             <ViewWrapper>
               <Link to={`${this.props.user.name}/edit`}>
-                <Button>Edit Profile</Button>
+                <Button>
+                  <h5>Edit Profile</h5>
+                </Button>
               </Link>
               <ProfileWrapper>
                 <img src="./../../profilepic.png" width="200" height="200" />
                 <h1>{this.props.user.name}</h1>
                 <h6>Karmalevel: 0</h6>
               </ProfileWrapper>
+              <ItemSection>
+                <h4>My various items...</h4>
+              </ItemSection>
             </ViewWrapper>
           </div>
         )) || <HomeView />}

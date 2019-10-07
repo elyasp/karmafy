@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 // import Importer from "./ItemAddView";
 
-//////////////////// STYLE //////////////////////
+/////////////////////// STYLE //////////////////////////
 
 const ViewWrapper = styled.div`
   color: #fff;
@@ -35,7 +35,7 @@ const Button = styled.button`
   }
 `;
 
-////////////////////////////////////////////////////
+///////////////////// END OF STYLE //////////////////////
 
 export default class EditUserView extends Component {
   constructor(props) {
@@ -48,11 +48,48 @@ export default class EditUserView extends Component {
         {(this.props.user && (
           <div>
             <ViewWrapper>
-              <Button>Edit Profile</Button>
+              <Link to={`/user/${this.props.user.name}`}>
+                <Button>
+                  <h1>↩</h1>{" "}
+                </Button>
+              </Link>
+
               <ProfileWrapper>
-                <h4>Name</h4>
-                <h4>Email</h4>
-                <h4>Change Password</h4>
+                <Form>
+                  <h6>Change Public Name</h6>
+                  <Form.Group>
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      placeholder="e.g. karma99"
+                    />
+                    <Form.Text className="text-muted">
+                      your name is {this.props.user.name}
+                    </Form.Text>
+                  </Form.Group>
+
+                  <h6>Change Password</h6>
+                  <Form.Group>
+                    <Form.Control
+                      type="password"
+                      name="name"
+                      placeholder="currently unavailable"
+                      disabled
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Control
+                      type="password"
+                      name="name"
+                      placeholder="currently unavailable"
+                      disabled
+                    />
+                  </Form.Group>
+
+                  <Button variant="primary" type="submit">
+                    Save Changes
+                  </Button>
+                </Form>
               </ProfileWrapper>
             </ViewWrapper>
           </div>
