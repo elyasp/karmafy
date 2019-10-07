@@ -79,11 +79,11 @@ export default class ItemFormView extends Component {
   render() {
     return (
       <Form onSubmit={this.onFormSubmit}>
-        <h1>Found Item</h1>
-        <h4>
+        <h3>Found Item</h3>
+        <h5>
           Found something? Get some karma points and add your item here to help
           us return it!
-        </h4>
+        </h5>
 
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>What Did You Find?</Form.Label>

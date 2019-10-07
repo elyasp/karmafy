@@ -7,6 +7,7 @@ const PageWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 15px;
 
   h1 {
     font-size: 60px;

@@ -100,7 +100,7 @@ export default class ItemAddView extends Component {
 
     return (
       <div class="container">
-        <h1 className="text-center ">Add Item</h1>
+        <h1 className="text-center ">Add an item to the exchange</h1>
         <div class="container mx-auto ">
           <div class="row justify-content-center">
             <Button onClick={this.addLost} class="col-6 my-3" variant="light">

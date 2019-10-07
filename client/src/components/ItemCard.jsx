@@ -9,6 +9,18 @@ const CardWrapper = styled.div`
     border-radius: 20px;
     border: none;
     background: #d3cfff;
+    height: 400px;
+    margin: 10px;
+  }
+
+  .cardtitle {
+    font-size: 20px;
+    color: black;
+  }
+
+  .cardsubtitle {
+    font-size: 15px;
+    color: black;
   }
 `;
 
@@ -73,24 +85,18 @@ export default class ItemCard extends Component {
                     </Carousel>
 
                     <Card.Body className="px-0">
-                      <Card.Title
-                        className="mt-3"
-                        style={{ fontSize: "2.6rem" }}
-                      >
+                      <Card.Title className="mt-1 cardtitle">
                         {item.title}
                       </Card.Title>
-                      <Card.Subtitle
-                        className="mt-3"
-                        style={{ fontSize: "1.5rem" }}
-                      >
+                      <Card.Subtitle className="mt-2 cardsubtitle">
                         Location Found: Somewhere
                       </Card.Subtitle>
-                      <Card.Text
+                      {/* <Card.Text
                         className="mt-3"
                         style={{ fontSize: "1.25rem" }}
                       >
                         {item.description}
-                      </Card.Text>
+                      </Card.Text> */}
                       {/* <Link className="mx-3 btn btn-danger" variant="primary">
                       Claim!
                     </Link> */}

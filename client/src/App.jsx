@@ -20,7 +20,7 @@ import { logOutService, verifyService } from "./services/authServices";
 
 ///////////////////////// STYLE //////////////////////////
 
-const change = keyframes`
+const delta = keyframes`
  0% {
       background-position: 0 50%;
     }
@@ -46,7 +46,7 @@ const UniStyle = styled.div`
   );
   background-size: 400% 400%;
   position: relative;
-  animation: ${change} 35s linear infinite;
+  animation: ${delta} 35s linear infinite;
 `;
 
 /////////////////// END OF STYLE   /////////////////////
