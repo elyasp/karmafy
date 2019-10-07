@@ -14,7 +14,6 @@ const ViewWrapper = styled.div`
   color: #fff;
   width: 100%;
   height: 100vh;
-  padding: 0;
   background: hsla(254, 100%, 42%, 0.7);
 `;
 
@@ -22,6 +21,10 @@ const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 100px;
+  h1 {
+    font-weight: 200;
+  }
 `;
 
 const Button = styled.button`
@@ -61,7 +64,9 @@ export default class UserView extends Component {
           <div>
             <ViewWrapper>
               <Link to={`${this.props.user.name}/edit`}>
-                <Button>Edit Profile</Button>
+                <Button>
+                  <h5>Edit Profile</h5>
+                </Button>
               </Link>
               <ProfileWrapper>
                 <img src="./../../profilepic.png" width="200" height="200" />
