@@ -14,8 +14,8 @@ const ViewWrapper = styled.div`
   color: #fff;
   width: 100%;
   height: 100vh;
-  padding: 5px;
-  background: hsla(254, 100%, 42%, 0.8);
+  padding: 0;
+  background: hsla(254, 100%, 42%, 0.7);
 `;
 
 const ProfileWrapper = styled.div`
@@ -34,6 +34,17 @@ const Button = styled.button`
     color: black;
     background: white;
   }
+`;
+
+const ItemSection = styled.div`
+  border: 1px solid white;
+  height: 100vh;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #96eaff;
+  color: #070424;
 `;
 
 ////////////////////////////////////////////////////
@@ -57,6 +68,9 @@ export default class UserView extends Component {
                 <h1>{this.props.user.name}</h1>
                 <h6>Karmalevel: 0</h6>
               </ProfileWrapper>
+              <ItemSection>
+                <h4>My various items...</h4>
+              </ItemSection>
             </ViewWrapper>
           </div>
         )) || <HomeView />}
