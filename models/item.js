@@ -14,21 +14,19 @@ const schema = new mongoose.Schema(
       required: true,
       trim: true
     },
-    // imageUrl: [
-    //   {
-    //     image: String
-    //   }
-    // ],
-    imageUrl: {
-      type: String
-    },
+    imageUrl: [
+      {
+        image: String
+      }
+    ],
+    // imageUrl: {
+    //   type: String
+    // },
     user: {
       type: String
     },
     location: {
-      type: String,
-      // required: true,
-      trim: true
+      type: String
     },
     itemStatus: {
       type: String
