@@ -7,7 +7,7 @@ import ListView from "./ListView";
 export default class HomeView extends Component {
   render() {
     return (
-      <div className="homeview">
+      <div>
         <ListView />
       </div>
     );

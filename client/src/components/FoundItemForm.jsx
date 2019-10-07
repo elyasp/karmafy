@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
-//;'[]
+import { uploadImage } from "../services/itemApi";
 
 export default class ItemFormView extends Component {
   constructor(props) {
@@ -35,10 +34,31 @@ export default class ItemFormView extends Component {
     this.props.onFormSubmit();
   }
 
+  handleFileUpload = e => {
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", e.target.files[0]);
+    uploadImage(uploadData)
+      .then(response => {
+        // this.setState({ imageUrl: response.data.secure_url });
+        const name = "imageUrl";
+        const value = response.data.secure_url;
+        this.props.onValueChange({
+          [name]: value
+        });
+      })
+      .catch(err => {
+        console.log("Error while uploading the file: ", err);
+      });
+  };
+
   render() {
     return (
       <Form onSubmit={this.onFormSubmit}>
         <Form.Group>
+          <h4>
+            Found something? Get some karma points and add your item here to
+            help us return it!
+          </h4>
           <div className="form-check form-check-inline">
             <input
               className="form-check-input "
@@ -65,7 +85,7 @@ export default class ItemFormView extends Component {
           </div>
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Title</Form.Label>
+          <Form.Label>What Did You Find?</Form.Label>
           <Form.Control
             type="text"
             name="title"
@@ -87,16 +107,21 @@ export default class ItemFormView extends Component {
           />
         </Form.Group>
 
+        <Form.Group>
+          <Form.Label>Add some verification questions</Form.Label>
+          <Form.Control as="textarea" rows="4" />
+        </Form.Group>
+
         <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Upload Your Images</Form.Label>
+          <Form.Label>Upload An Image</Form.Label>
           <Form.Control
             as="input"
             type="file"
-            name="file"
+            name="imageUrl"
             size="lg"
             className="btn-lg pl-0"
-            // value={this.props.value.title}
-            // onChange={this.onValueChange}
+            onChange={e => this.handleFileUpload(e)}
+            // value={this.props.value.imageUrl}
           />
         </Form.Group>
         {this.props.children}

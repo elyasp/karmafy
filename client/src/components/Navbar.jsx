@@ -28,10 +28,10 @@ export default class NavbarItem extends Component {
           {(!this.props.user && (
             <Fragment>
               <Link className="btn" to="/login">
-                Login
+                <h5>Login</h5>
               </Link>
               <Link className="btn" to="/register">
-                Register
+                <h5>Register</h5>
               </Link>
             </Fragment>
           )) || (

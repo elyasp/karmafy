@@ -60,6 +60,7 @@ export default class RegisterView extends Component {
   onSubmit(event) {
     event.preventDefault();
     const { name, email, password } = this.state;
+    console.log(name, email, password);
     AuthenticationServices.registerService({
       name,
       email,

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 // import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import ItemForm from "./../components/ItemForm";
+import FoundItemForm from "./../components/FoundItemForm";
 
 import { remove } from "./../services/itemApi";
 import { edit } from "./../services/itemApi";
@@ -54,8 +54,7 @@ export default class ItemEditView extends Component {
     const item = this.state.item;
     edit(id, item)
       .then(item => {
-        // this.props.history.push(`/item/${item._id}`);
-        this.props.history.push(`/`);
+        this.props.history.push(`/item/${id}`);
       })
       .catch(error => {
         console.log(error);
@@ -67,7 +66,7 @@ export default class ItemEditView extends Component {
     console.log("this is delete id", id);
     remove(id)
       .then(item => {
-        this.props.history.push("/");
+        this.props.history.push(`/`);
       })
       .catch(error => {
         console.log(error);
@@ -78,13 +77,13 @@ export default class ItemEditView extends Component {
     return (
       <div>
         <h1 className="text-center">Edit Item</h1>
-        <ItemForm
+        <FoundItemForm
           value={this.state.item}
           onValueChange={this.onFormValueChange}
           onFormSubmit={this.editItem}
         >
           <Button type="submit">Edit Item</Button>
-        </ItemForm>
+        </FoundItemForm>
         <Button onClick={this.deleteItem} className="btn-danger">
           Delete Item
         </Button>
