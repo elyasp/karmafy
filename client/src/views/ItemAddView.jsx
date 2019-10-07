@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -8,8 +9,22 @@ import LostItemForm from "../components/LostItemForm";
 import { add } from "./../services/itemApi";
 import { uploadImage } from "./../services/itemApi";
 
-/////// IMPORT HERE THE ADD LOST N FOUND COMPONENTS<
-/// SWITCH COMPONENT BASED ON LOST OR FOUND CHECKBOX, and therefore the form changes
+////////Styles////////
+
+// const Button = styled.button`
+//   color: white;
+//   width: 35%;
+//   font-size: 3rem;
+//   margin: 2rem;
+//   padding: 1rem;
+//   border-radius: 5px;
+//   border: 2px solid white;
+//   background: none;
+//   &:hover {
+//     color: black;
+//     background: white;
+//   }
+// `;
 
 export default class ItemAddView extends Component {
   constructor(props) {
@@ -81,17 +96,29 @@ export default class ItemAddView extends Component {
     const user = this.props.user;
 
     return (
-      <div className="container">
+      <div class="container">
         <h1 className="text-center ">Add Item</h1>
 
         {!this.state.item.itemStatus && (
-          <div>
-            <Button onClick={this.addLost} variant="light" size="lg">
-              Add Lost Item
-            </Button>
-            <Button onClick={this.addFound} variant="light" size="lg">
-              Add Found Item
-            </Button>
+          <div class="container mx-auto ">
+            <div class="row justify-content-center">
+              <Button
+                onClick={this.addLost}
+                class="col-6 my-3"
+                variant="light"
+                size="lg"
+              >
+                Add Lost Item
+              </Button>
+              <Button
+                onClick={this.addFound}
+                class="col-6"
+                variant="light"
+                size="lg"
+              >
+                Add Found Item
+              </Button>
+            </div>
           </div>
         )}
 
