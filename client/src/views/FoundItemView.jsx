@@ -51,27 +51,15 @@ export default class FoundItemView extends Component {
           style={{ width: "90%" }}
         >
           <Carousel className="mx-auto" style={{ width: "100%" }}>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={item.imageUrl[0].image}
-                alt="First slide"
-              />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={item.imageUrl[1].image}
-                alt="Third slide"
-              />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100"
-                src={item.imageUrl[2].image}
-                alt="Third slide"
-              />
-            </Carousel.Item>
+            {item.imageUrl.map(item => (
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src={item.image}
+                  alt="First slide"
+                />
+              </Carousel.Item>
+            ))}
           </Carousel>
           <Card.Body className="px-0">
             <Card.Title className="mt-3" style={{ fontSize: "2.6rem" }}>
