@@ -1,34 +1,28 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
+import HomeView from "./HomeView";
 
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 // import Importer from "./ItemAddView";
 
 //////////////////// STYLE //////////////////////
-// const change = keyframes`
-//  0% {
-//       background-position: 0 50%;
-//     }
-//     50% {
-//       background-position: 150% 50%;
-//     }
-//     100% {
-//       background-position: 0 50%;
-//     }
-// `;
 
-const UserWrapper = styled.div`
-  border-top: 10px double white;
+const ViewWrapper = styled.div`
   display: flex;
   justify-content: center;
-  justify-self: center;
-  align-items: center;
   color: #fff;
   width: 100%;
-  height: 100%;
-  padding: 50px;
+  height: 100vh;
+  padding: 10px;
+  background: hsla(254, 100%, 42%, 0.8);
+`;
+
+const ProfileWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Button = styled.button`
@@ -52,17 +46,18 @@ export default class UserView extends Component {
 
   render() {
     return (
-      <UserWrapper>
-        <img />
-        <h1>{this.props.user.name}</h1>
-
-        <Button>Found Items</Button>
-        <Button>Lost Items</Button>
-
-        <Link to="/all" className="btn">
-          <h3>View Items</h3>
-        </Link>
-      </UserWrapper>
+      <div>
+        {(this.props.user && (
+          <div>
+            <ViewWrapper>
+              <ProfileWrapper>
+                <img src="./../../profilepic.png" width="200" height="200" />
+                <h1>{this.props.user.name}</h1>
+              </ProfileWrapper>
+            </ViewWrapper>
+          </div>
+        )) || <HomeView />}
+      </div>
     );
   }
 }

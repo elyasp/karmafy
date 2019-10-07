@@ -33,7 +33,7 @@ const change = keyframes`
 
 const UniStyle = styled.div`
   color: #fff;
-  height: 100vh;
+  height: 130vh;
   color: white;
   background: linear-gradient(
     45deg,
@@ -46,7 +46,7 @@ const UniStyle = styled.div`
 
   background-size: 400% 400%;
   position: relative;
-  animation: ${change} 50s linear infinite;
+  animation: ${change} 40s linear infinite;
 `;
 
 /////////////////// END OF STYLE   /////////////////////
@@ -97,7 +97,7 @@ export default class App extends Component {
         this.setState({
           user: null
         });
-        this.props.history.push("/register");
+        this.props.history.push("/");
         console.log("PROPS HISTORY CALLED FROM LOGOUT()", this.props.history);
       })
       .catch(error => {

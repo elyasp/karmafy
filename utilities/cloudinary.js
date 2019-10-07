@@ -12,7 +12,7 @@ cloudinary.config({
 
 const storage = cloudinaryStorage({
   cloudinary,
-  folder: "Carma",
+  folder: "Karmafy",
   formats: ["jpg", "png"]
 });
 
