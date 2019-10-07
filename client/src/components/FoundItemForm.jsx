@@ -37,22 +37,6 @@ export default class ItemFormView extends Component {
     this.props.onFormSubmit();
   }
 
-  // handleFileUpload = e => {
-  //   const uploadData = new FormData();
-  //   uploadData.append("imageUrl", e.target.files[0]);
-  //   uploadImage(uploadData)
-  //     .then(response => {
-  //       const name = "imageUrl";
-  //       const value = response.data.secure_url;
-  //       this.props.onValueChange({
-  //         [name]: value
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log("Error while uploading the file: ", err);
-  //     });
-  // };
-
   handleUploadImages = images => {
     const final = [];
     // uploads is an array that would hold all the post methods for each image to be uploaded, then we'd use axios.all()
@@ -134,18 +118,6 @@ export default class ItemFormView extends Component {
             placeholder="Add some verification questions"
           />
         </Form.Group>
-
-        {/* <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Upload An Image</Form.Label>
-          <Form.Control
-            as="input"
-            type="file"
-            name="imageUrl"
-            size="lg"
-            className="btn-lg pl-0"
-            onChange={e => this.handleFileUpload(e)}
-          />
-        </Form.Group> */}
 
         <Form.Group controlId="exampleForm.ControlInput1">
           <Dropzone onDrop={this.handleUploadImages}>

@@ -58,6 +58,8 @@ export default class UserView extends Component {
   }
 
   render() {
+    const user = this.props.user;
+    console.log(user);
     return (
       <div>
         {(this.props.user && (
@@ -69,7 +71,7 @@ export default class UserView extends Component {
                 </Button>
               </Link>
               <ProfileWrapper>
-                <img src="./../../profilepic.png" width="200" height="200" />
+                <img src={user.profile} width="200" height="200" />
                 <h1>{this.props.user.name}</h1>
                 <h6>Karmalevel: 0</h6>
               </ProfileWrapper>

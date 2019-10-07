@@ -6,7 +6,6 @@ import axios from "axios";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { uploadImage } from "../services/itemApi";
 
 export default class ItemFormView extends Component {
   constructor(props) {
@@ -37,21 +36,21 @@ export default class ItemFormView extends Component {
     this.props.onFormSubmit();
   }
 
-  handleFileUpload = e => {
-    const uploadData = new FormData();
-    uploadData.append("imageUrl", e.target.files[0]);
-    uploadImage(uploadData)
-      .then(response => {
-        const name = "imageUrl";
-        const value = response.data.secure_url;
-        this.props.onValueChange({
-          [name]: value
-        });
-      })
-      .catch(err => {
-        console.log("Error while uploading the file: ", err);
-      });
-  };
+  // handleFileUpload = e => {
+  //   const uploadData = new FormData();
+  //   uploadData.append("imageUrl", e.target.files[0]);
+  //   uploadImage(uploadData)
+  //     .then(response => {
+  //       const name = "imageUrl";
+  //       const value = response.data.secure_url;
+  //       this.props.onValueChange({
+  //         [name]: value
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log("Error while uploading the file: ", err);
+  //     });
+  // };
 
   handleUploadImages = images => {
     const final = [];

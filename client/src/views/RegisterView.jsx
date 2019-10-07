@@ -3,7 +3,8 @@ import { Form } from "react-bootstrap";
 import styled from "styled-components";
 
 import * as AuthenticationServices from "./../services/authServices";
-
+import { uploadImage } from "../services/authServices";
+import Location from "../components/location";
 /////////////// STYLES /////////////////
 
 const Positioner = styled.div`
@@ -42,14 +43,15 @@ export default class RegisterView extends Component {
     this.state = {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      profile: "",
+      location: ""
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   onValueChange(e) {
-    console.log(e.target);
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
@@ -57,14 +59,19 @@ export default class RegisterView extends Component {
     });
   }
 
+  onLocationChange() {
+    console.log(this.props.value);
+  }
+
   onSubmit(event) {
     event.preventDefault();
-    const { name, email, password } = this.state;
-    console.log(name, email, password);
+    const { name, email, password, profile, location } = this.state;
     AuthenticationServices.registerService({
       name,
       email,
-      password
+      password,
+      profile,
+      location
     })
       .then(user => {
         this.props.loadUser(user);
@@ -75,12 +82,47 @@ export default class RegisterView extends Component {
       });
   }
 
+  handleFileUpload = e => {
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", e.target.files[0]);
+    uploadImage(uploadData)
+      .then(response => {
+        this.setState({
+          profile: response.data.secure_url
+        });
+      })
+      .catch(err => {
+        console.log("Error while uploading the file: ", err);
+      });
+  };
+
+  componentDidMount() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.setState({
+          location: position.coords.latitude + "," + position.coords.longitude
+        });
+      });
+    }
+  }
+
+  changeLocation(evt) {
+    this.setState({
+      location: evt.target.value
+    });
+  }
+
   render() {
     return (
       <div>
         <Positioner>
           <h3>Join the karma exchange</h3>
           <Form className="entries" onSubmit={this.onSubmit}>
+            <input
+              className="new-todo none"
+              value={this.state.location}
+              onChange={evt => this.changeLocation(evt)}
+            />
             <Form.Group controlId="formGroupName">
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -121,6 +163,19 @@ export default class RegisterView extends Component {
                 placeholder="Make sure it matches"
               />
             </Form.Group>
+
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Label>Upload A Profile Picture</Form.Label>
+              <Form.Control
+                as="input"
+                type="file"
+                name="imageUrl"
+                size="lg"
+                className="btn-lg pl-0"
+                onChange={e => this.handleFileUpload(e)}
+              />
+            </Form.Group>
+
             <Button type="submit">REGISTER</Button>
           </Form>
         </Positioner>
