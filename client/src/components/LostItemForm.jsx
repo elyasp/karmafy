@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import Dropzone from "react-dropzone";
+import axios from "axios";
+
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { uploadImage } from "../services/itemApi";
 
 export default class ItemFormView extends Component {
   constructor(props) {
@@ -34,20 +36,59 @@ export default class ItemFormView extends Component {
     this.props.onFormSubmit();
   }
 
-  handleFileUpload = e => {
-    const uploadData = new FormData();
-    uploadData.append("imageUrl", e.target.files[0]);
-    uploadImage(uploadData)
-      .then(response => {
-        const name = "imageUrl";
-        const value = response.data.secure_url;
-        this.props.onValueChange({
-          [name]: value
+  // handleFileUpload = e => {
+  //   const uploadData = new FormData();
+  //   uploadData.append("imageUrl", e.target.files[0]);
+  //   uploadImage(uploadData)
+  //     .then(response => {
+  //       const name = "imageUrl";
+  //       const value = response.data.secure_url;
+  //       this.props.onValueChange({
+  //         [name]: value
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log("Error while uploading the file: ", err);
+  //     });
+  // };
+
+  handleUploadImages = images => {
+    const final = [];
+    // uploads is an array that would hold all the post methods for each image to be uploaded, then we'd use axios.all()
+    const uploads = images.map(image => {
+      // our formdata
+      const formData = new FormData();
+      formData.append("file", image);
+      // formData.append("tags", "{TAGS}"); // Add tags for the images - {Array}
+      formData.append("upload_preset", "e3kxwxiy"); // Replace the preset name with your own
+      formData.append("api_key", "676778632785877"); // Replace API key with your own Cloudinary API key
+      formData.append("timestamp", (Date.now() / 1000) | 0);
+
+      // Replace cloudinary upload URL with yours
+      return axios
+        .post(
+          `https://api.cloudinary.com/v1_1/dz3ipymey/image/upload`,
+          formData,
+          { headers: { "X-Requested-With": "XMLHttpRequest" } }
+        )
+        .then(response => {
+          final.push({ image: response.data.url });
+          console.log("this", response.data.url);
+          const name = "imageUrl";
+          const value = final;
+          this.props.onValueChange({
+            [name]: value
+          });
         });
-      })
-      .catch(err => {
-        console.log("Error while uploading the file: ", err);
-      });
+    });
+
+    // We would use axios `.all()` method to perform concurrent image upload to cloudinary.
+    axios.all(uploads).then(() => {
+      // ... do anything after successful upload. You can setState() or save the data
+      console.log("Images have all being uploaded", uploads);
+
+      console.log(final);
+    });
   };
 
   render() {
@@ -83,7 +124,7 @@ export default class ItemFormView extends Component {
           />
         </Form.Group>
 
-        <Form.Group controlId="exampleForm.ControlInput1">
+        {/* <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>
             Upload An Image Optional, but it would help a possible finder
           </Form.Label>
@@ -95,7 +136,7 @@ export default class ItemFormView extends Component {
             className="btn-lg pl-0"
             onChange={e => this.handleFileUpload(e)}
           />
-        </Form.Group>
+        </Form.Group> */}
 
         <Form.Group>
           <Form.Label>Where did you lose it?</Form.Label>
@@ -104,6 +145,17 @@ export default class ItemFormView extends Component {
             include all the places you've been.
           </Form.Text>
           <h5>"HERE BE GOOGLE MAPS"</h5>
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.ControlInput1">
+          <Dropzone onDrop={this.handleUploadImages}>
+            {({ getRootProps, getInputProps }) => (
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                Click me to upload a file!
+              </div>
+            )}
+          </Dropzone>
         </Form.Group>
 
         {this.props.children}

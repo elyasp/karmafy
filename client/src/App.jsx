@@ -138,7 +138,12 @@ export default class App extends Component {
                   path="/register"
                   verify={this.checkUnAuthed}
                   render={props => (
-                    <RegisterView {...props} exact loadUser={this.loadUser} />
+                    <RegisterView
+                      {...props}
+                      exact
+                      loadUser={this.loadUser}
+                      user={this.state.user}
+                    />
                   )}
                 />
                 <Route

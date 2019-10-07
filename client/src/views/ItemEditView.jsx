@@ -81,7 +81,7 @@ export default class ItemEditView extends Component {
           <FoundItemForm
             value={this.state.item}
             onValueChange={this.onFormValueChange}
-            onFormSubmit={this.addItem}
+            onFormSubmit={this.editItem}
           >
             <Button type="submit">Submit</Button>
           </FoundItemForm>

@@ -4,10 +4,10 @@ const authAPI = axios.create({
   baseURL: "/"
 });
 
-export const registerService = ({ name, email, password }) =>
+export const registerService = ({ name, email, password, profile, location }) =>
   new Promise((resolve, reject) => {
     authAPI
-      .post("/register", { name, email, password })
+      .post("/register", { name, email, password, profile, location })
       .then(response => {
         const user = response.data.user;
         resolve(user);
@@ -36,10 +36,7 @@ export const verifyService = () =>
       .get("/verify")
       .then(response => {
         const user = response.data.user.user;
-        console.log(
-          "USER DATA SUCCES FROM verifyservice in auth",
-          response.data.user
-        );
+        console.log("USER DATA SUCCES FROM verifyservice in auth", response);
         resolve(user);
       })
       .catch(error => {
@@ -60,15 +57,15 @@ export const logOutService = () =>
       });
   });
 
-// export const uploadService = data =>
-//   new Promise((resolve, reject) => {
-//     authAPI
-//       .post("/upload", data)
-//       .then(response => {
-//         const user = response.data.user;
-//         resolve(user);
-//       })
-//       .catch(error => {
-//         reject(error);
-//       });
-//   });
+export const uploadImage = theFile => {
+  return new Promise((resolve, reject) => {
+    authAPI
+      .post("/upload", theFile)
+      .then(response => {
+        resolve(response);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
