@@ -43,8 +43,7 @@ export default class FoundItemView extends Component {
   // }
   render() {
     const item = this.state.item;
-    console.log(item);
-    // console.log(item.title);
+    const user = this.props.user;
     return (
       (item && (
         <Card
@@ -84,10 +83,8 @@ export default class FoundItemView extends Component {
             <Card.Text className="mt-3" style={{ fontSize: "1.25rem" }}>
               {item.description}
             </Card.Text>
-            <Link className="mx-3 btn btn-danger" variant="primary">
-              Claim!
-            </Link>
-            <div>
+
+            {item.user === user._id ? (
               <Link
                 to={`/item/${item._id}/edit`}
                 className="mx-3 btn btn-danger"
@@ -95,10 +92,16 @@ export default class FoundItemView extends Component {
               >
                 Edit
               </Link>
-              <Link className="mx-3 btn btn-danger" variant="primary">
-                Mark as Resolved
-              </Link>
-            </div>
+            ) : (
+              <div>
+                <Link className="mx-3 btn btn-danger" variant="primary">
+                  Claim!
+                </Link>
+                <Link className="mx-3 btn btn-danger" variant="primary">
+                  Mark as Resolved
+                </Link>
+              </div>
+            )}
           </Card.Body>
         </Card>
       )) || <div></div>

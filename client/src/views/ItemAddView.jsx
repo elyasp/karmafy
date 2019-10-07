@@ -40,8 +40,6 @@ export default class ItemAddView extends Component {
 
   addItem() {
     const item = this.state.item;
-    console.log("user", this.props.user._id);
-    console.log("added", item);
     add(item)
       .then(item => {
         this.props.history.push(`/item/${item.data.data.item._id}`);
@@ -103,7 +101,7 @@ export default class ItemAddView extends Component {
             onValueChange={this.onFormValueChange}
             onFormSubmit={this.addItem}
           >
-            <Button type="submit">Add Item</Button>
+            <Button type="submit">Submit</Button>
           </LostItemForm>
         )}
 
@@ -113,7 +111,7 @@ export default class ItemAddView extends Component {
             onValueChange={this.onFormValueChange}
             onFormSubmit={this.addItem}
           >
-            <Button type="submit">Add Item</Button>
+            <Button type="submit">Submit</Button>
           </FoundItemForm>
         )}
       </div>

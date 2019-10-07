@@ -4,6 +4,7 @@ import React, { Component } from "react";
 // import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FoundItemForm from "./../components/FoundItemForm";
+import LostItemForm from "./../components/LostItemForm";
 
 import { remove } from "./../services/itemApi";
 import { edit } from "./../services/itemApi";
@@ -75,18 +76,25 @@ export default class ItemEditView extends Component {
 
   render() {
     return (
-      <div>
-        <h1 className="text-center">Edit Item</h1>
-        <FoundItemForm
-          value={this.state.item}
-          onValueChange={this.onFormValueChange}
-          onFormSubmit={this.editItem}
-        >
-          <Button type="submit">Edit Item</Button>
-        </FoundItemForm>
-        <Button onClick={this.deleteItem} className="btn-danger">
-          Delete Item
-        </Button>
+      <div class="container">
+        {this.state.item.itemStatus === "Found" && (
+          <FoundItemForm
+            value={this.state.item}
+            onValueChange={this.onFormValueChange}
+            onFormSubmit={this.addItem}
+          >
+            <Button type="submit">Submit</Button>
+          </FoundItemForm>
+        )}
+        {this.state.item.itemStatus === "Lost" && (
+          <LostItemForm
+            value={this.state.item}
+            onValueChange={this.onFormValueChange}
+            onFormSubmit={this.addItem}
+          >
+            <Button type="submit">Submit</Button>
+          </LostItemForm>
+        )}
       </div>
     );
   }
