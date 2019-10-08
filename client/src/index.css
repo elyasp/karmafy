@@ -15,3 +15,11 @@ code {
 .none {
   display: none;
 }
+
+.white {
+  background-color: white;
+}
+
+.outline {
+  background-color: green;
+}

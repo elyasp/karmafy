@@ -36,7 +36,7 @@ export default class NavbarItem extends Component {
   render() {
     return (
       <div>
-        <Navbar className="sticky-top" expand="sm">
+        <Navbar className="sticky-top" expand="lg">
           <Link to="/" className="btn">
             <h4 className="title">KARMAFY</h4>
           </Link>
@@ -52,6 +52,7 @@ export default class NavbarItem extends Component {
             </Fragment>
           )) || (
             <Fragment>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse
                 className="justify-content-end"
                 id="responsive-navbar-nav"

@@ -20,7 +20,6 @@ const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 100px;
   h1 {
     font-weight: 200;
   }
@@ -40,7 +39,7 @@ const Button = styled.button`
 
 const ItemSection = styled.div`
   height: 150vh;
-  margin-top: 30px;
+  margin-top: 10px;
   padding: 30px 0;
   display: flex;
   flex-direction: column;
@@ -85,18 +84,19 @@ export default class UserView extends Component {
         {(this.props.user && this.state.item && (
           <div>
             <ViewWrapper>
-              <Link to={`${this.props.user._id}/edit`}>
-                {/* <Button>
-                  <h5>Edit Profile</h5>
-                </Button> */}
-              </Link>
               <ProfileWrapper>
                 <img src={user.profile} width="200" />
                 <h1>{this.props.user.name}</h1>
+                <h1>{this.props.user.email}</h1>
                 <h6>Karmalevel: 0</h6>
+                <Link to={`${this.props.user._id}/edit`}>
+                  <Button>
+                    <h5>Edit Profile</h5>
+                  </Button>
+                </Link>
               </ProfileWrapper>
               <ItemSection>
-                <h4>My various items...</h4>
+                <h4 className="text-white">My various items...</h4>
                 <Container>
                   <Row>
                     {this.state.item.map(item => (
@@ -126,9 +126,11 @@ export default class UserView extends Component {
                             <Card.Title className="mt-1 cardtitle">
                               {item.title}
                             </Card.Title>
-                            <Card.Subtitle className="mt-2 cardsubtitle">
-                              Location Found: Somewhere
-                            </Card.Subtitle>
+                            {item.resolved ? (
+                              <h3>It's been reunited!</h3>
+                            ) : (
+                              <h3>{item.itemStatus}</h3>
+                            )}
                           </Card.Body>
                         </Card>
                       </Col>

@@ -50,13 +50,12 @@ export default class EditUserView extends Component {
 
   editUser(event) {
     event.preventDefault();
-    const id = this.props.match.params.name;
-    const user = this.state.name;
+    const name = this.state.name;
+    const id = this.props.user._id;
 
-    editUser(id, user)
+    editUser(name, id)
       .then(user => {
-        this.props.history.push(`/`);
-        // this.props.history.push(`/user/${id}`);
+        this.props.history.push(`/user/${id}`);
       })
       .catch(error => {
         console.log(error);

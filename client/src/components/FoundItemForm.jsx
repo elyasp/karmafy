@@ -11,10 +11,21 @@ import { uploadImage } from "../services/itemApi";
 export default class ItemFormView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      files: []
+    };
     this.onValueChange = this.onValueChange.bind(this);
     this.onButtonValueChange = this.onButtonValueChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.handleUploadImages = this.handleUploadImages.bind(this);
+    this.onPreviewDrop = this.onPreviewDrop.bind(this);
   }
+
+  onPreviewDrop = files => {
+    this.setState({
+      files: this.state.files.concat(files)
+    });
+  };
 
   onValueChange(event) {
     const name = event.target.name;
@@ -70,12 +81,15 @@ export default class ItemFormView extends Component {
     axios.all(uploads).then(() => {
       // ... do anything after successful upload. You can setState() or save the data
       console.log("Images have all uploaded", uploads);
-
-      console.log(final);
     });
   };
 
   render() {
+    const previewStyle = {
+      display: "inline",
+      width: 100,
+      height: 100
+    };
     return (
       <Form onSubmit={this.onFormSubmit}>
         <h3>Found Item</h3>
@@ -119,16 +133,40 @@ export default class ItemFormView extends Component {
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">
-          <Dropzone onDrop={this.handleUploadImages}>
+          {/* <Dropzone onDrop={this.handleUploadImages}>
             {({ getRootProps, getInputProps }) => (
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 Click me to upload a file!
               </div>
             )}
+          </Dropzone> */}
+          <Dropzone onDrop={this.handleUploadImages}>
+            {({ getRootProps, getInputProps, isDragActive }) => (
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                {isDragActive
+                  ? "Drop it like it's hot!"
+                  : "Click me or drag a file to upload!"}
+              </div>
+            )}
           </Dropzone>
         </Form.Group>
-
+        <div className="app">
+          {this.state.files.length > 0 && (
+            <div>
+              <h3>Previews</h3>
+              {this.state.files.map(file => (
+                <img
+                  alt="Preview"
+                  key={file.preview}
+                  src={file.preview}
+                  style={previewStyle}
+                />
+              ))}
+            </div>
+          )}
+        </div>
         {this.props.children}
       </Form>
     );

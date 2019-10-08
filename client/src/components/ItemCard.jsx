@@ -29,69 +29,84 @@ export default class ItemCard extends Component {
     super(props);
     this.state = {
       items: [],
-      searchTerm: ""
+      searchTerm: "",
+      lostButton: ""
     };
+    this.all = this.all.bind(this);
     this.lost = this.lost.bind(this);
     this.found = this.found.bind(this);
     this.searchFilter = this.searchFilter.bind(this);
   }
 
-  lost(event) {
-    loadByType(event.target.name)
-      .then(items => {
-        this.setState({
-          items
-        });
-      })
-      .catch(error => {
-        this.props.history.push(
-          `/error/${error.response ? error.response.status : "404"}`
-        );
+  // found(event) {
+  //   loadByType(event.target.value)
+  //     .then(items => {
+  //       this.setState({
+  //         items
+  //       });
+  //     })
+  //     .catch(error => {
+  //       this.props.history.push(
+  //         `/error/${error.response ? error.response.status : "404"}`
+  //       );
+  //     });
+  // }
+
+  lost() {
+    if (this.state.lostButton === "clicked") {
+      this.setState({
+        lostButton: "",
+        searchTerm: ""
       });
+    } else {
+      this.setState({
+        lostButton: "clicked",
+        searchTerm: "Lost"
+      });
+    }
+  }
+
+  found() {
+    if (this.state.lostButton === "clicked") {
+      this.setState({
+        lostButton: "",
+        searchTerm: ""
+      });
+    } else {
+      this.setState({
+        lostButton: "clicked",
+        searchTerm: "Found"
+      });
+    }
+  }
+
+  all() {
+    this.setState({
+      lostButton: "",
+      foundButton: "",
+      searchTerm: ""
+    });
   }
 
   searchFilter(event) {
-    // let search = this.state.items.filter(item => {
-    //   if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
-    //     return item;
-    //   }
-    // });
-
     this.setState({
       searchTerm: event.target.value.toLowerCase()
     });
   }
 
-  found(event) {
-    loadByType(event.target.name)
-      .then(items => {
-        this.setState({
-          items
-        });
-      })
-      .catch(error => {
-        this.props.history.push(
-          `/error/${error.response ? error.response.status : "404"}`
-        );
-      });
-  }
-
-  //   get filteredSearchList() {
-  //     const query = this.state.searchTerm;
-  //     const item = this.state.items;
-  //     return item.filter(item => {
-  //       if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
-  //           return item
-  //         }
-  //   }
-  // }
-
   get filteredSearchList() {
     const query = this.state.searchTerm;
     const item = this.state.items;
-    return item.filter(item =>
-      item.title.toLowerCase().includes(query.toLowerCase())
-    );
+    if (
+      this.state.lostButton === "clicked" ||
+      this.state.founcButton === "clicked"
+    ) {
+      return item.filter(item => item.itemStatus === query);
+    } else {
+      return item.filter(item =>
+        item.title.toLowerCase().includes(query.toLowerCase())
+      );
+    }
   }
 
   componentDidMount() {
@@ -107,14 +122,16 @@ export default class ItemCard extends Component {
   }
 
   render() {
-    console.log("search", this.state.searchTerm);
     return (
       <Container>
-        <Button name="Lost" onClick={this.lost}>
+        <Button name="Lost" onClick={this.lost} value="Lost">
           Lost Items
         </Button>
-        <Button name="Found" onClick={this.found}>
+        <Button name="Found" onClick={this.found} value="Found">
           Found Items
+        </Button>
+        <Button name="All" onClick={this.all} value="All">
+          All
         </Button>
         <input onChange={this.searchFilter} type="text"></input>
         <Row>
@@ -151,6 +168,7 @@ export default class ItemCard extends Component {
                       <Card.Subtitle className="mt-2 cardsubtitle">
                         Posted By: {item.postedBy}
                       </Card.Subtitle>
+                      <h3>{item.itemStatus}</h3>
                     </Card.Body>
                   </Card>
                 </CardWrapper>
