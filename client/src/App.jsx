@@ -20,36 +20,12 @@ import { logOutService, verifyService } from "./services/authServices";
 
 ///////////////////////// STYLE //////////////////////////
 
-const delta = keyframes`
- 0% {
-      background-position: 0 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0 50%;
-    }
-`;
-
 const UniStyle = styled.div`
   color: #fff;
-  height: 200vh;
   color: white;
-  background: linear-gradient(
-    45deg,
-    #1fffbc,
-    #a219fd,
-    #1d99ff,
-    #a219fd,
-    #1fffbc
-  );
-  background-size: 400% 400%;
-  position: relative;
-  animation: ${delta} 35s linear infinite;
 `;
 
-/////////////////// END OF STYLE   /////////////////////
+/////////////////// END OF STYLE   ///////////////////////
 
 export default class App extends Component {
   constructor(props) {
@@ -58,7 +34,6 @@ export default class App extends Component {
       user: null,
       loaded: false
     };
-    this.loadUser = this.loadUser.bind(this);
     this.logOut = this.logOut.bind(this);
     this.loadUser = this.loadUser.bind(this);
     this.checkAuthed = this.checkAuthed.bind(this);

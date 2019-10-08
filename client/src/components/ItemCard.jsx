@@ -8,7 +8,7 @@ const CardWrapper = styled.div`
   .carditem {
     border-radius: 20px;
     border: none;
-    background: #d3cfff;
+    background: hsla(0, 96%, 52%, 0.4);
     height: 400px;
     margin: 10px;
   }
