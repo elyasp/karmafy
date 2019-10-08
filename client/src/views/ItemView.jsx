@@ -44,6 +44,7 @@ export default class FoundItemView extends Component {
   render() {
     const item = this.state.item;
     const user = this.props.user;
+    console.log(user);
     return (
       (item && (
         <Card
@@ -72,7 +73,7 @@ export default class FoundItemView extends Component {
               {item.description}
             </Card.Text>
 
-            {item.user === user._id ? (
+            {user && item.user === user._id ? (
               <Link
                 to={`/item/${item._id}/edit`}
                 className="mx-3 btn btn-danger"
