@@ -60,28 +60,16 @@ export default class ItemCard extends Component {
                     className="text-center carditem"
                     style={{ width: "100%" }}
                   >
-                    <Carousel className="mx-auto mt-3" style={{ width: "90%" }}>
-                      <Carousel.Item>
-                        <img
-                          className="d-block w-100"
-                          src="https://source.unsplash.com/1600x900/?key"
-                          alt="First slide"
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item>
-                        <img
-                          className="d-block w-100"
-                          src="https://source.unsplash.com/1600x900/?key"
-                          alt="Third slide"
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item>
-                        <img
-                          className="d-block w-100"
-                          src="https://source.unsplash.com/1600x900/?key"
-                          alt="Third slide"
-                        />
-                      </Carousel.Item>
+                    <Carousel className="mx-auto" style={{ width: "100%" }}>
+                      {item.imageUrl.map(item => (
+                        <Carousel.Item>
+                          <img
+                            className="d-block w-100"
+                            src={item.image}
+                            alt="First slide"
+                          />
+                        </Carousel.Item>
+                      ))}
                     </Carousel>
 
                     <Card.Body className="px-0">
