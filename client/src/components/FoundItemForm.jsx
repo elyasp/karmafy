@@ -52,13 +52,12 @@ export default class ItemFormView extends Component {
       // Replace cloudinary upload URL with yours
       return axios
         .post(
-          `https://api.cloudinary.com/v1_1/dz3ipymey/image/upload`,
+          `https://api.cloudinary.com/v1_1/dz3ipymey/image/upload/`,
           formData,
           { headers: { "X-Requested-With": "XMLHttpRequest" } }
         )
         .then(response => {
           final.push({ image: response.data.url });
-          console.log("this", response.data.url);
           const name = "imageUrl";
           const value = final;
           this.props.onValueChange({

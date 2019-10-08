@@ -37,7 +37,6 @@ router.post("/item/add", (req, res, next) => {
 router.patch("/item/:id/edit", (req, res, next) => {
   const id = req.params.id;
   const { title, description } = req.body;
-  console.log("whole", req.body);
   Item.findOneAndUpdate(
     {
       _id: id
@@ -80,6 +79,18 @@ router.delete("/item/:id/delete", (req, res, next) => {
 router.get("/item/:id", (req, res, next) => {
   const id = req.params.id;
   Item.findById(id)
+    // .populate("user")
+    .then(item => {
+      res.json({ type: "success", data: { item } });
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.get("/byUser/:id", (req, res, next) => {
+  const id = req.params.id;
+  Item.find({ user: id })
     // .populate("user")
     .then(item => {
       res.json({ type: "success", data: { item } });

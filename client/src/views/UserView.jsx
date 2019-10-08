@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import HomeView from "./HomeView";
 import EditUserView from "./EditUserView";
-
+import ItemCard from "../components/ItemCard";
 import styled from "styled-components";
-
-// import Importer from "./ItemAddView";
-
+import { loadByUser } from "../services/itemApi";
+import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
 //////////////////// STYLE //////////////////////
 
 const ViewWrapper = styled.div`
@@ -55,6 +54,27 @@ const ItemSection = styled.div`
 export default class UserView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      item: null
+    };
+  }
+
+  loadItem() {
+    loadByUser(this.props.user._id)
+      .then(item => {
+        this.setState({
+          item
+        });
+      })
+      .catch(error => {
+        this.props.history.push(
+          `/error/${error.response ? error.response.status : "404"}`
+        );
+      });
+  }
+
+  componentDidMount() {
+    this.loadItem();
   }
 
   render() {
@@ -62,21 +82,59 @@ export default class UserView extends Component {
 
     return (
       <div>
-        {(this.props.user && (
+        {(this.props.user && this.state.item && (
           <div>
             <ViewWrapper>
               <Link to={`${this.props.user._id}/edit`}>
-                <Button>
+                {/* <Button>
                   <h5>Edit Profile</h5>
-                </Button>
+                </Button> */}
               </Link>
               <ProfileWrapper>
-                <img src={user.profile} width="200" height="200" />
+                <img src={user.profile} width="200" />
                 <h1>{this.props.user.name}</h1>
                 <h6>Karmalevel: 0</h6>
               </ProfileWrapper>
               <ItemSection>
                 <h4>My various items...</h4>
+                <Container>
+                  <Row>
+                    {this.state.item.map(item => (
+                      <Col md={4}>
+                        <Card
+                          className="text-center carditem"
+                          style={{ width: "100%" }}
+                        >
+                          <Carousel
+                            className="mx-auto"
+                            style={{ width: "100%" }}
+                          >
+                            {item.imageUrl.map(item => (
+                              <Carousel.Item>
+                                <img
+                                  className="d-block w-100"
+                                  src={item.image
+                                    .split("upload/")
+                                    .join("upload/h_350,w_500,c_scale/")}
+                                  alt="First slide"
+                                />
+                              </Carousel.Item>
+                            ))}
+                          </Carousel>
+
+                          <Card.Body className="px-0">
+                            <Card.Title className="mt-1 cardtitle">
+                              {item.title}
+                            </Card.Title>
+                            <Card.Subtitle className="mt-2 cardsubtitle">
+                              Location Found: Somewhere
+                            </Card.Subtitle>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    ))}
+                  </Row>
+                </Container>
               </ItemSection>
             </ViewWrapper>
           </div>

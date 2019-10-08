@@ -65,7 +65,9 @@ export default class ItemCard extends Component {
                         <Carousel.Item>
                           <img
                             className="d-block w-100"
-                            src={item.image}
+                            src={item.image
+                              .split("upload/")
+                              .join("upload/h_350,w_500,c_scale/")}
                             alt="First slide"
                           />
                         </Carousel.Item>

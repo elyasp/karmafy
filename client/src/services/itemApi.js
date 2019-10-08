@@ -17,6 +17,19 @@ export const list = () => {
   });
 };
 
+export const loadByUser = id => {
+  return new Promise((resolve, reject) => {
+    itemApi
+      .get(`/byUser/${id}`)
+      .then(response => {
+        resolve(response.data.data.item);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
 export const load = id => {
   return new Promise((resolve, reject) => {
     itemApi

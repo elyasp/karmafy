@@ -33,14 +33,6 @@ export default class FoundItemView extends Component {
     this.loadItem();
   }
 
-  // componentDidUpdate(previousProps, previousState) {
-  //   if (
-  //     !this.state.item ||
-  //     previousProps.match.params.id !== this.props.match.params.id
-  //   ) {
-  //     this.loadItem();
-  //   }
-  // }
   render() {
     const item = this.state.item;
     const user = this.props.user;
@@ -49,7 +41,7 @@ export default class FoundItemView extends Component {
       (item && (
         <Card
           className="mt-5 border-0 mx-auto text-center"
-          style={{ width: "90%" }}
+          style={{ width: "60%" }}
         >
           <Carousel className="mx-auto" style={{ width: "50%" }}>
             {item.imageUrl.map(item => (
@@ -63,13 +55,17 @@ export default class FoundItemView extends Component {
             ))}
           </Carousel>
           <Card.Body className="px-0">
-            <Card.Title className="mt-3" style={{ fontSize: "2.6rem" }}>
+            <Card.Title
+              className="mt-3 text-dark"
+              style={{ fontSize: "2.6rem" }}
+            >
               {item.title}
             </Card.Title>
-            <Card.Subtitle className="mt-3" style={{ fontSize: "1.5rem" }}>
-              Location Found: Somewhere
-            </Card.Subtitle>
-            <Card.Text className="mt-3" style={{ fontSize: "1.25rem" }}>
+
+            <Card.Text
+              className="mt-3 text-dark"
+              style={{ fontSize: "1.25rem" }}
+            >
               {item.description}
             </Card.Text>
 
@@ -84,10 +80,7 @@ export default class FoundItemView extends Component {
             ) : (
               <div>
                 <Link className="mx-3 btn btn-danger" variant="primary">
-                  Claim!
-                </Link>
-                <Link className="mx-3 btn btn-danger" variant="primary">
-                  Mark as Resolved
+                  Message User!
                 </Link>
               </div>
             )}
