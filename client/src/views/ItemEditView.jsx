@@ -62,17 +62,17 @@ export default class ItemEditView extends Component {
       });
   }
 
-  deleteItem(event) {
-    event.preventDefault();
-    const id = this.props.match.params.id;
-    remove(id)
-      .then(item => {
-        this.props.history.push(`/`);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  // deleteItem(event) {
+  //   event.preventDefault();
+  //   const id = this.props.match.params.id;
+  //   remove(id)
+  //     .then(item => {
+  //       this.props.history.push(`/`);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
 
   render() {
     return (
@@ -95,11 +95,11 @@ export default class ItemEditView extends Component {
             <Button type="submit">Submit</Button>
           </LostItemForm>
         )}
-        <Form onSubmit={this.deleteItem}>
+        {/* <Form onSubmit={this.deleteItem}>
           <Button className="mt-4" type="submit">
             Delete Item
           </Button>
-        </Form>
+        </Form> */}
       </div>
     );
   }

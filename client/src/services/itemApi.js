@@ -61,6 +61,7 @@ export const edit = (id, updatedItem) => {
     itemApi
       .patch(`/item/${id}/edit`, updatedItem)
       .then(response => {
+        console.log(response);
         resolve(response);
       })
       .catch(error => {
@@ -71,7 +72,6 @@ export const edit = (id, updatedItem) => {
 
 export const remove = id => {
   return new Promise((resolve, reject) => {
-    console.log(id);
     itemApi
       .delete(`/item/${id}`)
       .then(() => {

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import { Card, Form } from "react-bootstrap";
 import axios from "axios";
-
+import { remove } from "./../services/itemApi";
 import { edit } from "../services/itemApi";
 import { load } from "../services/itemApi";
 
@@ -52,16 +52,30 @@ export default class FoundItemView extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleChange = e => {
-    this.setState({[e.target.name]: e.target.value})
-  }
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   async handleSubmit(e) {
-    e.preventDefault()
-    const {name, email, message} = this.state
-    const form = await axios.post("/mailsent", {name, email, message})
+    e.preventDefault();
+    const { name, email, message } = this.state;
+    const form = await axios.post("/mailsent", { name, email, message });
+  }
+
+  deleteItem(event) {
+    console.log(event, "event");
+    event.preventDefault();
+    const id = this.props.match.params.id;
+    remove(id)
+      .then(item => {
+        this.props.history.push(`/`);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   loadItem() {
@@ -85,10 +99,8 @@ export default class FoundItemView extends Component {
   render() {
     const item = this.state.item;
     const user = this.props.user;
-    console.log(user);
     return (
       (item && (
-
         <PageWrapper className="container">
           <CardWrapper>
             <Card
@@ -118,22 +130,27 @@ export default class FoundItemView extends Component {
                 </Card.Text>
 
                 {user && item.user === user._id ? (
-                  <Link
-                    to={`/item/${item._id}/edit`}
-                    className="mx-3 btn btn-danger"
-                    variant="primary"
-                  >
-                    Edit
-                  </Link>
-                ) : (
                   <div>
-                    <Link className="mx-3 btn btn-danger" variant="primary">
-                      Claim!
+                    <Link
+                      to={`/item/${item._id}/edit`}
+                      className="mx-3 btn btn-danger"
+                      variant="primary"
+                    >
+                      Edit
                     </Link>
-                    <Link className="mx-3 btn btn-danger" variant="primary">
-                      Mark as Resolved
-                    </Link>
+                    <Form onSubmit={this.deleteItem}>
+                      <Button
+                        className="mt-4 mx-3 btn btn-danger"
+                        type="submit"
+                      >
+                        Mark As Resolved
+                      </Button>
+                    </Form>
                   </div>
+                ) : (
+                  <Link className="mx-3 btn btn-danger" variant="primary">
+                    Claim!
+                  </Link>
                 )}
               </Card.Body>
             </Card>
@@ -144,16 +161,30 @@ export default class FoundItemView extends Component {
             <Form onSubmit={this.handleSubmit}>
               <Form.Group>
                 <Form.Label htmlFor="name">Your Name</Form.Label>
-                <Form.Control type="text" name="name" onChange={this.handleChange} />
+                <Form.Control
+                  type="text"
+                  name="name"
+                  onChange={this.handleChange}
+                />
               </Form.Group>
               <Form.Group>
                 <Form.Label htmlFor="email">Your Email</Form.Label>
-                <Form.Control type="email" name="email" onChange={this.handleChange}/>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  onChange={this.handleChange}
+                />
               </Form.Group>
 
               <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label htmlFor="message">Message</Form.Label>
-                <Form.Control onChange={this.handleChange} as="textarea" name="message" rows="6" placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"/>
+                <Form.Control
+                  onChange={this.handleChange}
+                  as="textarea"
+                  name="message"
+                  rows="6"
+                  placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"
+                />
               </Form.Group>
               <Button type="submit"> Send Message </Button>
             </Form>
@@ -164,7 +195,6 @@ export default class FoundItemView extends Component {
           <h3> No Item to View..</h3>
         </div>
       )
-
     );
   }
 }
