@@ -61,7 +61,7 @@ export default class NavbarItem extends Component {
                     <AddButton> ADD OBJECT </AddButton>
                   </Link>
                   <Link
-                    to={`/user/${this.props.user.name}`}
+                    to={`/user/${this.props.user._id}`}
                     className="text-white"
                   >
                     <span className="btn">

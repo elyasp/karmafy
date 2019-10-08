@@ -3,11 +3,13 @@
 const User = require("./../../models/user");
 
 module.exports = (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, profile, location } = req.body;
   User.register({
     name,
     email,
-    password
+    password,
+    profile,
+    location
   })
     .then(user => {
       req.session.user = {

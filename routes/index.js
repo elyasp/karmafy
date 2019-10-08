@@ -37,6 +37,7 @@ router.post("/item/add", (req, res, next) => {
 router.patch("/item/:id/edit", (req, res, next) => {
   const id = req.params.id;
   const { title, description } = req.body;
+  console.log("whole", req.body);
   Item.findOneAndUpdate(
     {
       _id: id

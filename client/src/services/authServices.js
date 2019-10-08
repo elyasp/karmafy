@@ -69,3 +69,17 @@ export const uploadImage = theFile => {
       });
   });
 };
+
+export const editUser = (id, updatedUser) => {
+  return new Promise((resolve, reject) => {
+    console.log("updated", updatedUser);
+    authAPI
+      .patch(`/user/${id}/edit`, updatedUser)
+      .then(response => {
+        resolve(response);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
