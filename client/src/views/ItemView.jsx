@@ -79,8 +79,9 @@ export default class FoundItemView extends Component {
               </Link>
             ) : (
               <div>
+                {/* <p className="text-dark">Posted By: {item.postedBy}</p> */}
                 <Link className="mx-3 btn btn-danger" variant="primary">
-                  Message User!
+                  Message {item.postedBy}!
                 </Link>
               </div>
             )}

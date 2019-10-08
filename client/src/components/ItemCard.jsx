@@ -79,7 +79,7 @@ export default class ItemCard extends Component {
                         {item.title}
                       </Card.Title>
                       <Card.Subtitle className="mt-2 cardsubtitle">
-                        Location Found: Somewhere
+                        Posted By: {item.postedBy}
                       </Card.Subtitle>
                     </Card.Body>
                   </Card>

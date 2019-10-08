@@ -17,14 +17,15 @@ router.get("/all", (req, res, next) => {
 });
 
 router.post("/item/add", (req, res, next) => {
-  const { title, description, itemStatus, imageUrl, user } = req.body;
+  const { title, description, itemStatus, imageUrl, user, postedBy } = req.body;
 
   Item.create({
     title,
     description,
     itemStatus,
     imageUrl,
-    user
+    user,
+    postedBy
   })
     .then(item => {
       res.json({ type: "success", data: { item } });
