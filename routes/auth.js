@@ -36,17 +36,10 @@ router.post("/upload", upload.single("imageUrl"), (req, res, next) => {
 
 router.patch("/user/:id/edit", (req, res, next) => {
   const id = req.params.id;
-  const { name } = req.body;
-  User.findOneAndUpdate(
-    {
-      _id: id
-    },
-    {
-      ...(name && { name })
-      // ...(description && { description })
-    },
-    { new: true }
-  )
+
+  const name = Object.keys(req.body)[0];
+
+  User.findOneAndUpdate({ _id: id }, { name: name })
     .then(user => {
       if (user) {
         res.json({ type: "success", data: { user } });

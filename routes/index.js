@@ -108,7 +108,6 @@ router.post("/mailsent", (req, res, next) => {
 router.get("/item/:id", (req, res, next) => {
   const id = req.params.id;
   Item.findById(id)
-    // .populate("user")
     .then(item => {
       res.json({ type: "success", data: { item } });
     })
@@ -130,7 +129,6 @@ router.get("/byUser/:id", (req, res, next) => {
 
 router.delete("/item/:id", (req, res, next) => {
   const id = req.params.id;
-  const { title, description } = req.body;
   Item.findOneAndUpdate({ _id: id }, { resolved: true })
     .then(item => {
       if (item) {
@@ -143,23 +141,6 @@ router.delete("/item/:id", (req, res, next) => {
       next(error);
     });
 });
-
-// router.delete("/item/:id", (req, res, next) => {
-//   const id = req.params.id;
-//   Item.findOneAndDelete({
-//     _id: id
-//   })
-//     .then(item => {
-//       if (item) {
-//         res.json({ type: "success" });
-//       } else {
-//         next(new Error("ITEM_COULD_NOT_BE_DELETED"));
-//       }
-//     })
-//     .catch(error => {
-//       next(error);
-//     });
-// });
 
 router.get("/:type", (req, res, next) => {
   const typeItem = req.params;

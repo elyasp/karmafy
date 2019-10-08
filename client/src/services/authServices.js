@@ -70,11 +70,11 @@ export const uploadImage = theFile => {
   });
 };
 
-export const editUser = (id, updatedUser) => {
+export const editUser = (name, id) => {
+  console.log("api", name);
   return new Promise((resolve, reject) => {
-    console.log("updated", updatedUser);
     authAPI
-      .patch(`/user/${id}/edit`, updatedUser)
+      .patch(`/user/${id}/edit`, name, id)
       .then(response => {
         resolve(response);
       })

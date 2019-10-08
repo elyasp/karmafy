@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 
-// import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FoundItemForm from "./../components/FoundItemForm";
 import LostItemForm from "./../components/LostItemForm";
 
-import { remove } from "./../services/itemApi";
 import { edit } from "./../services/itemApi";
 import { load } from "./../services/itemApi";
 
@@ -23,7 +20,6 @@ export default class ItemEditView extends Component {
     };
     this.onFormValueChange = this.onFormValueChange.bind(this);
     this.editItem = this.editItem.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
   }
 
   componentDidMount() {
