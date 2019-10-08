@@ -1,6 +1,5 @@
 "use strict";
 require("dotenv").config();
-
 const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
 const multer = require("multer");
@@ -13,7 +12,7 @@ cloudinary.config({
 
 let storage = cloudinaryStorage({
   cloudinary,
-  folder: "items", // The name of the folder in cloudinary
+  folder: "Karmafy", // The name of the folder in cloudinary
   allowedFormats: ["jpg", "png"],
   // params: { resource_type: 'raw' }, => this is in case you want to upload other type of files, not just images
   filename: function(req, res, cb) {
