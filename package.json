@@ -6,7 +6,9 @@
     "start": "node ./server",
     "dev": "nodemon ./server",
     "dev:debug": "DEBUG=final-project* npm run dev",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "cd client && npm install --production=false && npm run build && cd ..",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "axios": "^0.19.0",

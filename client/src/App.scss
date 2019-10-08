@@ -21,6 +21,38 @@
   color: #09d3ac;
 }
 
+@keyframes delta {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+body {
+  color: #fff;
+  height: 250vh;
+  color: white;
+  background: linear-gradient(
+    45deg,
+    #1fffbc,
+    #a219fd,
+    #1d99ff,
+    #a219fd,
+    #1fffbc
+  );
+  background-size: 400% 400%;
+  position: relative;
+  animation-name: delta;
+  animation-duration: 35s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 * {
   font-family: "Krub", sans-serif;
 }
