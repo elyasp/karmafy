@@ -28,41 +28,70 @@ export default class ItemCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      searchTerm: ""
     };
     this.lost = this.lost.bind(this);
     this.found = this.found.bind(this);
+    this.searchFilter = this.searchFilter.bind(this);
   }
 
   lost(event) {
     loadByType(event.target.name)
       .then(items => {
-        console.log("lost list", items);
         this.setState({
           items
         });
       })
       .catch(error => {
-        // this.props.history.push(
-        //   `/error/${error.response ? error.response.status : "404"}`
-        // );
+        this.props.history.push(
+          `/error/${error.response ? error.response.status : "404"}`
+        );
       });
   }
 
+  searchFilter(event) {
+    // let search = this.state.items.filter(item => {
+    //   if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
+    //     return item;
+    //   }
+    // });
+
+    this.setState({
+      searchTerm: event.target.value.toLowerCase()
+    });
+  }
+
   found(event) {
-    console.log(event.target.name);
     loadByType(event.target.name)
       .then(items => {
-        console.log("found list", items);
         this.setState({
           items
         });
       })
       .catch(error => {
-        // this.props.history.push(
-        //   `/error/${error.response ? error.response.status : "404"}`
-        // );
+        this.props.history.push(
+          `/error/${error.response ? error.response.status : "404"}`
+        );
       });
+  }
+
+  //   get filteredSearchList() {
+  //     const query = this.state.searchTerm;
+  //     const item = this.state.items;
+  //     return item.filter(item => {
+  //       if (item.title.toLowerCase().includes(event.target.value.toLowerCase())) {
+  //           return item
+  //         }
+  //   }
+  // }
+
+  get filteredSearchList() {
+    const query = this.state.searchTerm;
+    const item = this.state.items;
+    return item.filter(item =>
+      item.title.toLowerCase().includes(query.toLowerCase())
+    );
   }
 
   componentDidMount() {
@@ -78,7 +107,7 @@ export default class ItemCard extends Component {
   }
 
   render() {
-    console.log("state", this.state.items);
+    console.log("search", this.state.searchTerm);
     return (
       <Container>
         <Button name="Lost" onClick={this.lost}>
@@ -87,8 +116,9 @@ export default class ItemCard extends Component {
         <Button name="Found" onClick={this.found}>
           Found Items
         </Button>
+        <input onChange={this.searchFilter} type="text"></input>
         <Row>
-          {this.state.items.map(item => (
+          {this.filteredSearchList.map(item => (
             <Col md={4}>
               <Link
                 to={`/item/${item._id}`}
