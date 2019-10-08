@@ -19,9 +19,9 @@ const schema = new mongoose.Schema({
     required: true
   },
   location: {
-    type: [Number]
+    type: String
   },
-  profilePhoto: {
+  profile: {
     type: String
   },
   karmaCount: {

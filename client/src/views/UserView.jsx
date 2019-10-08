@@ -59,13 +59,13 @@ export default class UserView extends Component {
 
   render() {
     const user = this.props.user;
-    console.log(user);
+
     return (
       <div>
         {(this.props.user && (
           <div>
             <ViewWrapper>
-              <Link to={`${this.props.user.name}/edit`}>
+              <Link to={`${this.props.user._id}/edit`}>
                 <Button>
                   <h5>Edit Profile</h5>
                 </Button>

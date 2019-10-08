@@ -42,7 +42,7 @@ export default class NavbarItem extends Component {
               >
                 <Nav>
                   <Link
-                    to={`/user/${this.props.user.name}`}
+                    to={`/user/${this.props.user._id}`}
                     className="text-white"
                   >
                     <span className="btn">

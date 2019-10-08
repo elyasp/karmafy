@@ -49,9 +49,8 @@ export default class ItemEditView extends Component {
     });
   }
 
-  editItem() {
+  editItem(event) {
     const id = this.props.match.params.id;
-
     const item = this.state.item;
     edit(id, item)
       .then(item => {
@@ -90,7 +89,7 @@ export default class ItemEditView extends Component {
           <LostItemForm
             value={this.state.item}
             onValueChange={this.onFormValueChange}
-            onFormSubmit={this.addItem}
+            onFormSubmit={this.editItem}
           >
             <Button type="submit">Submit</Button>
           </LostItemForm>

@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 import HomeView from "./HomeView";
 
 import styled from "styled-components";
-
+import { editUser } from "./../services/authServices";
 // import Importer from "./ItemAddView";
 
 /////////////////////// STYLE //////////////////////////
@@ -40,6 +40,32 @@ const Button = styled.button`
 export default class EditUserView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: ""
+    };
+    this.editUser = this.editUser.bind(this);
+    this.onValueChange = this.onValueChange.bind(this);
+  }
+
+  editUser(event) {
+    event.preventDefault();
+    const id = this.props.match.params.name;
+    const user = this.state.name;
+
+    editUser(id, user)
+      .then(user => {
+        this.props.history.push(`/`);
+        // this.props.history.push(`/user/${id}`);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  onValueChange(event) {
+    this.setState({
+      name: event.target.value
+    });
   }
 
   render() {
@@ -48,20 +74,21 @@ export default class EditUserView extends Component {
         {(this.props.user && (
           <div>
             <ViewWrapper>
-              <Link to={`/user/${this.props.user.name}`}>
+              <Link to={`/user/${this.props.user._id}`}>
                 <Button>
                   <h1>↩</h1>{" "}
                 </Button>
               </Link>
 
               <ProfileWrapper>
-                <Form>
+                <Form onSubmit={this.editUser}>
                   <h6>Change Public Name</h6>
                   <Form.Group>
                     <Form.Control
                       type="text"
                       name="name"
                       placeholder="e.g. karma99"
+                      onChange={this.onValueChange}
                     />
                     <Form.Text className="text-muted">
                       your name is {this.props.user.name}
