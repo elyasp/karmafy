@@ -70,7 +70,7 @@ export default class ItemFormView extends Component {
     // We would use axios `.all()` method to perform concurrent image upload to cloudinary.
     axios.all(uploads).then(() => {
       // ... do anything after successful upload. You can setState() or save the data
-      console.log("Images have all being uploaded", uploads);
+      console.log("Images have all uploaded", uploads);
 
       console.log(final);
     });
@@ -79,11 +79,11 @@ export default class ItemFormView extends Component {
   render() {
     return (
       <Form onSubmit={this.onFormSubmit}>
-        <h1>Found Item</h1>
-        <h4>
+        <h3>Found Item</h3>
+        <h5>
           Found something? Get some karma points and add your item here to help
           us return it!
-        </h4>
+        </h5>
 
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>What Did You Find?</Form.Label>

@@ -31,7 +31,7 @@ const Button = styled.button`
   background: none;
   &:hover {
     color: black;
-    background: white;
+    background: hsla(248, 100%, 50%, 0.659);
   }
 `;
 

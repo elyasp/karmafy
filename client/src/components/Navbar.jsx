@@ -1,17 +1,32 @@
 import React, { Component, Fragment } from "react";
 import { Navbar, Nav, Form } from "react-bootstrap";
+import ItemAddView from "./../views/ItemAddView";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+/////////////////////////// STYLE //////////////////////
 
 const Button = styled.button`
   border: none;
   background: none;
 `;
 
-const Right = styled.div`
+const AddButton = styled.button`
+  border: 0.5px solid #fff1c4;
+  border-radius: 3px;
   display: flex;
-  justify-content: flex-end;
+  justify-self: center;
+  font-size: 20px;
+  background: none;
+  color: #fff1c4;
+  &:hover {
+    background: hsla(59, 100%, 49%, 0.34);
+    color: black;
+    text-decoration: none;
+  }
 `;
+
+////////////////////// END OF STYLE ///////////////////////
 
 export default class NavbarItem extends Component {
   constructor(props) {
@@ -23,8 +38,9 @@ export default class NavbarItem extends Component {
       <div>
         <Navbar className="sticky-top" expand="sm">
           <Link to="/" className="btn">
-            <h4>KARMAFY</h4>
+            <h4 className="title">KARMAFY</h4>
           </Link>
+
           {(!this.props.user && (
             <Fragment>
               <Link className="btn" to="/login">
@@ -41,6 +57,9 @@ export default class NavbarItem extends Component {
                 id="responsive-navbar-nav"
               >
                 <Nav>
+                  <Link to="/item/add">
+                    <AddButton> ADD OBJECT </AddButton>
+                  </Link>
                   <Link
                     to={`/user/${this.props.user._id}`}
                     className="text-white"
@@ -51,7 +70,7 @@ export default class NavbarItem extends Component {
                   </Link>
                   <Form onSubmit={this.props.logOut}>
                     <Button type="submit">
-                      <img src="./../../logout.png" width="30" height="30" />
+                      <img src="./../../logout.png" width="30" height="35" />
                     </Button>
                   </Form>
                 </Nav>
