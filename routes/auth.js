@@ -2,7 +2,7 @@
 
 const { Router } = require("express");
 const router = Router();
-const upload = require("./../utilities/cloudinary");
+const upload = require("./../configs/cloudinary-setup");
 const User = require("./../models/user");
 const routeGuardMiddleware = require("./../middleware/route-guard");
 const Item = require("./../models/item");

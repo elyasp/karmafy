@@ -72,7 +72,7 @@ export default class FoundItemView extends Component {
               {item.description}
             </Card.Text>
 
-            {item.user === user._id ? (
+            {user.id && item.user === user._id ? (
               <Link
                 to={`/item/${item._id}/edit`}
                 className="mx-3 btn btn-danger"
