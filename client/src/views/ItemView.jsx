@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import MessageSent from "./MessageSentView";
 
 import Carousel from "react-bootstrap/Carousel";
 import { Card, Form } from "react-bootstrap";
@@ -46,7 +47,7 @@ export default class FoundItemView extends Component {
     super(props);
     this.state = {
       item: null,
-      name: "",
+      contactnumber: "",
       email: "",
       message: ""
     };
@@ -55,14 +56,8 @@ export default class FoundItemView extends Component {
   }
 
   handleChange = e => {
-    this.setState({[e.target.name]: e.target.value})
-  }
-
-  async handleSubmit(e) {
-    e.preventDefault()
-    const {name, email, message} = this.state
-    const form = await axios.post("/mailsent", {name, email, message})
-  }
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   loadItem() {
     load(this.props.match.params.id)
@@ -78,17 +73,32 @@ export default class FoundItemView extends Component {
       });
   }
 
+  async handleSubmit(e) {
+    e.preventDefault();
+    const { contactnumber, email, message } = this.state;
+    const receiver = this.state.item && this.state.item.user.email;
+
+    const name = this.props.user.name;
+    const form = await axios.post("/mailsent", {
+      name,
+      email,
+      message,
+      receiver,
+      contactnumber
+    });
+  }
+
   componentDidMount() {
     this.loadItem();
   }
 
   render() {
-    const item = this.state.item;
+    const item = this.state.item && this.state.item;
     const user = this.props.user;
-    console.log(user);
+    console.log("ITEM USER EMAIL", item);
+
     return (
       (item && (
-
         <PageWrapper className="container">
           <CardWrapper>
             <Card
@@ -143,19 +153,39 @@ export default class FoundItemView extends Component {
             <h2>Item yours? Contact the finder</h2>
             <Form onSubmit={this.handleSubmit}>
               <Form.Group>
-                <Form.Label htmlFor="name">Your Name</Form.Label>
-                <Form.Control type="text" name="name" onChange={this.handleChange} />
-              </Form.Group>
-              <Form.Group>
                 <Form.Label htmlFor="email">Your Email</Form.Label>
-                <Form.Control type="email" name="email" onChange={this.handleChange}/>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  required
+                  onChange={this.handleChange}
+                />
               </Form.Group>
 
-              <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label htmlFor="message">Message</Form.Label>
-                <Form.Control onChange={this.handleChange} as="textarea" name="message" rows="6" placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"/>
+              <Form.Group>
+                <Form.Label htmlFor="contactnumber">
+                  Add your phone number
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="contactnumber"
+                  placeholder="optional"
+                  onChange={this.handleChange}
+                />
               </Form.Group>
-              <Button type="submit"> Send Message </Button>
+
+              <Form.Group>
+                <Form.Label htmlFor="message">Message</Form.Label>
+                <Form.Control
+                  onChange={this.handleChange}
+                  as="textarea"
+                  required
+                  name="message"
+                  rows="8"
+                  placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"
+                />
+              </Form.Group>
+              <Button type="submit">send</Button>
             </Form>
           </MailWrapper>
         </PageWrapper>
@@ -164,7 +194,6 @@ export default class FoundItemView extends Component {
           <h3> No Item to View..</h3>
         </div>
       )
-
     );
   }
 }

@@ -22,9 +22,8 @@ const schema = new mongoose.Schema(
     // imageUrl: {
     //   type: String
     // },
-    user: {
-      type: String
-    },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+
     location: {
       type: String
     },
