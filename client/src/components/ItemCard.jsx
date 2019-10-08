@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { list } from "./../services/itemApi";
 import { Link } from "react-router-dom";
-import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
+import { Card, Col, Row, Container, Carousel, Button } from "react-bootstrap";
 import styled from "styled-components";
-
+import { loadByType } from "../services/itemApi";
 const CardWrapper = styled.div`
   .carditem {
     border-radius: 20px;
@@ -30,6 +30,39 @@ export default class ItemCard extends Component {
     this.state = {
       items: []
     };
+    this.lost = this.lost.bind(this);
+    this.found = this.found.bind(this);
+  }
+
+  lost(event) {
+    loadByType(event.target.name)
+      .then(items => {
+        console.log("lost list", items);
+        this.setState({
+          items
+        });
+      })
+      .catch(error => {
+        // this.props.history.push(
+        //   `/error/${error.response ? error.response.status : "404"}`
+        // );
+      });
+  }
+
+  found(event) {
+    console.log(event.target.name);
+    loadByType(event.target.name)
+      .then(items => {
+        console.log("found list", items);
+        this.setState({
+          items
+        });
+      })
+      .catch(error => {
+        // this.props.history.push(
+        //   `/error/${error.response ? error.response.status : "404"}`
+        // );
+      });
   }
 
   componentDidMount() {
@@ -45,8 +78,15 @@ export default class ItemCard extends Component {
   }
 
   render() {
+    console.log("state", this.state.items);
     return (
       <Container>
+        <Button name="Lost" onClick={this.lost}>
+          Lost Items
+        </Button>
+        <Button name="Found" onClick={this.found}>
+          Found Items
+        </Button>
         <Row>
           {this.state.items.map(item => (
             <Col md={4}>

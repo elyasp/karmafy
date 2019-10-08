@@ -37,7 +37,6 @@ router.post("/upload", upload.single("imageUrl"), (req, res, next) => {
 router.patch("/user/:id/edit", (req, res, next) => {
   const id = req.params.id;
   const { name } = req.body;
-  console.log(req.body);
   User.findOneAndUpdate(
     {
       _id: id

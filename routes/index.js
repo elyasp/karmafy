@@ -60,13 +60,15 @@ router.patch("/item/:id/edit", (req, res, next) => {
     });
 });
 
-router.delete("/item/:id/delete", (req, res, next) => {
+router.delete("/item/:id", (req, res, next) => {
   const id = req.params.id;
+  console.log(id);
   Item.findOneAndDelete({
     id: id
   })
     .then(item => {
       if (item) {
+        console.log("deltete", item);
         res.json({ type: "success" });
       } else {
         next(new Error("ITEM_COULD_NOT_BE_DELETED"));
@@ -93,6 +95,17 @@ router.get("/byUser/:id", (req, res, next) => {
   const id = req.params.id;
   Item.find({ user: id })
     // .populate("user")
+    .then(item => {
+      res.json({ type: "success", data: { item } });
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.get("/:type", (req, res, next) => {
+  const typeItem = req.params;
+  Item.find({ itemStatus: typeItem.type })
     .then(item => {
       res.json({ type: "success", data: { item } });
     })

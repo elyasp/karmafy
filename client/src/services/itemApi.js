@@ -17,6 +17,19 @@ export const list = () => {
   });
 };
 
+export const loadByType = typeItem => {
+  return new Promise((resolve, reject) => {
+    itemApi
+      .get(`/${typeItem}`)
+      .then(response => {
+        resolve(response.data.data.item);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
 export const loadByUser = id => {
   return new Promise((resolve, reject) => {
     itemApi
@@ -58,8 +71,9 @@ export const edit = (id, updatedItem) => {
 
 export const remove = id => {
   return new Promise((resolve, reject) => {
+    console.log(id);
     itemApi
-      .delete(`/item/${id}/delete`)
+      .delete(`/item/${id}`)
       .then(() => {
         resolve();
       })
