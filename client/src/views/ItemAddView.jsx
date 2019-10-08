@@ -34,6 +34,7 @@ export default class ItemAddView extends Component {
         title: "",
         description: "",
         itemStatus: "",
+        postedBy: "",
         imageUrl: [
           {
             image: ""
@@ -71,7 +72,8 @@ export default class ItemAddView extends Component {
     this.setState({
       item: {
         itemStatus: "Lost",
-        user: this.props.user._id
+        user: this.props.user._id,
+        postedBy: this.props.user.name
       }
     });
   }
@@ -80,7 +82,8 @@ export default class ItemAddView extends Component {
     this.setState({
       item: {
         itemStatus: "Found",
-        user: this.props.user._id
+        user: this.props.user._id,
+        postedBy: this.props.user.name
       }
     });
 

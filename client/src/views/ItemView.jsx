@@ -82,21 +82,13 @@ export default class FoundItemView extends Component {
     this.loadItem();
   }
 
-  // componentDidUpdate(previousProps, previousState) {
-  //   if (
-  //     !this.state.item ||
-  //     previousProps.match.params.id !== this.props.match.params.id
-  //   ) {
-  //     this.loadItem();
-  //   }
-  // }
-
   render() {
     const item = this.state.item;
     const user = this.props.user;
     console.log(user);
     return (
       (item && (
+
         <PageWrapper className="container">
           <CardWrapper>
             <Card
@@ -172,6 +164,7 @@ export default class FoundItemView extends Component {
           <h3> No Item to View..</h3>
         </div>
       )
+
     );
   }
 }

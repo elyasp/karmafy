@@ -44,6 +44,7 @@ export default class EditUserView extends Component {
       name: ""
     };
     this.editUser = this.editUser.bind(this);
+
     this.onValueChange = this.onValueChange.bind(this);
   }
 

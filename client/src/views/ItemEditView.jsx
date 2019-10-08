@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 // import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import FoundItemForm from "./../components/FoundItemForm";
 import LostItemForm from "./../components/LostItemForm";
 
@@ -61,9 +62,9 @@ export default class ItemEditView extends Component {
       });
   }
 
-  deleteItem() {
+  deleteItem(event) {
+    event.preventDefault();
     const id = this.props.match.params.id;
-    console.log("this is delete id", id);
     remove(id)
       .then(item => {
         this.props.history.push(`/`);
@@ -94,6 +95,11 @@ export default class ItemEditView extends Component {
             <Button type="submit">Submit</Button>
           </LostItemForm>
         )}
+        <Form onSubmit={this.deleteItem}>
+          <Button className="mt-4" type="submit">
+            Delete Item
+          </Button>
+        </Form>
       </div>
     );
   }

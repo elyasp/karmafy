@@ -21,14 +21,15 @@ router.get("/all", (req, res, next) => {
 });
 
 router.post("/item/add", (req, res, next) => {
-  const { title, description, itemStatus, imageUrl, user } = req.body;
+  const { title, description, itemStatus, imageUrl, user, postedBy } = req.body;
 
   Item.create({
     title,
     description,
     itemStatus,
     imageUrl,
-    user
+    user,
+    postedBy
   })
     .then(item => {
       res.json({ type: "success", data: { item } });
@@ -81,7 +82,6 @@ router.post("/mailsent", (req, res, next) => {
 router.patch("item/:id/edit", (req, res, next) => {
   const id = req.params.id;
   const { title, description } = req.body;
-  console.log("whole", req.body);
   Item.findOneAndUpdate(
     {
       _id: id
@@ -104,13 +104,15 @@ router.patch("item/:id/edit", (req, res, next) => {
     });
 });
 
-router.delete("/item/:id/delete", (req, res, next) => {
+router.delete("/item/:id", (req, res, next) => {
   const id = req.params.id;
+  console.log(id);
   Item.findOneAndDelete({
     id: id
   })
     .then(item => {
       if (item) {
+        console.log("deltete", item);
         res.json({ type: "success" });
       } else {
         next(new Error("ITEM_COULD_NOT_BE_DELETED"));
@@ -125,6 +127,29 @@ router.get("/item/:id", (req, res, next) => {
   const id = req.params.id;
   Item.findById(id)
     // .populate("user")
+    .then(item => {
+      res.json({ type: "success", data: { item } });
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.get("/byUser/:id", (req, res, next) => {
+  const id = req.params.id;
+  Item.find({ user: id })
+    // .populate("user")
+    .then(item => {
+      res.json({ type: "success", data: { item } });
+    })
+    .catch(error => {
+      next(error);
+    });
+});
+
+router.get("/:type", (req, res, next) => {
+  const typeItem = req.params;
+  Item.find({ itemStatus: typeItem.type })
     .then(item => {
       res.json({ type: "success", data: { item } });
     })
