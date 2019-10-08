@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authAPI = axios.create({
-  baseURL: `/`
+  baseURL: `${process.env.REACT_APP_API_URL}/`
 });
 
 export const registerService = ({ name, email, password, profile, location }) =>
