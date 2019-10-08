@@ -79,27 +79,6 @@ export default class ItemCard extends Component {
                       <Card.Subtitle className="mt-2 cardsubtitle">
                         Location Found: Somewhere
                       </Card.Subtitle>
-                      {/* <Card.Text
-                        className="mt-3"
-                        style={{ fontSize: "1.25rem" }}
-                      >
-                        {item.description}
-                      </Card.Text> */}
-                      {/* <Link className="mx-3 btn btn-danger" variant="primary">
-                      Claim!
-                    </Link> */}
-                      {/* <div>
-                      <Link
-                        to={`/item/${item._id}/edit`}
-                        className="mx-3 btn btn-danger"
-                        variant="primary"
-                      >
-                        Edit
-                      </Link>
-                      <Link className="mx-3 btn btn-danger" variant="primary">
-                        Mark as Resolved
-                      </Link>
-                    </div> */}
                     </Card.Body>
                   </Card>
                 </CardWrapper>

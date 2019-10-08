@@ -50,7 +50,7 @@ export default class FoundItemView extends Component {
           className="mt-5 border-0 mx-auto text-center"
           style={{ width: "90%" }}
         >
-          <Carousel className="mx-auto" style={{ width: "100%" }}>
+          <Carousel className="mx-auto" style={{ width: "50%" }}>
             {item.imageUrl.map(item => (
               <Carousel.Item>
                 <img
