@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Dropzone from "react-dropzone";
 import axios from "axios";
-import Map from "./Map";
+import Map from "./FormMap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { uploadImage } from "../services/itemApi";
@@ -97,6 +97,14 @@ export default class ItemFormView extends Component {
   };
 
   render() {
+    const mapStyles = {
+      width: "20px",
+      height: "100px",
+      display: "block",
+      position: "static"
+    };
+    const containerStyle = { height: "100px" };
+
     return (
       <Form onSubmit={this.onFormSubmit}>
         <h3>Found Item</h3>
@@ -148,7 +156,15 @@ export default class ItemFormView extends Component {
         </Form.Group>
 
         <Form.Group style={{ height: "300px" }}>
-          <Map updateCoord={this.mapCoord} value={this.state.item} />
+          <Form.Label>
+            Click to add a marker near where you found the item.
+          </Form.Label>
+          <Map
+            style={mapStyles}
+            updateCoord={this.mapCoord}
+            value={this.state.item}
+            containerStyle={containerStyle}
+          />
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">

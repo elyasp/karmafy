@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Dropzone from "react-dropzone";
 import axios from "axios";
-import Map from "./Map";
+import Map from "./FormMap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -105,6 +105,13 @@ export default class ItemFormView extends Component {
   };
 
   render() {
+    const mapStyles = {
+      width: "50%",
+      height: "300px",
+      display: "block",
+      position: "static"
+    };
+    const containerStyle = { height: "300px" };
     return (
       <Form onSubmit={this.onFormSubmit}>
         <h1>Lost Item</h1>
@@ -137,22 +144,16 @@ export default class ItemFormView extends Component {
           />
         </Form.Group>
 
-        {/* <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>
-            Upload An Image Optional, but it would help a possible finder
-          </Form.Label>
-          <Form.Control
-            as="input"
-            type="file"
-            name="imageUrl"
-            size="lg"
-            className="btn-lg pl-0"
-            onChange={e => this.handleFileUpload(e)}
-          />
-        </Form.Group> */}
-
         <Form.Group style={{ height: "300px" }}>
-          <Map updateCoord={this.mapCoord} value={this.state.item} />
+          <Form.Label>
+            Click to add a marker near where you think you lost the item.
+          </Form.Label>
+          <Map
+            style={mapStyles}
+            updateCoord={this.mapCoord}
+            value={this.state.item}
+            containerStyle={containerStyle}
+          />
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">

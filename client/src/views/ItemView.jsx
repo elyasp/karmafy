@@ -8,7 +8,7 @@ import axios from "axios";
 import { remove } from "./../services/itemApi";
 import { edit } from "../services/itemApi";
 import { load } from "../services/itemApi";
-import Map from "./Map";
+import Map from "../components/ItemMap";
 import styled from "styled-components";
 
 //////////////////////// STYLE ////////////////////////
@@ -77,7 +77,6 @@ export default class FoundItemView extends Component {
   }
 
   deleteItem(event) {
-    console.log(event, "event");
     event.preventDefault();
     const id = this.props.match.params.id;
     remove(id)
@@ -120,6 +119,7 @@ export default class FoundItemView extends Component {
   }
 
   render() {
+    const containerStyle = { height: "200px" };
     const item = this.state.item && this.state.item;
     const user = this.props.user;
     console.log("USER ", user, "ITEM ", item);
@@ -153,7 +153,7 @@ export default class FoundItemView extends Component {
                 <Card.Text className="mt-3" style={{ fontSize: "1.25rem" }}>
                   {item.description}
                 </Card.Text>
-
+                <Map item={item.location} />
                 {user && item && item.user._id === user._id ? (
                   <div>
                     <Link

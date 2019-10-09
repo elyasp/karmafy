@@ -104,7 +104,7 @@ router.post("/mailsent", (req, res, next) => {
     .catch(error => console.log("MAIL SENDING FAILED", error));
 });
 
-router.patch("item/:id/edit", (req, res, next) => {
+router.patch("/item/:id/edit", (req, res, next) => {
   const id = req.params.id;
 
   const { title, description } = req.body;

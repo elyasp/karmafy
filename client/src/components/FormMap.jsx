@@ -1,3 +1,4 @@
+// require("dotenv").config();
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
 import React, { Component } from "react";
@@ -34,7 +35,7 @@ export class MapContainer extends Component {
 
   render() {
     const mapStyles = {
-      width: "50%",
+      width: "85%",
       height: "300px",
       display: "block",
       position: "static"
@@ -48,7 +49,7 @@ export class MapContainer extends Component {
     return (
       <Map
         google={this.props.google}
-        zoom={8}
+        zoom={10}
         style={mapStyles}
         initialCenter={{ lat: 47.444, lng: -122.176 }}
         onClick={this.onMapClick}
@@ -61,5 +62,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_API_KEY
+  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API
 })(MapContainer);
