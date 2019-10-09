@@ -16,6 +16,13 @@ import styled from "styled-components";
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  font-weight: 200;
+
+  .accessdenied {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const CardWrapper = styled.div`
@@ -34,9 +41,21 @@ const Button = styled.button`
   border-radius: 5px;
   border: 2px solid white;
   background: none;
+  margin-right: 30px;
   &:hover {
     color: black;
-    background: hsla(59, 100%, 49%, 0.34);
+    background: hsla(360, 100%, 49%, 0.34);
+  }
+`;
+
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 30vh;
+
+  h3 {
+    font-size: 50px;
+    font-weight: 200;
   }
 `;
 
@@ -185,114 +204,127 @@ export default class FoundItemView extends Component {
             </Card>
           </CardWrapper>
 
-          {!this.state.sent ? (
-            <MailWrapper>
-              {this.state.item.itemStatus === "Found" ? (
-                <Fragment>
-                  <h2>Item yours? Contact the finder</h2>
-                  <Form onSubmit={this.handleSubmit}>
-                    <Form.Group>
-                      <Form.Label htmlFor="email">Your Email</Form.Label>
-                      <Form.Control
-                        type="email"
-                        name="email"
-                        required
-                        onChange={this.handleChange}
-                      />
-                      <Form.Text>
-                        <small>You will be replied to this address</small>
-                      </Form.Text>
-                    </Form.Group>
+          {this.props.user ? (
+            <div>
+              {!this.state.sent ? (
+                <MailWrapper>
+                  {this.state.item.itemStatus === "Found" ? (
+                    <Fragment>
+                      <h2>Item yours? Contact the finder</h2>
+                      <Form onSubmit={this.handleSubmit}>
+                        <Form.Group>
+                          <Form.Label htmlFor="email">Your Email</Form.Label>
+                          <Form.Control
+                            type="email"
+                            name="email"
+                            required
+                            onChange={this.handleChange}
+                          />
+                          <Form.Text>
+                            <small>You will be replied to this address</small>
+                          </Form.Text>
+                        </Form.Group>
 
-                    <Form.Group>
-                      <Form.Label htmlFor="contactnumber">
-                        Add your phone number
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        name="contactnumber"
-                        placeholder="optional"
-                        onChange={this.handleChange}
-                      />
-                    </Form.Group>
+                        <Form.Group>
+                          <Form.Label htmlFor="contactnumber">
+                            Add your phone number
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="contactnumber"
+                            placeholder="optional"
+                            onChange={this.handleChange}
+                          />
+                        </Form.Group>
 
-                    <Form.Group>
-                      <Form.Label htmlFor="ownerCheck">
-                        {this.state.item.ownerCheck}
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        required
-                        name="ownerCheckAns"
-                        placeholder="verification question"
-                        onChange={this.handleChange}
-                      />
-                    </Form.Group>
+                        <Form.Group>
+                          <Form.Label htmlFor="ownerCheck">
+                            {this.state.item.ownerCheck}
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            required
+                            name="ownerCheckAns"
+                            placeholder="verification question"
+                            onChange={this.handleChange}
+                          />
+                        </Form.Group>
 
-                    <Form.Group>
-                      <Form.Label htmlFor="message">Message</Form.Label>
-                      <Form.Control
-                        onChange={this.handleChange}
-                        as="textarea"
-                        name="message"
-                        rows="6"
-                        placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"
-                      />
-                    </Form.Group>
-                    <Button type="submit">Send Message</Button>
-                  </Form>
-                </Fragment>
+                        <Form.Group>
+                          <Form.Label htmlFor="message">Message</Form.Label>
+                          <Form.Control
+                            onChange={this.handleChange}
+                            as="textarea"
+                            name="message"
+                            rows="6"
+                            placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"
+                          />
+                        </Form.Group>
+                        <Button type="submit">Send Message</Button>
+                      </Form>
+                    </Fragment>
+                  ) : (
+                    <Fragment>
+                      <h2>Found this? Upgrade your karma and return it!</h2>
+                      <Form onSubmit={this.handleSubmit}>
+                        <Form.Group>
+                          <Form.Label htmlFor="email">Your Email</Form.Label>
+                          <Form.Control
+                            type="email"
+                            name="email"
+                            required
+                            onChange={this.handleChange}
+                          />
+                          <Form.Text>
+                            <small>You will be replied to this address</small>
+                          </Form.Text>
+                        </Form.Group>
+
+                        <Form.Group>
+                          <Form.Label htmlFor="contactnumber">
+                            Add your phone number
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="contactnumber"
+                            placeholder="optional"
+                            onChange={this.handleChange}
+                          />
+                        </Form.Group>
+
+                        <Form.Group>
+                          <Form.Label htmlFor="message">Message</Form.Label>
+                          <Form.Control
+                            onChange={this.handleChange}
+                            as="textarea"
+                            name="message"
+                            rows="3"
+                          />
+                        </Form.Group>
+                        <Button type="submit">Send Message</Button>
+                      </Form>
+                    </Fragment>
+                  )}
+                </MailWrapper>
               ) : (
-                <Fragment>
-                  <h2>Found this? Upgrade your karma and return it!</h2>
-                  <Form onSubmit={this.handleSubmit}>
-                    <Form.Group>
-                      <Form.Label htmlFor="email">Your Email</Form.Label>
-                      <Form.Control
-                        type="email"
-                        name="email"
-                        required
-                        onChange={this.handleChange}
-                      />
-                      <Form.Text>
-                        <small>You will be replied to this address</small>
-                      </Form.Text>
-                    </Form.Group>
-
-                    <Form.Group>
-                      <Form.Label htmlFor="contactnumber">
-                        Add your phone number
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        name="contactnumber"
-                        placeholder="optional"
-                        onChange={this.handleChange}
-                      />
-                    </Form.Group>
-
-                    <Form.Group>
-                      <Form.Label htmlFor="message">Message</Form.Label>
-                      <Form.Control
-                        onChange={this.handleChange}
-                        as="textarea"
-                        name="message"
-                        rows="3"
-                      />
-                    </Form.Group>
-                    <Button type="submit">Send Message</Button>
-                  </Form>
-                </Fragment>
+                <MessageSent />
               )}
-            </MailWrapper>
+            </div>
           ) : (
-            <MessageSent />
+            <div className="accessdenied">
+              <Link to="/login">
+                <Button>LOG IN</Button>
+              </Link>
+              <Link to="/register">
+                <Button>REGISTER</Button>
+              </Link>
+            </div>
           )}
         </PageWrapper>
       )) || (
-        <div>
+        <Center>
           <h3> Item Loading...</h3>
-        </div>
+        </Center>
       )
     );
   }

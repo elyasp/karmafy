@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const itemApi = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}/`
+  baseURL: `${process.env.REACT_APP_API_URL}/api`
 });
 
 export const list = () => {
