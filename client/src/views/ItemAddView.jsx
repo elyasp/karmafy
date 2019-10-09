@@ -41,7 +41,8 @@ export default class ItemAddView extends Component {
             image: ""
           }
         ],
-        location: {}
+        location: {},
+        imageUploaded: ""
       }
     };
     this.onFormValueChange = this.onFormValueChange.bind(this);
@@ -60,8 +61,8 @@ export default class ItemAddView extends Component {
   }
 
   addItem() {
+    console.log("adding");
     const item = this.state.item;
-    console.log("whole state", item);
     add(item)
       .then(item => {
         this.props.history.push(`/item/${item.data.data.item._id}`);
@@ -102,6 +103,8 @@ export default class ItemAddView extends Component {
   }
 
   render() {
+    console.log("img uploaded", this.state.item.imageUploaded);
+    const isEnabled = this.state.item.imageUploaded === "loading";
     return (
       <div class="container">
         <h1 className="text-center ">Add an item to the exchange</h1>
@@ -122,7 +125,9 @@ export default class ItemAddView extends Component {
             onValueChange={this.onFormValueChange}
             onFormSubmit={this.addItem}
           >
-            <Button type="submit">Submit</Button>
+            <Button disabled={isEnabled} type="submit">
+              Submit
+            </Button>
           </LostItemForm>
         )}
 
@@ -132,7 +137,9 @@ export default class ItemAddView extends Component {
             onValueChange={this.onFormValueChange}
             onFormSubmit={this.addItem}
           >
-            <Button type="submit">Submit</Button>
+            <Button disabled={isEnabled} type="submit">
+              Submit
+            </Button>
           </FoundItemForm>
         )}
       </div>

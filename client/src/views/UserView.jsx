@@ -152,26 +152,28 @@ export default class UserView extends Component {
                             {item.resolved ? (
                               <h3>It's been reunited!</h3>
                             ) : (
-                              <h3>{item.itemStatus}</h3>
+                              <div>
+                                <h3>{item.itemStatus}</h3>
+                                <Link
+                                  to={`/item/${item._id}/edit`}
+                                  className="mx-3 btn btn-danger"
+                                  variant="primary"
+                                >
+                                  Edit
+                                </Link>
+                                <Form onSubmit={this.deleteItem}>
+                                  <Button
+                                    className="mt-4 mx-3 btn btn-danger"
+                                    type="submit"
+                                    value={item._id}
+                                    name={item._id}
+                                    onClick={this.itemUpdate}
+                                  >
+                                    Mark As Resolved
+                                  </Button>
+                                </Form>
+                              </div>
                             )}
-                            <Link
-                              to={`/item/${item._id}/edit`}
-                              className="mx-3 btn btn-danger"
-                              variant="primary"
-                            >
-                              Edit
-                            </Link>
-                            <Form onSubmit={this.deleteItem}>
-                              <Button
-                                className="mt-4 mx-3 btn btn-danger"
-                                type="submit"
-                                value={item._id}
-                                name={item._id}
-                                onClick={this.itemUpdate}
-                              >
-                                Mark As Resolved
-                              </Button>
-                            </Form>
                           </Card.Body>
                         </Card>
                       </Col>

@@ -13,7 +13,8 @@ export default class ItemFormView extends Component {
     super(props);
     this.state = {
       files: [],
-      location: {}
+      location: {},
+      imageUploaded: ""
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.onButtonValueChange = this.onButtonValueChange.bind(this);
@@ -56,11 +57,15 @@ export default class ItemFormView extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    console.log("these are the props", this.props);
     this.props.onFormSubmit();
   }
 
   handleUploadImages = images => {
+    const name = "imageUploaded";
+    const value = "loading";
+    this.props.onValueChange({
+      [name]: value
+    });
     const final = [];
     // uploads is an array that would hold all the post methods for each image to be uploaded, then we'd use axios.all()
     const uploads = images.map(image => {
@@ -91,6 +96,11 @@ export default class ItemFormView extends Component {
 
     // We would use axios `.all()` method to perform concurrent image upload to cloudinary.
     axios.all(uploads).then(() => {
+      const name = "imageUploaded";
+      const value = "done";
+      this.props.onValueChange({
+        [name]: value
+      });
       // ... do anything after successful upload. You can setState() or save the data
       console.log("Images have all uploaded", uploads);
     });
@@ -99,11 +109,11 @@ export default class ItemFormView extends Component {
   render() {
     const mapStyles = {
       width: "20px",
-      height: "100px",
+      height: "300px",
       display: "block",
       position: "static"
     };
-    const containerStyle = { height: "100px" };
+    const containerStyle = { height: "300px" };
 
     return (
       <Form onSubmit={this.onFormSubmit}>
@@ -155,7 +165,7 @@ export default class ItemFormView extends Component {
           </small>
         </Form.Group>
 
-        <Form.Group style={{ height: "300px" }}>
+        <Form.Group style={{ height: "400px" }}>
           <Form.Label>
             Click to add a marker near where you found the item.
           </Form.Label>
