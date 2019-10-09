@@ -36,6 +36,9 @@ const schema = new mongoose.Schema(
     },
     postedBy: {
       type: String
+    },
+    ownerCheck: {
+      type: String
     }
   },
 

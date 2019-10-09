@@ -21,11 +21,19 @@ router.get("/all", (req, res, next) => {
 });
 
 router.post("/item/add", (req, res, next) => {
-  const { title, description, itemStatus, imageUrl, postedBy } = req.body;
+  const {
+    title,
+    description,
+    itemStatus,
+    imageUrl,
+    postedBy,
+    ownerCheck
+  } = req.body;
 
   Item.create({
     title,
     description,
+    ownerCheck,
     itemStatus,
     imageUrl,
     user: req.user._id,

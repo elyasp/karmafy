@@ -33,6 +33,7 @@ export default class ItemAddView extends Component {
         user: "",
         title: "",
         description: "",
+        ownerCheck: "",
         itemStatus: "",
         postedBy: "",
         imageUrl: [

@@ -103,7 +103,7 @@ export default class ItemFormView extends Component {
           <Form.Control
             type="text"
             name="title"
-            placeholder="e.g. size 39 red right shoe"
+            placeholder="e.g. black hat"
             size="lg"
             value={this.props.value.title}
             onChange={this.onValueChange}
@@ -115,21 +115,29 @@ export default class ItemFormView extends Component {
             as="textarea"
             rows="4"
             name="description"
-            placeholder="Add a detailed description"
+            placeholder="Add a general description"
             size="lg"
             value={this.props.value.description}
             onChange={this.onValueChange}
           />
         </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Verification Questions</Form.Label>
+        <Form.Group controlId="exampleForm.ControlTextarea1">
+          <Form.Label>Proof of Ownership question</Form.Label>
           <Form.Control
             as="textarea"
-            rows="4"
-            size="lg"
-            placeholder="Add some verification questions"
+            rows="3"
+            size="sm"
+            name="ownerCheck"
+            required
+            maxlength="120"
+            value={this.props.value.ownerCheck}
+            onChange={this.onValueChange}
+            placeholder="Ask about any special characteristics of the item (i.e. brand, inner-details, size). Max 120 characters"
           />
+          <small>
+            HINT: Dont ask anything that you put in the description!
+          </small>
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">
