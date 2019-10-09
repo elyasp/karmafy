@@ -49,11 +49,13 @@ export default class FoundItemView extends Component {
       item: null,
       contactnumber: "",
       email: "",
-      message: ""
+      message: "",
+      sent: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.redirectSucces = this.redirectSucces.bind(this);
   }
 
   handleChange = e => {
@@ -91,7 +93,6 @@ export default class FoundItemView extends Component {
     e.preventDefault();
     const { contactnumber, email, message } = this.state;
     const receiver = this.state.item && this.state.item.user.email;
-
     const name = this.props.user.name;
     const form = await axios.post("/mailsent", {
       name,
@@ -100,6 +101,15 @@ export default class FoundItemView extends Component {
       receiver,
       contactnumber
     });
+    console.log("HANDLESUBMIT!!!!!");
+  }
+
+  redirectSucces() {
+    this.setState({
+      ...this.state,
+      sent: true
+    });
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
   }
 
   componentDidMount() {
@@ -165,45 +175,51 @@ export default class FoundItemView extends Component {
               </Card.Body>
             </Card>
           </CardWrapper>
+          {!this.state.sent ? (
+            <MailWrapper>
+              <h2>Item yours? Contact the finder</h2>
+              <Form onSubmit={this.handleSubmit && this.redirectSucces}>
+                <Form.Group>
+                  <Form.Label htmlFor="email">Your Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    required
+                    onChange={this.handleChange}
+                  />
+                  <Form.Text>
+                    <small>You will be replied to this address</small>
+                  </Form.Text>
+                </Form.Group>
 
-          <MailWrapper>
-            <h2>Item yours? Contact the finder</h2>
-            <Form onSubmit={this.handleSubmit}>
-              <Form.Group>
-                <Form.Label htmlFor="email">Your Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  required
-                  onChange={this.handleChange}
-                />
-              </Form.Group>
+                <Form.Group>
+                  <Form.Label htmlFor="contactnumber">
+                    Add your phone number
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="contactnumber"
+                    placeholder="optional"
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
 
-              <Form.Group>
-                <Form.Label htmlFor="contactnumber">
-                  Add your phone number
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="contactnumber"
-                  placeholder="optional"
-                  onChange={this.handleChange}
-                />
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label htmlFor="message">Message</Form.Label>
-                <Form.Control
-                  onChange={this.handleChange}
-                  as="textarea"
-                  name="message"
-                  rows="6"
-                  placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"
-                />
-              </Form.Group>
-              <Button type="submit">Send Message</Button>
-            </Form>
-          </MailWrapper>
+                <Form.Group>
+                  <Form.Label htmlFor="message">Message</Form.Label>
+                  <Form.Control
+                    onChange={this.handleChange}
+                    as="textarea"
+                    name="message"
+                    rows="6"
+                    placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"
+                  />
+                </Form.Group>
+                <Button type="submit">Send Message</Button>
+              </Form>
+            </MailWrapper>
+          ) : (
+            <MessageSent />
+          )}
         </PageWrapper>
       )) || (
         <div>

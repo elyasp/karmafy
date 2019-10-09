@@ -25,7 +25,7 @@ router.get("/user/:name", loadUserController);
 // routeGuardMiddleware(true),
 // editUserController)
 
-router.delete("/user/:name", routeGuardMiddleware(true), deleteUserController);
+router.delete("/user/:id", routeGuardMiddleware(true), deleteUserController);
 router.post("/upload", upload.single("imageUrl"), (req, res, next) => {
   if (!req.file) {
     next(new Error("UPLOAD FAILED"));

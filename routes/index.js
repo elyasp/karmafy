@@ -41,7 +41,7 @@ router.post("/item/add", (req, res, next) => {
 });
 
 router.post("/mailsent", (req, res, next) => {
-  console.log(req.body.receiver);
+  console.log("The recipient was: ", req.body.receiver);
   const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {

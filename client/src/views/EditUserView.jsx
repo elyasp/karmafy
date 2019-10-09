@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 import HomeView from "./HomeView";
 
 import styled from "styled-components";
-import { editUser } from "./../services/authServices";
+import { editUser, removeUser } from "./../services/authServices";
 // import Importer from "./ItemAddView";
 
 /////////////////////// STYLE //////////////////////////
@@ -44,7 +44,7 @@ export default class EditUserView extends Component {
       name: ""
     };
     this.editUser = this.editUser.bind(this);
-
+    this.deleteUser = this.deleteUser.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
   }
 
@@ -56,6 +56,17 @@ export default class EditUserView extends Component {
     editUser(name, id)
       .then(user => {
         this.props.history.push(`/user/${id}`);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  deleteUser() {
+    console.log(this.props.history);
+    removeUser(this.props.user._id)
+      .then(user => {
+        this.props.history.push("/");
       })
       .catch(error => {
         console.log(error);
@@ -117,6 +128,9 @@ export default class EditUserView extends Component {
                     Save Changes
                   </Button>
                 </Form>
+                <Button variant="outline-danger" onClick={this.deleteUser}>
+                  Delete
+                </Button>
               </ProfileWrapper>
             </ViewWrapper>
           </div>
