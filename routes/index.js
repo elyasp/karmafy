@@ -40,8 +40,47 @@ router.post("/item/add", (req, res, next) => {
     });
 });
 
+// router.post("/mailsent", (req, res, next) => {
+//   console.log("The recipient was: ", req.body.receiver);
+//   const transporter = nodemailer.createTransport({
+//     service: "Gmail",
+//     auth: {
+//       user: process.env.GMAIL_EMAIL,
+//       pass: process.env.GMAIL_PASS
+//     }
+//   });
+
+//   const message = `
+//     <h1>Good News!<h1>
+//     <h3>Your item has been spotted by someone!<h3>
+
+//     <h4>The following user:</h4>
+//     <ul>
+//     <li>Name: ${req.body.name}</li>
+//     <li>Phone: ${req.body.contactnumber}</li>
+//     <li><strong>Email: ${req.body.email}</strong></li>
+//     </ul>
+
+//     <h4>Wrote Message: </h4>
+//     <p><i>${req.body.message}</i></p>
+//   `;
+
+//   transporter
+//     .sendMail({
+//       from: '"Team Karmafy" <teamkarmafy@gmail.com>',
+//       to: `${req.body.receiver}`,
+//       subject: "Your Karmafy item has been spotted!",
+//       html: `${message}`,
+//       text: message
+//     })
+//     .then(result => {
+//       console.log(result);
+//     })
+//     .catch(error => console.log("MAIL SENDING FAILED", error));
+// });
+
 router.post("/mailsent", (req, res, next) => {
-  console.log("The recipient was: ", req.body.receiver);
+  console.log(req.body);
   const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -51,30 +90,31 @@ router.post("/mailsent", (req, res, next) => {
   });
 
   const message = `
-    <h1>Good News!<h1>
-    <h3>Your item has been spotted by someone!<h3>
-
-    <h4>The following user:</h4>
-    <ul>
-    <li>Name: ${req.body.name}</li>
-    <li>Phone: ${req.body.contactnumber}</li>
-    <li><strong>Email: ${req.body.email}</strong></li>
-    </ul>
-
-    <h4>Wrote Message: </h4>
-    <p><i>${req.body.message}</i></p>
-  `;
+      <h1>Good News!<h1>
+      <h3>Your item has been spotted by someone!<h3>
+  
+      <h4>The following user:</h4>
+      <ul>
+      <li>Name: ${req.body.name}</li>
+      <li><strong>Email: ${req.body.email}</strong></li>
+      </ul>
+  
+      <h4>Wrote Message: </h4>
+      <p>
+      ${req.body.message}
+      </p>
+    `;
 
   transporter
     .sendMail({
       from: '"Team Karmafy" <teamkarmafy@gmail.com>',
-      to: `${req.body.receiver}`,
+      to: "teamkarmafy@gmail.com",
       subject: "Your Karmafy item has been spotted!",
       html: `${message}`,
       text: message
     })
     .then(result => {
-      console.log(result);
+      res.json({ type: "success", result });
     })
     .catch(error => console.log("MAIL SENDING FAILED", error));
 });
@@ -103,46 +143,6 @@ router.patch("item/:id/edit", (req, res, next) => {
     .catch(error => {
       next(error);
     });
-});
-
-router.post("/mailsent", (req, res, next) => {
-  console.log(req.body);
-  const transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: process.env.GMAIL_EMAIL,
-      pass: process.env.GMAIL_PASS
-    }
-  });
-
-  const message = `
-    <h1>Good News!<h1>
-    <h3>Your item has been spotted by someone!<h3>
-
-    <h4>The following user:</h4>
-    <ul>
-    <li>Name: ${req.body.name}</li>
-    <li><strong>Email: ${req.body.email}</strong></li>
-    </ul>
-
-    <h4>Wrote Message: </h4>
-    <p>
-    ${req.body.message}
-    </p>
-  `;
-
-  transporter
-    .sendMail({
-      from: '"Team Karmafy" <teamkarmafy@gmail.com>',
-      to: "teamkarmafy@gmail.com",
-      subject: "Your Karmafy item has been spotted!",
-      html: `${message}`,
-      text: message
-    })
-    .then(result => {
-      console.log(result);
-    })
-    .catch(error => console.log("MAIL SENDING FAILED", error));
 });
 
 router.get("/item/:id", (req, res, next) => {

@@ -55,7 +55,6 @@ export default class FoundItemView extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
-    this.redirectSucces = this.redirectSucces.bind(this);
   }
 
   handleChange = e => {
@@ -94,22 +93,22 @@ export default class FoundItemView extends Component {
     const { contactnumber, email, message } = this.state;
     const receiver = this.state.item && this.state.item.user.email;
     const name = this.props.user.name;
-    const form = await axios.post("/mailsent", {
-      name,
-      email,
-      message,
-      receiver,
-      contactnumber
-    });
-    console.log("HANDLESUBMIT!!!!!");
-  }
-
-  redirectSucces() {
-    this.setState({
-      ...this.state,
-      sent: true
-    });
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    const form = await axios
+      .post("/mailsent", {
+        name,
+        email,
+        message,
+        receiver,
+        contactnumber
+      })
+      .then(() => {
+        this.setState({
+          sent: true
+        });
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+      });
   }
 
   componentDidMount() {
@@ -119,9 +118,11 @@ export default class FoundItemView extends Component {
   render() {
     const item = this.state.item && this.state.item;
     const user = this.props.user;
+    console.log("USER ", user, "ITEM ", item);
     return (
       (item && (
         <PageWrapper className="container">
+          {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
           <CardWrapper>
             <Card
               className="mt-5 border-0 mx-auto text-center"
@@ -129,7 +130,7 @@ export default class FoundItemView extends Component {
             >
               <Carousel className="mx-auto" style={{ width: "50%" }}>
                 {item.imageUrl.map(item => (
-                  <Carousel.Item>
+                  <Carousel.Item key={item._id}>
                     <img
                       className="d-block w-100"
                       src={item.image}
@@ -149,7 +150,7 @@ export default class FoundItemView extends Component {
                   {item.description}
                 </Card.Text>
 
-                {user && item.user === user._id ? (
+                {user && item && item.user === user._id ? (
                   <div>
                     <Link
                       to={`/item/${item._id}/edit`}
@@ -168,7 +169,11 @@ export default class FoundItemView extends Component {
                     </Form>
                   </div>
                 ) : (
-                  <Link className="mx-3 btn btn-danger" variant="primary">
+                  <Link
+                    to="#"
+                    className="mx-3 btn btn-danger"
+                    variant="primary"
+                  >
                     Claim!
                   </Link>
                 )}
@@ -178,7 +183,7 @@ export default class FoundItemView extends Component {
           {!this.state.sent ? (
             <MailWrapper>
               <h2>Item yours? Contact the finder</h2>
-              <Form onSubmit={this.handleSubmit && this.redirectSucces}>
+              <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                   <Form.Label htmlFor="email">Your Email</Form.Label>
                   <Form.Control
