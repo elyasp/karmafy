@@ -50,6 +50,7 @@ export default class FoundItemView extends Component {
       contactnumber: "",
       email: "",
       message: "",
+      ownerCheckAns: "",
       sent: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -90,8 +91,9 @@ export default class FoundItemView extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    const { contactnumber, email, message } = this.state;
+    const { contactnumber, email, message, ownerCheckAns } = this.state;
     const receiver = this.state.item && this.state.item.user.email;
+    const verifQuestion = this.state.item && this.state.item.ownerCheck;
     const name = this.props.user.name;
     const form = await axios
       .post("/mailsent", {
@@ -99,7 +101,9 @@ export default class FoundItemView extends Component {
         email,
         message,
         receiver,
-        contactnumber
+        contactnumber,
+        ownerCheckAns,
+        verifQuestion
       })
       .then(() => {
         this.setState({
@@ -219,7 +223,7 @@ export default class FoundItemView extends Component {
                       <Form.Control
                         type="text"
                         required
-                        name="ownerCheck"
+                        name="ownerCheckAns"
                         placeholder="verification question"
                         onChange={this.handleChange}
                       />
