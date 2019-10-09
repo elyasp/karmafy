@@ -6,6 +6,7 @@ import EditUserView from "./EditUserView";
 import ItemCard from "../components/ItemCard";
 import styled from "styled-components";
 import { loadByUser } from "../services/itemApi";
+import { remove } from "./../services/itemApi";
 import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
 //////////////////// STYLE //////////////////////
 
@@ -54,8 +55,17 @@ export default class UserView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: null
+      item: null,
+      itemId: ""
     };
+    this.itemUpdate = this.itemUpdate.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+  }
+  itemUpdate(event) {
+    const id = event.target.name;
+    this.setState({
+      itemId: id
+    });
   }
 
   loadItem() {
@@ -72,6 +82,19 @@ export default class UserView extends Component {
       });
   }
 
+  deleteItem(event) {
+    event.preventDefault();
+    const id = this.state.itemId;
+    console.log(this.state.itemId);
+
+    remove(id)
+      .then(item => {
+        this.props.history.push(`/`);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   componentDidMount() {
     this.loadItem();
   }
@@ -131,6 +154,24 @@ export default class UserView extends Component {
                             ) : (
                               <h3>{item.itemStatus}</h3>
                             )}
+                            <Link
+                              to={`/item/${item._id}/edit`}
+                              className="mx-3 btn btn-danger"
+                              variant="primary"
+                            >
+                              Edit
+                            </Link>
+                            <Form onSubmit={this.deleteItem}>
+                              <Button
+                                className="mt-4 mx-3 btn btn-danger"
+                                type="submit"
+                                value={item._id}
+                                name={item._id}
+                                onClick={this.itemUpdate}
+                              >
+                                Mark As Resolved
+                              </Button>
+                            </Form>
                           </Card.Body>
                         </Card>
                       </Col>
