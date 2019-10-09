@@ -204,7 +204,9 @@ export default class FoundItemView extends Component {
             </Card>
           </CardWrapper>
 
-          {this.props.user ? (
+          {/* {this.props.user.email !== this.state.item.user.email} */}
+          {this.props.user &&
+          this.props.user.email !== this.state.item.user.email ? (
             <div>
               {!this.state.sent ? (
                 <MailWrapper>
@@ -310,8 +312,15 @@ export default class FoundItemView extends Component {
                 <MessageSent />
               )}
             </div>
-          ) : (
+          ) : this.props.user.email === this.state.item.user.email ? (
             <div className="accessdenied">
+              {" "}
+              <h5>
+                Your object has been published and is waiting to be spotted!
+              </h5>
+            </div>
+          ) : (
+            <div>
               <Link to="/login">
                 <Button>LOG IN</Button>
               </Link>
