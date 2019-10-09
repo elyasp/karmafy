@@ -3,16 +3,21 @@ import { Link } from "react-router-dom";
 
 import Dropzone from "react-dropzone";
 import axios from "axios";
-
+import Map from "./Map";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 export default class ItemFormView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      files: [],
+      location: {}
+    };
     this.onValueChange = this.onValueChange.bind(this);
     this.onButtonValueChange = this.onButtonValueChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.mapCoord = this.mapCoord.bind(this);
   }
 
   onValueChange(event) {
@@ -23,6 +28,14 @@ export default class ItemFormView extends Component {
     });
   }
 
+  mapCoord(point) {
+    const name = "location";
+    const value = point;
+    this.props.onValueChange({
+      [name]: value
+    });
+    console.log(this.state.point);
+  }
   onButtonValueChange(event) {
     const name = event.target.name;
     const value = event.target.id;
@@ -138,13 +151,8 @@ export default class ItemFormView extends Component {
           />
         </Form.Group> */}
 
-        <Form.Group>
-          <Form.Label>Where did you lose it?</Form.Label>
-          <Form.Text className="text-muted">
-            If you can't remember one specific place, widen the searchradius to
-            include all the places you've been.
-          </Form.Text>
-          <h5>"HERE BE GOOGLE MAPS"</h5>
+        <Form.Group style={{ height: "300px" }}>
+          <Map updateCoord={this.mapCoord} value={this.state.item} />
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">

@@ -37,6 +37,7 @@ export default class ItemFormView extends Component {
     });
     console.log(this.state.point);
   }
+
   onValueChange(event) {
     const name = event.target.name;
     const value = event.target.value;
