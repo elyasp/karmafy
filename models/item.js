@@ -19,13 +19,9 @@ const schema = new mongoose.Schema(
         image: String
       }
     ],
-    // imageUrl: {
-    //   type: String
-    // },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-
     location: {
-      type: String
+      type: Object
     },
     itemStatus: {
       type: String
@@ -33,9 +29,6 @@ const schema = new mongoose.Schema(
     resolved: {
       type: Boolean,
       default: false
-    },
-    postedBy: {
-      type: String
     },
     ownerCheck: {
       type: String

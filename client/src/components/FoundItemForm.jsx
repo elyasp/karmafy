@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Dropzone from "react-dropzone";
 import axios from "axios";
-
+import Map from "./Map";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { uploadImage } from "../services/itemApi";
@@ -12,13 +12,15 @@ export default class ItemFormView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      files: []
+      files: [],
+      location: {}
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.onButtonValueChange = this.onButtonValueChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleUploadImages = this.handleUploadImages.bind(this);
     this.onPreviewDrop = this.onPreviewDrop.bind(this);
+    this.mapCoord = this.mapCoord.bind(this);
   }
 
   onPreviewDrop = files => {
@@ -26,6 +28,15 @@ export default class ItemFormView extends Component {
       files: this.state.files.concat(files)
     });
   };
+
+  mapCoord(point) {
+    const name = "location";
+    const value = point;
+    this.props.onValueChange({
+      [name]: value
+    });
+    console.log(this.state.point);
+  }
 
   onValueChange(event) {
     const name = event.target.name;
@@ -45,6 +56,7 @@ export default class ItemFormView extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
+    console.log("these are the props", this.props);
     this.props.onFormSubmit();
   }
 
@@ -85,11 +97,6 @@ export default class ItemFormView extends Component {
   };
 
   render() {
-    const previewStyle = {
-      display: "inline",
-      width: 100,
-      height: 100
-    };
     return (
       <Form onSubmit={this.onFormSubmit}>
         <h3>Found Item</h3>
@@ -122,7 +129,7 @@ export default class ItemFormView extends Component {
           />
         </Form.Group>
 
-        <Form.Group controlId="exampleForm.ControlTextarea1">
+        <Form.Group>
           <Form.Label>Proof of Ownership question</Form.Label>
           <Form.Control
             as="textarea"
@@ -140,15 +147,11 @@ export default class ItemFormView extends Component {
           </small>
         </Form.Group>
 
+        <Form.Group style={{ height: "300px" }}>
+          <Map updateCoord={this.mapCoord} value={this.state.item} />
+        </Form.Group>
+
         <Form.Group controlId="exampleForm.ControlInput1">
-          {/* <Dropzone onDrop={this.handleUploadImages}>
-            {({ getRootProps, getInputProps }) => (
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                Click me to upload a file!
-              </div>
-            )}
-          </Dropzone> */}
           <Dropzone onDrop={this.handleUploadImages}>
             {({ getRootProps, getInputProps, isDragActive }) => (
               <div {...getRootProps()}>
@@ -160,21 +163,7 @@ export default class ItemFormView extends Component {
             )}
           </Dropzone>
         </Form.Group>
-        <div className="app">
-          {this.state.files.length > 0 && (
-            <div>
-              <h3>Previews</h3>
-              {this.state.files.map(file => (
-                <img
-                  alt="Preview"
-                  key={file.preview}
-                  src={file.preview}
-                  style={previewStyle}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+
         {this.props.children}
       </Form>
     );

@@ -26,7 +26,7 @@ router.post("/item/add", (req, res, next) => {
     description,
     itemStatus,
     imageUrl,
-    postedBy,
+    location,
     ownerCheck
   } = req.body;
 
@@ -37,7 +37,7 @@ router.post("/item/add", (req, res, next) => {
     itemStatus,
     imageUrl,
     user: req.user._id,
-    postedBy
+    location
   })
     .then(item => {
       res.json({ type: "success", data: { item } });

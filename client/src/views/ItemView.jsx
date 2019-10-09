@@ -154,7 +154,7 @@ export default class FoundItemView extends Component {
                   {item.description}
                 </Card.Text>
 
-                {user && item && item.user === user._id ? (
+                {user && item && item.user._id === user._id ? (
                   <div>
                     <Link
                       to={`/item/${item._id}/edit`}
