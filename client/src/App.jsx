@@ -18,6 +18,7 @@ import Nav from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.css";
 import RouteProtector from "./components/RouteProtector";
 import { logOutService, verifyService } from "./services/authServices";
+import { Map, GoogleApiWrapper } from "google-maps-react";
 
 ///////////////////////// STYLE //////////////////////////
 
@@ -90,6 +91,10 @@ export default class App extends Component {
   }
 
   render() {
+    const mapStyles = {
+      width: "100%",
+      height: "100%"
+    };
     return (
       <UniStyle>
         <Router>

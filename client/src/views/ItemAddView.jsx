@@ -39,7 +39,8 @@ export default class ItemAddView extends Component {
           {
             image: ""
           }
-        ]
+        ],
+        location: {}
       }
     };
     this.onFormValueChange = this.onFormValueChange.bind(this);
@@ -59,6 +60,7 @@ export default class ItemAddView extends Component {
 
   addItem() {
     const item = this.state.item;
+    console.log("whole state", item);
     add(item)
       .then(item => {
         this.props.history.push(`/item/${item.data.data.item._id}`);
@@ -99,8 +101,6 @@ export default class ItemAddView extends Component {
   }
 
   render() {
-    const user = this.props.user;
-
     return (
       <div class="container">
         <h1 className="text-center ">Add an item to the exchange</h1>

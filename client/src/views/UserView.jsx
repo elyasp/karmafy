@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import HomeView from "./HomeView";
 import EditUserView from "./EditUserView";
 import ItemCard from "../components/ItemCard";
@@ -26,17 +26,17 @@ const ProfileWrapper = styled.div`
   }
 `;
 
-const Button = styled.button`
-  margin: 10px;
-  color: white;
-  border-radius: 5px;
-  border: 2px solid white;
-  background: none;
-  &:hover {
-    color: black;
-    background: white;
-  }
-`;
+// const Button = styled.button`
+//   margin: 10px;
+//   color: white;
+//   border-radius: 5px;
+//   border: 2px solid white;
+//   background: none;
+//   &:hover {
+//     color: black;
+//     background: white;
+//   }
+// `;
 
 const ItemSection = styled.div`
   height: 150vh;

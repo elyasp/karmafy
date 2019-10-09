@@ -91,6 +91,7 @@ export default class FoundItemView extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
+
     const { contactnumber, email, message } = this.state;
     const receiver = this.state.item && this.state.item.user.email;
     const name = this.props.user.name;
@@ -119,6 +120,7 @@ export default class FoundItemView extends Component {
   render() {
     const item = this.state.item && this.state.item;
     const user = this.props.user;
+
     return (
       (item && (
         <PageWrapper className="container">
@@ -149,7 +151,7 @@ export default class FoundItemView extends Component {
                   {item.description}
                 </Card.Text>
 
-                {user && item.user === user._id ? (
+                {user && item && item.user._id === user._id ? (
                   <div>
                     <Link
                       to={`/item/${item._id}/edit`}

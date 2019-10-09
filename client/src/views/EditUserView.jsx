@@ -128,9 +128,9 @@ export default class EditUserView extends Component {
                     Save Changes
                   </Button>
                 </Form>
-                <Button variant="outline-danger" onClick={this.deleteUser}>
+                {/* <Button variant="outline-danger" onClick={this.deleteUser}>
                   Delete
-                </Button>
+                </Button> */}
               </ProfileWrapper>
             </ViewWrapper>
           </div>

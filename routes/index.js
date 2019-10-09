@@ -21,7 +21,7 @@ router.get("/all", (req, res, next) => {
 });
 
 router.post("/item/add", (req, res, next) => {
-  const { title, description, itemStatus, imageUrl, postedBy } = req.body;
+  const { title, description, itemStatus, imageUrl, location } = req.body;
 
   Item.create({
     title,
@@ -29,7 +29,7 @@ router.post("/item/add", (req, res, next) => {
     itemStatus,
     imageUrl,
     user: req.user._id,
-    postedBy
+    location
   })
     .then(item => {
       res.json({ type: "success", data: { item } });
