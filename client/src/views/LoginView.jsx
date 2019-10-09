@@ -42,10 +42,12 @@ export default class LoginView extends Component {
     this.state = {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      loginError: false
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.loginError = this.loginError.bind(this);
   }
 
   onValueChange(e) {
@@ -54,6 +56,12 @@ export default class LoginView extends Component {
     console.log(value);
     this.setState({
       [name]: value
+    });
+  }
+
+  loginError() {
+    this.setState({
+      loginError: true
     });
   }
 
@@ -70,7 +78,7 @@ export default class LoginView extends Component {
         this.props.history.push(`/all`);
       })
       .catch(error => {
-        console.log(error);
+        this.loginError();
       });
   }
 
@@ -78,7 +86,7 @@ export default class LoginView extends Component {
     return (
       <div>
         <Positioner>
-          <h3>Log In</h3>
+          {this.state.loginError && <h4>Incorrect username or password</h4>}
 
           <Form onSubmit={this.onSubmit} className="entries">
             <Form.Group>
@@ -86,11 +94,12 @@ export default class LoginView extends Component {
               <Form.Control
                 name="email"
                 placeholder="Enter email"
+                required
                 value={this.state.email}
                 onChange={this.onValueChange}
               />
-              <Form.Text className="text-muted">
-                Your e-mail is safe with us
+              <Form.Text>
+                <small>Your e-mail is safe with us</small>
               </Form.Text>
             </Form.Group>
 
@@ -100,6 +109,7 @@ export default class LoginView extends Component {
                 type="password"
                 name="password"
                 placeholder="Password"
+                required
                 value={this.state.password}
                 onChange={this.onValueChange}
               />

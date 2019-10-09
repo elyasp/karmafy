@@ -49,6 +49,7 @@ export default class RegisterView extends Component {
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.passwordChecker = this.passwordChecker.bind(this);
   }
 
   onValueChange(e) {
@@ -106,6 +107,31 @@ export default class RegisterView extends Component {
     }
   }
 
+  passwordChecker() {
+    const button = document.getElementById("regbutton");
+    if (
+      document.getElementById("register-password").value ===
+      document.getElementById("confirm-password").value
+    ) {
+      document.getElementById("message").style.color = "#b1ff9c";
+      document.getElementById("message").innerHTML = "MATCHED";
+      button.disabled = false;
+      button.style.backgroundColor = "hsla(32, 100%, 50%, 0)";
+      if (
+        document.getElementById("register-password").value === "" &&
+        document.getElementById("confirm-password").value === ""
+      ) {
+        document.getElementById("message").style.color = "orange";
+        document.getElementById("message").innerHTML = "CHOOSE PASSWORD";
+      }
+    } else {
+      document.getElementById("message").style.color = "red";
+      document.getElementById("message").innerHTML = "PASSWORDS NOT MATCHING";
+      button.disabled = true;
+      button.style.backgroundColor = "white";
+    }
+  }
+
   changeLocation(evt) {
     this.setState({
       location: evt.target.value
@@ -131,6 +157,7 @@ export default class RegisterView extends Component {
                 value={this.state.name}
                 onChange={this.onValueChange}
                 placeholder="What is your name?"
+                required
               />
             </Form.Group>
             <Form.Group controlId="formGroupEmail">
@@ -141,16 +168,21 @@ export default class RegisterView extends Component {
                 value={this.state.email}
                 onChange={this.onValueChange}
                 placeholder="Enter your email"
+                required
               />
             </Form.Group>
+
             <Form.Group controlId="formGroupPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 name="password"
+                onKeyUp={this.passwordChecker}
+                id="register-password"
                 value={this.state.password}
                 onChange={this.onValueChange}
                 placeholder="Choose a password"
+                required
               />
             </Form.Group>
             <Form.Group controlId="formGroupPassword">
@@ -158,11 +190,15 @@ export default class RegisterView extends Component {
               <Form.Control
                 type="password"
                 name="password"
-                value={this.state.password}
-                onChange={this.onValueChange}
+                onKeyUp={this.passwordChecker}
+                id="confirm-password"
                 placeholder="Make sure it matches"
+                required
               />
             </Form.Group>
+            <strong>
+              <h6 id="message"></h6>
+            </strong>
 
             <Form.Group controlId="exampleForm.ControlInput1">
               <Form.Label>Upload A Profile Picture</Form.Label>
@@ -170,13 +206,15 @@ export default class RegisterView extends Component {
                 as="input"
                 type="file"
                 name="imageUrl"
-                size="lg"
-                className="btn-lg pl-0"
+                size="sm"
+                className="btn-sm pl-0"
                 onChange={e => this.handleFileUpload(e)}
               />
             </Form.Group>
 
-            <Button type="submit">REGISTER</Button>
+            <Button type="submit" id="regbutton">
+              REGISTER
+            </Button>
           </Form>
         </Positioner>
       </div>

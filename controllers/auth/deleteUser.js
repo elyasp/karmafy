@@ -3,7 +3,7 @@
 const User = require("../../models/user");
 
 module.exports = (req, res, next) => {
-  User.findOneAndDelete({ name: req.params.name })
+  User.findOneAndDelete({ id: req.params._id })
     .then(user => {
       if (user) {
         req.session.destroy();

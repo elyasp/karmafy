@@ -83,3 +83,17 @@ export const editUser = (name, id) => {
       });
   });
 };
+
+export const removeUser = name => {
+  return new Promise((resolve, reject) => {
+    authAPI
+      .delete(`/user/${name}`)
+      .then(() => {
+        resolve();
+      })
+      .catch(error => {
+        reject(error);
+        console.log("DELETION FAILED");
+      });
+  });
+};

@@ -12,6 +12,7 @@ import EditUserView from "./views/EditUserView";
 import ItemView from "./views/ItemView";
 import ItemEditView from "./views/ItemEditView";
 import ItemAddView from "./views/ItemAddView";
+import MessageSentView from "./views/MessageSentView";
 import ItemCard from "./components/ItemCard";
 import Nav from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.css";
@@ -159,6 +160,11 @@ export default class App extends Component {
                     <ItemView {...props} user={this.state.user} />
                   )}
                 />
+                {/* <Route
+                  path="/item/succes"
+                  exact
+                  render={props => <MessageSentView {...props} />}
+                /> */}
               </Switch>
             )}
           </div>
