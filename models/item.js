@@ -29,6 +29,9 @@ const schema = new mongoose.Schema(
     resolved: {
       type: Boolean,
       default: false
+    },
+    ownerCheck: {
+      type: String
     }
   },
 
