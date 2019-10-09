@@ -8,7 +8,7 @@ import axios from "axios";
 import { remove } from "./../services/itemApi";
 import { edit } from "../services/itemApi";
 import { load } from "../services/itemApi";
-
+import Map from "./Map";
 import styled from "styled-components";
 
 //////////////////////// STYLE ////////////////////////
