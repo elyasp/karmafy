@@ -238,11 +238,11 @@ export default class ItemCard extends Component {
                     >
                       {item.itemStatus === "Found" ? (
                         <FoundCardHeader>
-                          <h4>᛫ ᛫ ᛫ FOUND ᛫ ᛫ ᛫</h4>
+                          <h4>᛫ FOUND ᛫</h4>
                         </FoundCardHeader>
                       ) : (
                         <LostCardHeader>
-                          <h4>᛫ ᛫ ᛫ LOST ᛫ ᛫ ᛫</h4>
+                          <h4>᛫ LOST ᛫</h4>
                         </LostCardHeader>
                       )}
 

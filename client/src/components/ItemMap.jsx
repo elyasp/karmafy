@@ -16,7 +16,7 @@ export class MapContainer extends Component {
       position: "static"
     };
 
-    const containerStyle = { height: "300px" };
+    const containerStyle = { height: "300px", width: "85%" };
     const item = this.props.item;
 
     const lat = item && item.lat;

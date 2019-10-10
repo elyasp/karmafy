@@ -140,7 +140,7 @@ export default class FoundItemView extends Component {
   }
 
   render() {
-    const containerStyle = { height: "200px" };
+    const containerStyle = { height: "200px", width: "85%" };
     const item = this.state.item && this.state.item;
     const user = this.props.user;
     console.log(this.state.item);
@@ -169,9 +169,7 @@ export default class FoundItemView extends Component {
                 <Card.Title className="mt-3" style={{ fontSize: "2.6rem" }}>
                   {item.title}
                 </Card.Title>
-                <Card.Subtitle className="mt-3" style={{ fontSize: "1.5rem" }}>
-                  Location Found: Somewhere
-                </Card.Subtitle>
+
                 <Card.Text className="mt-3" style={{ fontSize: "1.25rem" }}>
                   {item.description}
                 </Card.Text>

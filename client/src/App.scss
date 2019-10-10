@@ -50,7 +50,7 @@ body {
   background-size: 600% 600%;
   position: relative;
   animation-name: delta;
-  animation-duration: 35s;
+  animation-duration: 20s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
@@ -195,4 +195,12 @@ body {
     color: black;
     background: hsla(59, 100%, 49%, 0.34);
   }
+}
+
+.text-center {
+  text-shadow: 1px 1px 9px #2c0401;
+}
+
+.text {
+  text-shadow: 1px 1px 9px #2c0401;
 }
