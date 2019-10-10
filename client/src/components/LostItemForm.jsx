@@ -105,14 +105,14 @@ export default class ItemFormView extends Component {
       display: "block",
       position: "static"
     };
-    const containerStyle = { height: "400px" };
+    const containerStyle = { height: "400px", position: "static" };
     return (
       <Form onSubmit={this.onFormSubmit}>
-        <h1>Lost Item</h1>
-        <h4>
+        <h3>Lost Item</h3>
+        <h5>
           Lost something? Poor you! Describe it below and redeem your karma
           points.
-        </h4>
+        </h5>
 
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>What did you lose?</Form.Label>

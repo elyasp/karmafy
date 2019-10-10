@@ -107,13 +107,7 @@ export default class ItemFormView extends Component {
   };
 
   render() {
-    const mapStyles = {
-      width: "20px",
-      height: "300px",
-      display: "block",
-      position: "static"
-    };
-    const containerStyle = { height: "300px" };
+    const containerStyle = { height: "300px", position: "static" };
 
     return (
       <Form onSubmit={this.onFormSubmit}>
@@ -165,15 +159,15 @@ export default class ItemFormView extends Component {
           </small>
         </Form.Group>
 
-        <Form.Group style={{ height: "400px" }}>
+        <Form.Group style={{ height: "400px", margin: "0 auto" }}>
           <Form.Label>
             Click to add a marker near where you found the item.
           </Form.Label>
           <Map
-            style={mapStyles}
+            className="mx-auto"
+            style={{ margin: "0 auto" }}
             updateCoord={this.mapCoord}
             value={this.state.item}
-            containerStyle={containerStyle}
           />
         </Form.Group>
 

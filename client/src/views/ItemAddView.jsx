@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import styled from "styled-components";
-import Form from "react-bootstrap/Form";
+// import { Form, Button } from "react-bootstrap";
 
 import FoundItemForm from "../components/FoundItemForm";
 import LostItemForm from "../components/LostItemForm";
@@ -12,9 +12,10 @@ import { uploadImage } from "./../services/itemApi";
 
 const Button = styled.button`
   color: white;
+  flex: 0 0 45%;
   width: 35%;
   font-size: 1.5rem;
-  margin: 2rem;
+  margin: 2rem 0.5rem;
   padding: 1rem;
   border-radius: 5px;
   border: 2px solid white;
@@ -105,14 +106,13 @@ export default class ItemAddView extends Component {
   }
 
   render() {
-    console.log("img uploaded", this.state.item.imageUploaded);
     const isEnabled = this.state.item.imageUploaded === "loading";
     return (
       <div class="container">
-        <h1 className="text-center ">Add an item to the exchange</h1>
-        <div class="container mx-auto ">
+        <h1 className="text-center">Add an item to the exchange</h1>
+        <div class="container mx-auto">
           <div class="row justify-content-center">
-            <Button onClick={this.addLost} class="col-6 my-3" variant="light">
+            <Button onClick={this.addLost} class="col-6" variant="light">
               Lost
             </Button>
             <Button onClick={this.addFound} class="col-6" variant="light">
