@@ -33,16 +33,25 @@ const Center = styled.div`
   align-items: center;
   justify-content: center;
   margin: 2vh;
+
+  .searchfilter {
+    display: flex;
+  }
 `;
 
 const Button = styled.div`
   border: 0.5px solid #ffffffb0;
-  border-radius: 3px;
+  border-radius: 2px;
   display: flex;
   justify-self: center;
   font-size: 20px;
-  margin: 0.5em;
-  background: none;
+  margin: 0.2em;
+  color: black;
+  padding-right: 2em;
+  padding-left: 2em;
+  padding-bottom: 1em;
+
+  background: white;
   transition: all 0.4s ease;
   -webkit-transition: all 0.4s ease;
 
@@ -166,15 +175,15 @@ export default class ItemCard extends Component {
               placeholder="type to search"
             ></input>
           </div>
-          <div>
+          <div className="searchfilter">
             <Button name="Lost" onClick={this.lost} value="Lost">
-              Lost Items
-            </Button>
-            <Button name="Found" onClick={this.found} value="Found">
-              Found Items
+              lost
             </Button>
             <Button name="All" onClick={this.all} value="All">
-              All
+              all
+            </Button>
+            <Button name="Found" onClick={this.found} value="Found">
+              found
             </Button>
           </div>
         </Center>
