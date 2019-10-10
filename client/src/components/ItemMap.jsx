@@ -19,8 +19,8 @@ export class MapContainer extends Component {
     const containerStyle = { height: "300px" };
     const item = this.props.item;
 
-    const lat = item.lat;
-    const lng = item.lng;
+    const lat = item && item.lat;
+    const lng = item && item.lng;
 
     return (
       <Map

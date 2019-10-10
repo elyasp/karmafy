@@ -10,6 +10,8 @@ import { edit } from "../services/itemApi";
 import { load } from "../services/itemApi";
 import Map from "../components/ItemMap";
 import styled from "styled-components";
+import LostContactForm from "../components/LostContactForm";
+import FoundContactForm from "../components/FoundContactForm";
 
 //////////////////////// STYLE ////////////////////////
 
@@ -114,7 +116,7 @@ export default class FoundItemView extends Component {
     const verifQuestion = this.state.item && this.state.item.ownerCheck;
     const name = this.props.user.name;
     const form = await axios
-      .post("/mailsent", {
+      .post("/api/mailsent", {
         name,
         email,
         message,
@@ -213,101 +215,16 @@ export default class FoundItemView extends Component {
               {!this.state.sent ? (
                 <MailWrapper>
                   {this.state.item.itemStatus === "Found" ? (
-                    <Fragment>
-                      <h2>Item yours? Contact the finder</h2>
-                      <Form onSubmit={this.handleSubmit}>
-                        <Form.Group>
-                          <Form.Label htmlFor="email">Your Email</Form.Label>
-                          <Form.Control
-                            type="email"
-                            name="email"
-                            required
-                            onChange={this.handleChange}
-                          />
-                          <Form.Text>
-                            <small>You will be replied to this address</small>
-                          </Form.Text>
-                        </Form.Group>
-
-                        <Form.Group>
-                          <Form.Label htmlFor="contactnumber">
-                            Add your phone number
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="contactnumber"
-                            placeholder="optional"
-                            onChange={this.handleChange}
-                          />
-                        </Form.Group>
-
-                        <Form.Group>
-                          <Form.Label htmlFor="ownerCheck">
-                            {this.state.item.ownerCheck}
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            required
-                            name="ownerCheckAns"
-                            placeholder="answer verification question above"
-                            onChange={this.handleChange}
-                          />
-                        </Form.Group>
-
-                        <Form.Group>
-                          <Form.Label htmlFor="message">Message</Form.Label>
-                          <Form.Control
-                            onChange={this.handleChange}
-                            as="textarea"
-                            name="message"
-                            rows="6"
-                            placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"
-                          />
-                        </Form.Group>
-                        <Button type="submit">Send Message</Button>
-                      </Form>
-                    </Fragment>
+                    <LostContactForm
+                      form={this.handleSubmit}
+                      change={this.handleChange}
+                      check={this.state.item.ownerCheck}
+                    />
                   ) : (
-                    <Fragment>
-                      <h2>Found this? Upgrade your karma and return it!</h2>
-                      <Form onSubmit={this.handleSubmit}>
-                        <Form.Group>
-                          <Form.Label htmlFor="email">Your Email</Form.Label>
-                          <Form.Control
-                            type="email"
-                            name="email"
-                            required
-                            onChange={this.handleChange}
-                          />
-                          <Form.Text>
-                            <small>You will be replied to this address</small>
-                          </Form.Text>
-                        </Form.Group>
-
-                        <Form.Group>
-                          <Form.Label htmlFor="contactnumber">
-                            Add your phone number
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="contactnumber"
-                            placeholder="optional"
-                            onChange={this.handleChange}
-                          />
-                        </Form.Group>
-
-                        <Form.Group>
-                          <Form.Label htmlFor="message">Message</Form.Label>
-                          <Form.Control
-                            onChange={this.handleChange}
-                            as="textarea"
-                            name="message"
-                            rows="3"
-                          />
-                        </Form.Group>
-                        <Button type="submit">Send Message</Button>
-                      </Form>
-                    </Fragment>
+                    <FoundContactForm
+                      form={this.handleSubmit}
+                      change={this.handleChange}
+                    />
                   )}
                 </MailWrapper>
               ) : (
@@ -317,13 +234,12 @@ export default class FoundItemView extends Component {
           ) : this.props.user &&
             this.props.user.email === this.state.item.user.email ? (
             <div className="accessdenied">
-              {" "}
               <h5>
                 Your object has been published and is waiting to be spotted!
               </h5>
             </div>
           ) : (
-            <div>
+            <div className="accessdenied">
               <Link to="/login">
                 <Button>LOG IN</Button>
               </Link>
