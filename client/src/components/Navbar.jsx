@@ -6,26 +6,6 @@ import styled, { keyframes } from "styled-components";
 
 /////////////////////////// STYLE //////////////////////
 
-const Button = styled.button`
-  border: none;
-  background: none;
-`;
-
-const AddButton = styled.button`
-  border: 0.5px solid #fff1c4;
-  border-radius: 3px;
-  display: flex;
-  justify-self: center;
-  font-size: 20px;
-  background: none;
-  color: #fff1c4;
-  &:hover {
-    background: hsla(59, 100%, 49%, 0.34);
-    color: black;
-    text-decoration: none;
-  }
-`;
-
 ////////////////////// END OF STYLE ///////////////////////
 
 export default class NavbarItem extends Component {
@@ -36,19 +16,21 @@ export default class NavbarItem extends Component {
   render() {
     return (
       <div>
-        <Navbar className="sticky-top" expand="lg">
+        <Navbar className="sticky-top" expand="md">
           <Link to="/" className="btn">
             <h4 className="title">KARMAFY</h4>
           </Link>
 
           {(!this.props.user && (
             <Fragment>
-              <Link className="btn" to="/login">
-                <h5>Login</h5>
-              </Link>
-              <Link className="btn" to="/register">
-                <h5>Register</h5>
-              </Link>
+              <div>
+                <Link className="btn auth" to="/login">
+                  <h5>Login</h5>
+                </Link>
+                <Link className="btn auth" to="/register">
+                  <h5>Register</h5>
+                </Link>
+              </div>
             </Fragment>
           )) || (
             <Fragment>
@@ -58,21 +40,23 @@ export default class NavbarItem extends Component {
                 id="responsive-navbar-nav"
               >
                 <Nav>
-                  <Link to="/item/add">
-                    <AddButton> ADD OBJECT </AddButton>
-                  </Link>
                   <Link
                     to={`/user/${this.props.user._id}`}
-                    className="text-white"
+                    className="welcomebutton"
                   >
-                    <span className="btn">
-                      <h5>Welcome {this.props.user.name}</h5>
-                    </span>
+                    Hello <strong>{this.props.user.name}</strong>
                   </Link>
+
+                  <button className="addbutton">
+                    <Link to="/item/add" className="addlink">
+                      ADD OBJECT
+                    </Link>
+                  </button>
+
                   <Form onSubmit={this.props.logOut}>
-                    <Button type="submit">
-                      <img src="./../../logout.png" width="30" height="35" />
-                    </Button>
+                    <button type="submit" className="logoutbutton">
+                      LOG OUT
+                    </button>
                   </Form>
                 </Nav>
               </Navbar.Collapse>

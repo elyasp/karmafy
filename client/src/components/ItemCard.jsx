@@ -1,8 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { list } from "./../services/itemApi";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import { Card, Col, Row, Container, Carousel, Button } from "react-bootstrap";
 
+||||||| merged common ancestors
+import { Card, Col, Row, Container, Carousel, Button } from "react-bootstrap";
+=======
+import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
+>>>>>>> 858829f43ada8fb13f3bf9a91f19f47d2fb87cdc
 import styled from "styled-components";
 import { loadByType } from "../services/itemApi";
 import HomeMap from "./HomeMap";
@@ -34,6 +40,43 @@ const CardWrapper = styled.div`
 
   .cardsubtitle {
     font-size: 15px;
+    color: black;
+  }
+`;
+
+const Center = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh;
+
+  .searchfilter {
+    display: flex;
+  }
+`;
+
+const Button = styled.div`
+  border: 0.5px solid #ffffffb0;
+  border-radius: 2px;
+  display: flex;
+  justify-self: center;
+  font-size: 20px;
+  margin: 0.2em;
+  color: black;
+  padding-right: 2em;
+  padding-left: 2em;
+  padding-bottom: 1em;
+
+  background: white;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+
+  height: 1.7em;
+  &:hover {
+    background: hsla(0, 0%, 98%, 0.514);
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
     color: black;
   }
 `;
