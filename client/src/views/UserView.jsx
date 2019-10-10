@@ -44,8 +44,7 @@ export default class UserView extends Component {
     super(props);
     this.state = {
       item: null,
-      itemId: "",
-      karmaCount: parseInt(this.props.user.karmaCount)
+      itemId: ""
     };
     this.itemUpdate = this.itemUpdate.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
@@ -90,9 +89,6 @@ export default class UserView extends Component {
       karmaNum: karmaNum
     };
 
-    this.setState({
-      karmaCount: karmaNum
-    });
     remove(data)
       .then(item => {
         this.loadItem();
@@ -102,7 +98,9 @@ export default class UserView extends Component {
       });
   }
   componentDidMount() {
-    this.loadItem();
+    if (this.props.user) {
+      this.loadItem();
+    }
   }
 
   render() {
@@ -117,7 +115,7 @@ export default class UserView extends Component {
                 <img src={user.profile} width="200" />
                 <h1>{this.props.user.name}</h1>
                 <h1>{this.props.user.email}</h1>
-                <h6>Karmalevel: {this.state.karmaCount}</h6>
+                <h6>Karmalevel: {this.props.user.karmaCount}</h6>
                 <Link to={`${this.props.user._id}/edit`}>
                   <Button>
                     <h5>Edit Profile</h5>
