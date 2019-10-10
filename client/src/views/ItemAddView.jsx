@@ -18,12 +18,23 @@ const Button = styled.button`
   margin: 2rem 0.5rem;
   padding: 1rem;
   border-radius: 5px;
-  border: 2px solid white;
+  border: 0.5px solid white;
   background: none;
+  transition: all 0.6s ease;
+  -webkit-transition: all 0.6s ease;
+  text-shadow: 1px 1px 9px #2c0401;
   &:hover {
     color: black;
-    background: hsla(59, 100%, 49%, 0.34);
+    text-shadow: 1px 1px 7px #2c0401;
+    background: hsla(360, 100%, 49%, 0.5);
+    transform: scale(1.1, 1.1);
+    transition: all 0.6s ease;
+    -webkit-transition: all 0.6s ease;
   }
+`;
+
+const Positioner = styled.div`
+  margin-top: 30vh;
 `;
 
 /////////////////////// END OF STYLE ////////////////////
@@ -108,6 +119,7 @@ export default class ItemAddView extends Component {
   render() {
     const isEnabled = this.state.item.imageUploaded === "loading";
     return (
+<<<<<<< HEAD
       <div class="container">
         <h1 className="text-center">Add an item to the exchange</h1>
         <div class="container mx-auto">
@@ -118,33 +130,58 @@ export default class ItemAddView extends Component {
             <Button onClick={this.addFound} class="col-6" variant="light">
               Found
             </Button>
+||||||| merged common ancestors
+      <div class="container">
+        <h1 className="text-center ">Add an item to the exchange</h1>
+        <div class="container mx-auto ">
+          <div class="row justify-content-center">
+            <Button onClick={this.addLost} class="col-6 my-3" variant="light">
+              Lost
+            </Button>
+            <Button onClick={this.addFound} class="col-6" variant="light">
+              Found
+            </Button>
+=======
+      <Positioner>
+        <div class="container">
+          <h1 className="text-center ">Add an item to the exchange</h1>
+          <div class="container mx-auto ">
+            <div class="row justify-content-center">
+              <Button onClick={this.addLost} class="col-6 my-3" variant="light">
+                Lost
+              </Button>
+              <Button onClick={this.addFound} class="col-6" variant="light">
+                Found
+              </Button>
+            </div>
+>>>>>>> 8d9a4e524a241a483fefe861a284a8ca05bd444c
           </div>
+
+          {this.state.item.itemStatus === "Lost" && (
+            <LostItemForm
+              value={this.state.item}
+              onValueChange={this.onFormValueChange}
+              onFormSubmit={this.addItem}
+            >
+              <Button disabled={isEnabled} type="submit">
+                Submit
+              </Button>
+            </LostItemForm>
+          )}
+
+          {this.state.item.itemStatus === "Found" && (
+            <FoundItemForm
+              value={this.state.item}
+              onValueChange={this.onFormValueChange}
+              onFormSubmit={this.addItem}
+            >
+              <Button disabled={isEnabled} type="submit">
+                Submit
+              </Button>
+            </FoundItemForm>
+          )}
         </div>
-
-        {this.state.item.itemStatus === "Lost" && (
-          <LostItemForm
-            value={this.state.item}
-            onValueChange={this.onFormValueChange}
-            onFormSubmit={this.addItem}
-          >
-            <Button disabled={isEnabled} type="submit">
-              Submit
-            </Button>
-          </LostItemForm>
-        )}
-
-        {this.state.item.itemStatus === "Found" && (
-          <FoundItemForm
-            value={this.state.item}
-            onValueChange={this.onFormValueChange}
-            onFormSubmit={this.addItem}
-          >
-            <Button disabled={isEnabled} type="submit">
-              Submit
-            </Button>
-          </FoundItemForm>
-        )}
-      </div>
+      </Positioner>
     );
   }
 }

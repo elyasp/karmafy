@@ -18,7 +18,11 @@ export class MapContainer extends Component {
       margin: "0 auto"
     };
 
-    const containerStyle = { height: "250px", position: "static" };
+    const containerStyle = {
+      height: "300px",
+      width: "85%",
+      position: "static"
+    };
     const item = this.props.item;
 
     const lat = item && item.lat;

@@ -7,6 +7,12 @@ import Map from "./FormMap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { uploadImage } from "../services/itemApi";
+import styled from "styled-components";
+
+const TextStyler = styled.div`
+  text-shadow: 1px 1px 9px #000;
+  text-align: center;
+`;
 
 export default class ItemFormView extends Component {
   constructor(props) {
@@ -107,10 +113,29 @@ export default class ItemFormView extends Component {
   };
 
   render() {
+<<<<<<< HEAD
     const containerStyle = { height: "300px", position: "static" };
+||||||| merged common ancestors
+    const mapStyles = {
+      width: "20px",
+      height: "300px",
+      display: "block",
+      position: "static"
+    };
+    const containerStyle = { height: "300px" };
+=======
+    const mapStyles = {
+      width: "20px",
+      height: "300px",
+      display: "block",
+      position: "static"
+    };
+    const containerStyle = { height: "300px", width: "85%" };
+>>>>>>> 8d9a4e524a241a483fefe861a284a8ca05bd444c
 
     return (
       <Form onSubmit={this.onFormSubmit}>
+<<<<<<< HEAD
         <h3>Found Item</h3>
         <h5>
           Found something? Get some karma points and add your item here to help
@@ -183,6 +208,161 @@ export default class ItemFormView extends Component {
             )}
           </Dropzone>
         </Form.Group>
+||||||| merged common ancestors
+        <h3>Found Item</h3>
+        <h5>
+          Found something? Get some karma points and add your item here to help
+          us return it!
+        </h5>
+
+        <Form.Group controlId="exampleForm.ControlInput1">
+          <Form.Label>What Did You Find?</Form.Label>
+          <Form.Control
+            type="text"
+            name="title"
+            placeholder="e.g. black hat"
+            size="lg"
+            value={this.props.value.title}
+            onChange={this.onValueChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlTextarea1">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows="4"
+            name="description"
+            placeholder="Add a general description"
+            size="lg"
+            value={this.props.value.description}
+            onChange={this.onValueChange}
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label>Proof of Ownership question</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows="3"
+            size="sm"
+            name="ownerCheck"
+            required
+            maxlength="120"
+            value={this.props.value.ownerCheck}
+            onChange={this.onValueChange}
+            placeholder="Ask about any special characteristics of the item (i.e. brand, inner-details, size). Max 120 characters"
+          />
+          <small>
+            HINT: Dont ask anything that you put in the description!
+          </small>
+        </Form.Group>
+
+        <Form.Group style={{ height: "400px" }}>
+          <Form.Label>
+            Click to add a marker near where you found the item.
+          </Form.Label>
+          <Map
+            style={mapStyles}
+            updateCoord={this.mapCoord}
+            value={this.state.item}
+            containerStyle={containerStyle}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.ControlInput1">
+          <Dropzone onDrop={this.handleUploadImages}>
+            {({ getRootProps, getInputProps, isDragActive }) => (
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                {isDragActive
+                  ? "Drop it like it's hot!"
+                  : "Click me or drag a file to upload!"}
+              </div>
+            )}
+          </Dropzone>
+        </Form.Group>
+=======
+        <TextStyler>
+          <br />
+          <h3>
+            Found something? Level up your karma and add the item here to help
+            us return it!
+          </h3>
+          <br />
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>
+              <h5>What Did You Find?</h5>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              name="title"
+              placeholder="e.g. black hat"
+              size="md"
+              value={this.props.value.title}
+              onChange={this.onValueChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>
+              <h5>Description</h5>
+            </Form.Label>
+            <Form.Control
+              as="textarea"
+              rows="4"
+              name="description"
+              placeholder="Add a general description"
+              size="md"
+              value={this.props.value.description}
+              onChange={this.onValueChange}
+            />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>
+              <h5>Proof of Ownership question</h5>
+            </Form.Label>
+            <Form.Control
+              as="textarea"
+              rows="3"
+              size="sm"
+              name="ownerCheck"
+              required
+              maxlength="120"
+              value={this.props.value.ownerCheck}
+              onChange={this.onValueChange}
+              placeholder="Ask about any special characteristics of the item (i.e. brand, inner-details, size). Max 120 characters"
+            />
+            <small>
+              HINT: Dont ask anything that you put in the description!
+            </small>
+          </Form.Group>
+          <br />
+          <Form.Group style={{ height: "400px" }}>
+            <Form.Label>
+              <h5>Click to add a marker near where you found the item.</h5>
+            </Form.Label>
+            <Map
+              style={mapStyles}
+              updateCoord={this.mapCoord}
+              value={this.state.item}
+              containerStyle={containerStyle}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Dropzone onDrop={this.handleUploadImages}>
+              {({ getRootProps, getInputProps, isDragActive }) => (
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {isDragActive
+                    ? "Drop it like it's hot!"
+                    : "Click me or drag a picture to upload!"}
+                </div>
+              )}
+            </Dropzone>
+          </Form.Group>
+        </TextStyler>
+>>>>>>> 8d9a4e524a241a483fefe861a284a8ca05bd444c
 
         {this.props.children}
       </Form>

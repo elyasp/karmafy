@@ -41,7 +41,13 @@ export class MapContainer extends Component {
       position: "static"
     };
 
+<<<<<<< HEAD
     const containerStyle = { height: "350px", width: "100%" };
+||||||| merged common ancestors
+    const containerStyle = { height: "350px" };
+=======
+    const containerStyle = { height: "350px", width: "85%" };
+>>>>>>> 8d9a4e524a241a483fefe861a284a8ca05bd444c
 
     const lat = this.state.point.lat;
     const lng = this.state.point.lng;

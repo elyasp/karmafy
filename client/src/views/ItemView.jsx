@@ -155,7 +155,7 @@ export default class FoundItemView extends Component {
   }
 
   render() {
-    const containerStyle = { height: "200px" };
+    const containerStyle = { height: "200px", width: "85%" };
     const item = this.state.item && this.state.item;
     const user = this.props.user;
 
