@@ -68,14 +68,14 @@ const Button = styled.div`
   font-size: 16px;
   margin: 1em;
   color: black;
-  padding-right: 3em;
-  padding-left: 3em;
+  padding: .75em 3em
+
 
   background: white;
   transition: all 0.4s ease;
   -webkit-transition: all 0.4s ease;
 
-  height: 1.7em;
+  
   &:hover {
     background: hsla(0, 0%, 98%, 0.514);
     transition: all 0.4s ease;
@@ -207,10 +207,6 @@ export default class ItemCard extends Component {
               </Button>
             </div>
           </Center>
-
-          <Map>
-            <HomeMap items={this.filteredSearchList} />
-          </Map>
           <Center>
             <div>
               <input
@@ -221,6 +217,9 @@ export default class ItemCard extends Component {
               ></input>
             </div>
           </Center>
+          <Map>
+            <HomeMap items={this.filteredSearchList} />
+          </Map>
 
           <Row>
             {this.filteredSearchList.map(item => (
