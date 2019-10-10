@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MessageSent from "./MessageSentView";
 
 import Carousel from "react-bootstrap/Carousel";
-import { Card, Form } from "react-bootstrap";
+import { Card, Form, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import { remove } from "./../services/itemApi";
 import { edit } from "../services/itemApi";
@@ -29,7 +29,6 @@ const PageWrapper = styled.div`
 
 const CardWrapper = styled.div`
   color: black;
-  max-width: 50vw;
 `;
 
 const MailWrapper = styled.div`
@@ -143,18 +142,17 @@ export default class FoundItemView extends Component {
     const containerStyle = { height: "200px" };
     const item = this.state.item && this.state.item;
     const user = this.props.user;
-    console.log(this.state.item);
-    console.log("USER ", user, "ITEM ", item);
+
     return (
       (item && (
-        <PageWrapper className="container">
+        <div className="container">
           {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
           <CardWrapper>
             <Card
               className="mt-5 border-0 mx-auto text-center"
               style={{ width: "90%" }}
             >
-              <Carousel className="mx-auto" style={{ width: "50%" }}>
+              <Carousel className="mx-auto" style={{ width: "100%" }}>
                 {item.imageUrl.map(item => (
                   <Carousel.Item key={item._id}>
                     <img
@@ -169,46 +167,51 @@ export default class FoundItemView extends Component {
                 <Card.Title className="mt-3" style={{ fontSize: "2.6rem" }}>
                   {item.title}
                 </Card.Title>
-                <Card.Subtitle className="mt-3" style={{ fontSize: "1.5rem" }}>
-                  Location Found: Somewhere
-                </Card.Subtitle>
+
                 <Card.Text className="mt-3" style={{ fontSize: "1.25rem" }}>
                   {item.description}
                 </Card.Text>
-                <div style={{ height: "350px" }}>
-                  <Map item={item.location} />
-                </div>
-                {user && item && item.user._id === user._id ? (
-                  <div>
-                    <Link
-                      to={`/item/${item._id}/edit`}
-                      className="mx-3 btn btn-danger"
-                      variant="primary"
-                    >
-                      Edit
-                    </Link>
-                    <Form onSubmit={this.deleteItem}>
-                      <Button
-                        className="mt-4 mx-3 btn btn-danger"
-                        type="submit"
-                      >
-                        Mark As Resolved
-                      </Button>
-                    </Form>
+
+                {user && item && item.user._id === user._id && (
+                  <div className="container">
+                    <Row>
+                      <Col m={6}>
+                        <Button className="btn btn-primary w-100 h-100">
+                          <Link
+                            to={`/item/${item._id}/edit`}
+                            className="w-100 text-white"
+                          >
+                            Edit
+                          </Link>
+                        </Button>
+                      </Col>
+                      <Col m={6}>
+                        <Button
+                          className="btn btn-primary w-100 text-black"
+                          onClick={this.deleteItem}
+                        >
+                          Mark As Resolved
+                        </Button>
+
+                        {/* <Form onSubmit={this.deleteItem}>
+                          <Button
+                            className="btn btn-danger w-100"
+                            type="submit"
+                          >
+                            Mark As Resolved
+                          </Button>
+                        </Form> */}
+                      </Col>
+                    </Row>
                   </div>
-                ) : (
-                  <Link
-                    to="#"
-                    className="mx-3 btn btn-danger"
-                    variant="primary"
-                  >
-                    Claim!
-                  </Link>
                 )}
               </Card.Body>
             </Card>
           </CardWrapper>
-
+          <h4 className="mt-3 pl-4">Location {item.itemStatus}</h4>
+          <div className="mx-auto border mt-4" style={{ width: "90%" }}>
+            <Map item={item.location} />
+          </div>
           {this.props.user &&
           this.props.user.email !== this.state.item.user.email ? (
             <div>
@@ -248,7 +251,7 @@ export default class FoundItemView extends Component {
               </Link>
             </div>
           )}
-        </PageWrapper>
+        </div>
       )) || (
         <Center>
           <h3> Item Loading...</h3>
