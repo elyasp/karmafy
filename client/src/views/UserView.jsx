@@ -78,6 +78,9 @@ const CardWrapper = styled.div`
     color: rgba(3, 0, 0, 0.808);
     margin-left: 1em;
   }
+  .editlink {
+    text-decoration: none;
+  }
 `;
 
 const ItemSection = styled.div`
@@ -246,9 +249,9 @@ export default class UserView extends Component {
                             className="text-center carditem"
                             style={{ width: "100%" }}
                           >
-                            {item.resolved === "false" ? (
+                            {item.resolved === false ? (
                               <FoundCardHeader>
-                                <h6>᛫ ᛫ PENDING ᛫ ᛫ </h6>
+                                <h6>᛫ ᛫ PENDING ᛫ ᛫</h6>
                               </FoundCardHeader>
                             ) : (
                               <LostCardHeader>
@@ -279,18 +282,16 @@ export default class UserView extends Component {
                               {item.resolved ? (
                                 <h3>Item Reunited!</h3>
                               ) : (
-                                <div>
-                                  <h3>{item.itemStatus}</h3>
+                                <div className="d-flex">
                                   <Link
                                     to={`/item/${item._id}/edit`}
-                                    className="mx-3 btn btn-danger"
-                                    variant="primary"
+                                    className="mx-3 editlink"
                                   >
-                                    Edit
+                                    <Button>Edit Item</Button>
                                   </Link>
-                                  {/* <Form onSubmit={this.deleteItem}> */}
+
                                   <Button
-                                    className="mt-4 mx-3 btn btn-danger"
+                                    className="markbutton"
                                     type="submit"
                                     value={item._id}
                                     name={item._id}
@@ -298,7 +299,6 @@ export default class UserView extends Component {
                                   >
                                     Mark As Resolved
                                   </Button>
-                                  {/* </Form> */}
                                 </div>
                               )}
                             </Card.Body>

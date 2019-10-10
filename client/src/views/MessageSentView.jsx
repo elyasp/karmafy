@@ -13,6 +13,11 @@ const Positioner = styled.div`
   margin-top: 40px;
 `;
 
+const TextStyler = styled.div`
+  text-shadow: 1px 1px 9px #000;
+  text-align: center;
+`;
+
 //////////// END OF STYLES //////////////
 
 export default class SentView extends Component {
@@ -24,7 +29,9 @@ export default class SentView extends Component {
     return (
       <div>
         <Positioner>
-          <h3> Message Succesfully Sent ! </h3>
+          <TextStyler>
+            <h3> Message Succesfully Sent ! </h3>
+          </TextStyler>
         </Positioner>
       </div>
     );

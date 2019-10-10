@@ -9,9 +9,10 @@ import { remove } from "./../services/itemApi";
 import { edit } from "../services/itemApi";
 import { load } from "../services/itemApi";
 import Map from "../components/ItemMap";
-import styled from "styled-components";
+
 import LostContactForm from "../components/LostContactForm";
 import FoundContactForm from "../components/FoundContactForm";
+import styled from "styled-components";
 
 //////////////////////// STYLE ////////////////////////
 
@@ -73,6 +74,34 @@ const Center = styled.div`
   h3 {
     font-size: 50px;
     font-weight: 200;
+  }
+`;
+const TextStyler = styled.div`
+  text-shadow: 1px 1px 9px #000;
+  text-align: center;
+`;
+
+const FoundCardHeader = styled.div`
+  background: black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  h4 {
+    margin-top: 0.2em;
+    color: #5bf7a9;
+    font-family: "Courier New", Courier, monospace;
+    letter-spacing: 0.3em;
+  }
+`;
+
+const LostCardHeader = styled.div`
+  background: black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  h4 {
+    margin-top: 0.2em;
+    color: #ff3c00;
+    font-family: "Courier New", Courier, monospace;
+    letter-spacing: 0.3em;
   }
 `;
 
@@ -165,6 +194,15 @@ export default class FoundItemView extends Component {
           {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
           <CardWrapper>
             <Card className="mt-5 border-0 mx-auto text-center">
+              {item.itemStatus === "Found" ? (
+                <FoundCardHeader>
+                  <h4>᛫ FOUND ᛫</h4>
+                </FoundCardHeader>
+              ) : (
+                <LostCardHeader>
+                  <h4>᛫ LOST ᛫</h4>
+                </LostCardHeader>
+              )}
               <Carousel className="mx-auto" style={{ width: "100%" }}>
                 {item.imageUrl.map(item => (
                   <Carousel.Item key={item._id}>
@@ -202,15 +240,6 @@ export default class FoundItemView extends Component {
                         <Button className="" onClick={this.deleteItem}>
                           Mark As Resolved
                         </Button>
-
-                        {/* <Form onSubmit={this.deleteItem}>
-                          <Button
-                            className="btn btn-danger w-100"
-                            type="submit"
-                          >
-                            Mark As Resolved
-                          </Button>
-                        </Form> */}
                       </Col>
                     </Row>
                   </div>
@@ -218,12 +247,17 @@ export default class FoundItemView extends Component {
               </Card.Body>
             </Card>
           </CardWrapper>
+          <br />
+          <br />
           <h5 className="mt-4 text-center">
             Approximate Location {item.itemStatus}
           </h5>
-          <div className="mx-auto border mt-3" style={{ width: "90%" }}>
+          <br />
+
+          <div className="mx-auto mt-3" style={{ width: "100%" }}>
             <Map item={item.location} />
           </div>
+
           {this.props.user &&
           this.props.user.email !== this.state.item.user.email ? (
             <div className="container">
@@ -243,15 +277,23 @@ export default class FoundItemView extends Component {
                   )}
                 </MailWrapper>
               ) : (
-                <MessageSent />
+                <div>
+                  <br />
+                  <MessageSent />
+                  <br />
+                  <br />
+                  <br />
+                </div>
               )}
             </div>
           ) : this.props.user &&
             this.props.user.email === this.state.item.user.email ? (
             <div className="accessdenied mt-4">
-              <h5>
-                Your object has been published and is waiting to be spotted!
-              </h5>
+              <TextStyler>
+                <h5>
+                  Your object has been published and is waiting to be spotted!
+                </h5>
+              </TextStyler>
             </div>
           ) : (
             <div className="accessdenied">
