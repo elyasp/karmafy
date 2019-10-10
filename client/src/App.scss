@@ -35,7 +35,8 @@
 
 body {
   color: #fff;
-  height: 100vh;
+  max-width: 100vw;
+  height: 140vh;
   color: white;
   background: linear-gradient(
     45deg,
@@ -167,14 +168,31 @@ body {
     -webkit-transition: all 0.6s ease;
     color: black;
     text-shadow: 1px 1px 4px #fbfffe;
+    text-shadow: 1px 1px 4px #cc3232c7;
   }
 }
 
 .searchbar {
   border: 3px solid white;
   background: rgba(255, 255, 255, 0.445);
+
   border-radius: 3px;
-  width: 60vw;
+  width: 70vw;
   margin: 1em;
   padding: 0.4em;
+}
+
+.addbuttonhome {
+  color: white;
+  width: 35%;
+  font-size: 1.5rem;
+  margin: 4rem;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 2px solid white;
+  background: none;
+  &:hover {
+    color: black;
+    background: hsla(59, 100%, 49%, 0.34);
+  }
 }

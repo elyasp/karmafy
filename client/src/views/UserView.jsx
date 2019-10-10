@@ -59,8 +59,8 @@ export default class UserView extends Component {
     });
   }
 
-  loadByUser() {
-    this.props.user._id
+  loadItem() {
+    loadByUser(this.props.user._id)
       .then(item => {
         console.log("new", item);
         this.setState({
