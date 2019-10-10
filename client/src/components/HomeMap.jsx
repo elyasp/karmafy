@@ -1,6 +1,7 @@
 // require("dotenv").config();
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
-
+import OrgMarker from "../images/marker.png";
+import GreenMarker from "../images/greenMarker.png";
 import React, { Component } from "react";
 
 export class MapContainer extends Component {
@@ -12,7 +13,9 @@ export class MapContainer extends Component {
       activeMarker: {}
     };
   }
-
+  zoom = event => {
+    window.location = "#" + event.id._id;
+  };
   onClose = props => {
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -32,6 +35,10 @@ export class MapContainer extends Component {
 
   displayMarkers = () => {
     return this.state.locations.map((place, index) => {
+      let markerImg = "OrgMarker";
+      if (place.itemStatus === "Found") {
+        markerImg = GreenMarker;
+      }
       return (
         <Marker
           key={place._id}
@@ -40,7 +47,12 @@ export class MapContainer extends Component {
             lat: place.location.lat,
             lng: place.location.lng
           }}
-          onClick={this.test}
+          label={place.title}
+          icon={{
+            url: markerImg
+          }}
+          onClick={this.zoom}
+          style={{ backgroundColor: "blue", cursor: "pointer" }}
         />
       );
     });
@@ -64,6 +76,7 @@ export class MapContainer extends Component {
         initialCenter={{ lat: 38.7223, lng: -9.1393 }}
         onClick={this.onMapClick}
         containerStyle={containerStyle}
+        onBoundsChange={this._onBoundsChange}
       >
         {this.displayMarkers()}
       </Map>

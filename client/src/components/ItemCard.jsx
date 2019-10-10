@@ -1,14 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { list } from "./../services/itemApi";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-import { Card, Col, Row, Container, Carousel, Button } from "react-bootstrap";
-
-||||||| merged common ancestors
-import { Card, Col, Row, Container, Carousel, Button } from "react-bootstrap";
-=======
 import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
->>>>>>> 858829f43ada8fb13f3bf9a91f19f47d2fb87cdc
 import styled from "styled-components";
 import { loadByType } from "../services/itemApi";
 import HomeMap from "./HomeMap";
@@ -41,18 +34,6 @@ const CardWrapper = styled.div`
   .cardsubtitle {
     font-size: 15px;
     color: black;
-  }
-`;
-
-const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 2vh;
-
-  .searchfilter {
-    display: flex;
   }
 `;
 
@@ -190,7 +171,6 @@ export default class ItemCard extends Component {
   }
 
   render() {
-    console.log("parent", this.filteredSearchList);
     return (
       (this.state.items && (
         <Container>
@@ -230,6 +210,7 @@ export default class ItemCard extends Component {
                     <Card
                       className="text-center carditem"
                       style={{ width: "100%" }}
+                      id={item._id}
                     >
                       <Carousel className="mx-auto" style={{ width: "100%" }}>
                         {item.imageUrl.map(item => (
