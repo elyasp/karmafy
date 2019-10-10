@@ -11,21 +11,7 @@ export class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {}
     };
-    this.test = this.test.bind(this);
   }
-  test(event) {
-    this.setState({
-      activeMarker: event.id,
-      showingInfoWindow: true
-    });
-    console.log(this.activeMarker);
-  }
-  // onMarkerClick = (event) =>
-  //   this.setState({
-  //     selectedPlace: props,
-  //     activeMarker: marker,
-  //     showingInfoWindow: true
-  //   });
 
   onClose = props => {
     if (this.state.showingInfoWindow) {
@@ -75,19 +61,11 @@ export class MapContainer extends Component {
         google={this.props.google}
         zoom={14}
         style={mapStyles}
-        // initialCenter={{ lat: lat, lng: lng }}
+        initialCenter={{ lat: 38.7223, lng: -9.1393 }}
         onClick={this.onMapClick}
         containerStyle={containerStyle}
       >
         {this.displayMarkers()}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-        >
-          <div>
-            <h1>hello</h1>
-          </div>
-        </InfoWindow>
       </Map>
     );
   }

@@ -2,10 +2,21 @@ import React, { Component } from "react";
 import { list } from "./../services/itemApi";
 import { Link } from "react-router-dom";
 import { Card, Col, Row, Container, Carousel, Button } from "react-bootstrap";
+
 import styled from "styled-components";
 import { loadByType } from "../services/itemApi";
 import HomeMap from "./HomeMap";
 ///////////////// STYLE /////////////////////////
+const Center = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh;
+  .searchfilter {
+    display: flex;
+  }
+`;
 
 const CardWrapper = styled.div`
   .carditem {
@@ -140,18 +151,29 @@ export default class ItemCard extends Component {
     return (
       (this.state.items && (
         <Container>
-          <Button name="Lost" onClick={this.lost} value="Lost">
-            Lost Items
-          </Button>
-          <Button name="Found" onClick={this.found} value="Found">
-            Found Items
-          </Button>
-          <Button name="All" onClick={this.all} value="All">
-            All
-          </Button>
-          <input onChange={this.searchFilter} type="text"></input>
+          <Center>
+            <div className="searchfilter">
+              <Button name="Lost" onClick={this.lost} value="Lost">
+                Lost Items
+              </Button>
+              <Button name="Found" onClick={this.found} value="Found">
+                Found Items
+              </Button>
+              <Button name="All" onClick={this.all} value="All">
+                All
+              </Button>
+            </div>
+          </Center>
           <div style={{ height: "500px" }}>
             <HomeMap items={this.filteredSearchList} />
+          </div>
+          <div>
+            <input
+              onChange={this.searchFilter}
+              type="text"
+              className="searchbar"
+              placeholder="type to search"
+            ></input>
           </div>
           <Row>
             {this.filteredSearchList.map(item => (
@@ -179,7 +201,6 @@ export default class ItemCard extends Component {
                           </Carousel.Item>
                         ))}
                       </Carousel>
-
                       <Card.Body className="px-0">
                         <Card.Title className="mt-1 cardtitle">
                           {item.title}
