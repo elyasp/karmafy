@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 const Button = styled.button`
   color: white;
+  padding: 10px;
   border-radius: 5px;
   border: 2px solid white;
   background: none;
