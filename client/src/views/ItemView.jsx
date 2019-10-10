@@ -204,7 +204,6 @@ export default class FoundItemView extends Component {
             </Card>
           </CardWrapper>
 
-          {/* {this.props.user.email !== this.state.item.user.email} */}
           {this.props.user &&
           this.props.user.email !== this.state.item.user.email ? (
             <div>
@@ -247,7 +246,7 @@ export default class FoundItemView extends Component {
                             type="text"
                             required
                             name="ownerCheckAns"
-                            placeholder="verification question"
+                            placeholder="answer verification question above"
                             onChange={this.handleChange}
                           />
                         </Form.Group>
@@ -312,7 +311,8 @@ export default class FoundItemView extends Component {
                 <MessageSent />
               )}
             </div>
-          ) : this.props.user.email === this.state.item.user.email ? (
+          ) : this.props.user &&
+            this.props.user.email === this.state.item.user.email ? (
             <div className="accessdenied">
               {" "}
               <h5>

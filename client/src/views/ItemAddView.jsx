@@ -8,7 +8,7 @@ import LostItemForm from "../components/LostItemForm";
 import { add } from "./../services/itemApi";
 import { uploadImage } from "./../services/itemApi";
 
-//////Styles////////
+////////////////////// STYLE ////////////////////////
 
 const Button = styled.button`
   color: white;
@@ -24,6 +24,8 @@ const Button = styled.button`
     background: hsla(59, 100%, 49%, 0.34);
   }
 `;
+
+/////////////////////// END OF STYLE ////////////////////
 
 export default class ItemAddView extends Component {
   constructor(props) {

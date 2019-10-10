@@ -52,6 +52,10 @@ app.use("/api", authRouter);
 app.use("/api", indexRouter);
 app.use("/api", imageRouter);
 
+app.get("*", (req, res, next) => {
+  res.sendFile(join(__dirname, "/client/build/index.html"));
+});
+
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));

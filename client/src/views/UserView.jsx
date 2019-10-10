@@ -26,18 +26,6 @@ const ProfileWrapper = styled.div`
   }
 `;
 
-// const Button = styled.button`
-//   margin: 10px;
-//   color: white;
-//   border-radius: 5px;
-//   border: 2px solid white;
-//   background: none;
-//   &:hover {
-//     color: black;
-//     background: white;
-//   }
-// `;
-
 const ItemSection = styled.div`
   height: 150vh;
   margin-top: 10px;
@@ -49,7 +37,7 @@ const ItemSection = styled.div`
   color: #070424;
 `;
 
-////////////////////////////////////////////////////
+//////////////////////// END OF STYLE ///////////////////////////
 
 export default class UserView extends Component {
   constructor(props) {
