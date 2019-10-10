@@ -16,9 +16,7 @@ import FoundContactForm from "../components/FoundContactForm";
 //////////////////////// STYLE ////////////////////////
 
 const PageWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-weight: 200;
+  font-weight: 400;
 
   .accessdenied {
     display: flex;
@@ -29,20 +27,38 @@ const PageWrapper = styled.div`
 
 const CardWrapper = styled.div`
   color: black;
+  width: 80%;
+  border-radius: 2px;
+  margin: 0 auto;
+  box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
+    10px 10px 30px 15px rgba(0, 0, 0, 0.22);
 `;
 
 const MailWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 40px;
+  font-weight: 600;
 `;
 
+// const Button = styled.button`
+//   color: white;
+//   border-radius: 5px;
+//   border: 2px solid white;
+//   background: none;
+//   margin-right: 30px;
+//   &:hover {
+//     color: black;
+//     background: hsla(360, 100%, 49%, 0.34);
+//   }
+// `;
+
 const Button = styled.button`
-  color: white;
+  width: 100%;
+  border: 1px solid black;
   border-radius: 5px;
-  border: 2px solid white;
-  background: none;
-  margin-right: 30px;
+  background-color: white;
+  color: black;
   &:hover {
     color: black;
     background: hsla(360, 100%, 49%, 0.34);
@@ -145,13 +161,10 @@ export default class FoundItemView extends Component {
 
     return (
       (item && (
-        <div className="container">
+        <PageWrapper className="container">
           {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
           <CardWrapper>
-            <Card
-              className="mt-5 border-0 mx-auto text-center"
-              style={{ width: "90%" }}
-            >
+            <Card className="mt-5 border-0 mx-auto text-center">
               <Carousel className="mx-auto" style={{ width: "100%" }}>
                 {item.imageUrl.map(item => (
                   <Carousel.Item key={item._id}>
@@ -164,7 +177,7 @@ export default class FoundItemView extends Component {
                 ))}
               </Carousel>
               <Card.Body className="px-0">
-                <Card.Title className="mt-3" style={{ fontSize: "2.6rem" }}>
+                <Card.Title className="" style={{ fontSize: "2.6rem" }}>
                   {item.title}
                 </Card.Title>
 
@@ -176,20 +189,17 @@ export default class FoundItemView extends Component {
                   <div className="container">
                     <Row>
                       <Col m={6}>
-                        <Button className="btn btn-primary w-100 h-100">
+                        <Button className="h-100">
                           <Link
                             to={`/item/${item._id}/edit`}
-                            className="w-100 text-white"
+                            className="w-100 text-body"
                           >
                             Edit
                           </Link>
                         </Button>
                       </Col>
                       <Col m={6}>
-                        <Button
-                          className="btn btn-primary w-100 text-black"
-                          onClick={this.deleteItem}
-                        >
+                        <Button className="" onClick={this.deleteItem}>
                           Mark As Resolved
                         </Button>
 
@@ -208,13 +218,15 @@ export default class FoundItemView extends Component {
               </Card.Body>
             </Card>
           </CardWrapper>
-          <h4 className="mt-3 pl-4">Location {item.itemStatus}</h4>
-          <div className="mx-auto border mt-4" style={{ width: "90%" }}>
+          <h5 className="mt-4 text-center">
+            Approximate Location {item.itemStatus}
+          </h5>
+          <div className="mx-auto border mt-3" style={{ width: "90%" }}>
             <Map item={item.location} />
           </div>
           {this.props.user &&
           this.props.user.email !== this.state.item.user.email ? (
-            <div>
+            <div className="container">
               {!this.state.sent ? (
                 <MailWrapper>
                   {this.state.item.itemStatus === "Found" ? (
@@ -236,7 +248,7 @@ export default class FoundItemView extends Component {
             </div>
           ) : this.props.user &&
             this.props.user.email === this.state.item.user.email ? (
-            <div className="accessdenied">
+            <div className="accessdenied mt-4">
               <h5>
                 Your object has been published and is waiting to be spotted!
               </h5>
@@ -251,7 +263,7 @@ export default class FoundItemView extends Component {
               </Link>
             </div>
           )}
-        </div>
+        </PageWrapper>
       )) || (
         <Center>
           <h3> Item Loading...</h3>

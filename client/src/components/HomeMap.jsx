@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import OrgMarker from "../images/marker.png";
 import GreenMarker from "../images/greenMarker.png";
 import styled from "styled-components";
+import styles from "../images/GoogleMapStyles.json";
 require("dotenv").config();
 
 const Sizer = styled.div`
@@ -88,6 +89,10 @@ export class MapContainer extends Component {
           onClick={this.onMapClick}
           containerStyle={containerStyle}
           onBoundsChange={this._onBoundsChange}
+          disableDefaultUI={true} // disable default map UI
+          draggable={true} // make map draggable
+          zoomControl={true} // allow scale controle
+          styles={styles} // change default map styles
         >
           {this.displayMarkers()}
         </Map>
