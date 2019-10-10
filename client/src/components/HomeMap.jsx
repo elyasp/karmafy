@@ -1,5 +1,5 @@
 // require("dotenv").config();
-import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 
 import React, { Component } from "react";
 
@@ -7,13 +7,37 @@ export class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locations: this.props.items
+      locations: this.props.items,
+      showingInfoWindow: false,
+      activeMarker: {}
     };
+    this.test = this.test.bind(this);
   }
+  test(event) {
+    this.setState({
+      activeMarker: event.id,
+      showingInfoWindow: true
+    });
+    console.log(this.activeMarker);
+  }
+  // onMarkerClick = (event) =>
+  //   this.setState({
+  //     selectedPlace: props,
+  //     activeMarker: marker,
+  //     showingInfoWindow: true
+  //   });
+
+  onClose = props => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
+    }
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.items !== prevProps.items) {
-      console.log("updated", this.props.items);
       this.setState({
         locations: this.props.items
       });
@@ -24,20 +48,19 @@ export class MapContainer extends Component {
     return this.state.locations.map((place, index) => {
       return (
         <Marker
-          key={index}
-          id={index}
+          key={place._id}
+          id={place}
           position={{
             lat: place.location.lat,
             lng: place.location.lng
           }}
-          onClick={() => console.log("You clicked me!")}
+          onClick={this.test}
         />
       );
     });
   };
 
   render() {
-    console.log("filtered", this.state.locations);
     const mapStyles = {
       width: "85%",
       height: "450px",
@@ -56,8 +79,15 @@ export class MapContainer extends Component {
         onClick={this.onMapClick}
         containerStyle={containerStyle}
       >
-        {/* <Marker position={{ lat, lng }} /> */}
         {this.displayMarkers()}
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+        >
+          <div>
+            <h1>hello</h1>
+          </div>
+        </InfoWindow>
       </Map>
     );
   }
