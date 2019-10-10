@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ItemCard from "./../components/ItemCard";
 
+//////////////////////// STYLE /////////////////////////
+
 const PageWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -17,6 +19,8 @@ const PageWrapper = styled.div`
     font-size: 15px;
   }
 `;
+
+///////////////////////// END OF STYLE ////////////////
 
 export default class HomeView extends Component {
   render() {

@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { Card, Col, Row, Container, Carousel, Button } from "react-bootstrap";
 import styled from "styled-components";
 import { loadByType } from "../services/itemApi";
+
+///////////////// STYLE /////////////////////////
+
 const CardWrapper = styled.div`
   .carditem {
     border-radius: 20px;
@@ -23,6 +26,8 @@ const CardWrapper = styled.div`
     color: black;
   }
 `;
+
+//////////////// END OF STYLE ////////////////////
 
 export default class ItemCard extends Component {
   constructor(props) {

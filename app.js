@@ -10,9 +10,7 @@ const serveFavicon = require("serve-favicon");
 const expressSession = require("express-session");
 const MongoStore = require("connect-mongo")(expressSession);
 const mongoose = require("mongoose");
-
 const deserializer = require("./middleware/deserializer");
-
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const imageRouter = require("./routes/fileUpload");
@@ -50,9 +48,13 @@ app.use(
 
 app.use(deserializer);
 
-app.use("/", authRouter); ////////////////// POSSIBLE BUG, two routers, one path
-app.use("/", indexRouter);
-app.use("/", imageRouter);
+app.use("/api", authRouter);
+app.use("/api", indexRouter);
+app.use("/api", imageRouter);
+
+app.get("*", (req, res, next) => {
+  res.sendFile(join(__dirname, "/client/build/index.html"));
+});
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {
