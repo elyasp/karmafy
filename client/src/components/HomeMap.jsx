@@ -1,6 +1,7 @@
 // require("dotenv").config();
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
-
+import OrgMarker from "../images/marker.png";
+import GreenMarker from "../images/greenMarker.png";
 import React, { Component } from "react";
 
 export class MapContainer extends Component {
@@ -11,22 +12,10 @@ export class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {}
     };
-    this.test = this.test.bind(this);
   }
-  test(event) {
-    this.setState({
-      activeMarker: event.id,
-      showingInfoWindow: true
-    });
-    console.log(this.activeMarker);
-  }
-  // onMarkerClick = (event) =>
-  //   this.setState({
-  //     selectedPlace: props,
-  //     activeMarker: marker,
-  //     showingInfoWindow: true
-  //   });
-
+  zoom = event => {
+    window.location = "#" + event.id._id;
+  };
   onClose = props => {
     if (this.state.showingInfoWindow) {
       this.setState({
@@ -46,6 +35,11 @@ export class MapContainer extends Component {
 
   displayMarkers = () => {
     return this.state.locations.map((place, index) => {
+      let markerImg = OrgMarker;
+      if (place.itemStatus === "Found") {
+        markerImg = GreenMarker;
+      }
+      const dfe = { color: "blue" };
       return (
         <Marker
           key={place._id}
@@ -54,7 +48,13 @@ export class MapContainer extends Component {
             lat: place.location.lat,
             lng: place.location.lng
           }}
-          onClick={this.test}
+          label={place.title}
+          labelStyle={dfe}
+          icon={{
+            url: markerImg
+          }}
+          onClick={this.zoom}
+          style={{ backgroundColor: "blue", cursor: "pointer" }}
         />
       );
     });
@@ -75,19 +75,12 @@ export class MapContainer extends Component {
         google={this.props.google}
         zoom={14}
         style={mapStyles}
-        // initialCenter={{ lat: lat, lng: lng }}
+        initialCenter={{ lat: 38.7223, lng: -9.1393 }}
         onClick={this.onMapClick}
         containerStyle={containerStyle}
+        onBoundsChange={this._onBoundsChange}
       >
         {this.displayMarkers()}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-        >
-          <div>
-            <h1>hello</h1>
-          </div>
-        </InfoWindow>
       </Map>
     );
   }

@@ -5,9 +5,18 @@ import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
 import styled from "styled-components";
 import { loadByType } from "../services/itemApi";
 import HomeMap from "./HomeMap";
-import { loadByUser } from "./../services/itemApi";
+///////////////// STYLE /////////////////////////
+const Center = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh;
 
-/////////////////////////////////////////////// STYLE ////////////////////////////////////////////
+  .searchfilter {
+    display: flex;
+  }
+`;
 
 const CardWrapper = styled.div`
   margin-top: 2.5em;
@@ -38,18 +47,6 @@ const CardWrapper = styled.div`
   .cardsubtitle {
     font-size: 15px;
     color: black;
-  }
-`;
-
-const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 2vh;
-
-  .searchfilter {
-    display: flex;
   }
 `;
 
@@ -111,7 +108,8 @@ export default class ItemCard extends Component {
       item: null,
       items: [],
       searchTerm: "",
-      lostButton: ""
+      lostButton: "",
+      foundButton: ""
     };
     this.all = this.all.bind(this);
     this.lost = this.lost.bind(this);
@@ -128,20 +126,22 @@ export default class ItemCard extends Component {
     } else {
       this.setState({
         lostButton: "clicked",
+        foundButton: "",
         searchTerm: "Lost"
       });
     }
   }
 
   found() {
-    if (this.state.lostButton === "clicked") {
+    if (this.state.foundButton === "clicked") {
       this.setState({
-        lostButton: "",
+        foundButton: "",
         searchTerm: ""
       });
     } else {
       this.setState({
-        lostButton: "clicked",
+        foundButton: "clicked",
+        lostButton: "",
         searchTerm: "Found"
       });
     }
@@ -166,7 +166,7 @@ export default class ItemCard extends Component {
     const item = this.state.items;
     if (
       this.state.lostButton === "clicked" ||
-      this.state.founcButton === "clicked"
+      this.state.foundButton === "clicked"
     ) {
       return item.filter(item => item.itemStatus === query);
     } else {
@@ -175,25 +175,6 @@ export default class ItemCard extends Component {
       );
     }
   }
-
-  // get filteredSearchList() {
-  //   const query = this.state.searchTerm;
-  //   const item = this.state.items;
-  //   if (
-  //     this.state.lostButton === "clicked" ||
-  //     this.state.foundButton === "clicked"
-  //   ) {
-  //     this.setState({
-  //       filteredItems: item.filter(item => item.itemStatus === query)
-  //     });
-  //   } else {
-  //     this.setState({
-  //       filteredItems: item.filter(item =>
-  //         item.title.toLowerCase().includes(query.toLowerCase())
-  //       )
-  //     });
-  //   }
-  // }
 
   componentDidMount() {
     list()
@@ -212,7 +193,6 @@ export default class ItemCard extends Component {
   }
 
   render() {
-    console.log("parent", this.filteredSearchList);
     return (
       (this.state.items && (
         <Container>
@@ -255,6 +235,7 @@ export default class ItemCard extends Component {
                     <Card
                       className="text-center carditem"
                       style={{ width: "100%" }}
+                      id={item._id}
                     >
                       {item.itemStatus === "Found" ? (
                         <FoundCardHeader>
@@ -284,7 +265,7 @@ export default class ItemCard extends Component {
                           {item.title}
                         </Card.Title>
                         <Card.Subtitle className="mt-2 cardsubtitle">
-                          Posted By:{" "}
+                          Posted By: {item.user.name}
                         </Card.Subtitle>
                       </Card.Body>
                     </Card>
