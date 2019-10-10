@@ -159,7 +159,10 @@ export default class ItemFormView extends Component {
             />
           </Form.Group>
 
-          <Form.Group className="mt-4 h5" controlId="exampleForm.ControlInput1">
+          <Form.Group
+            className="mt-5 border rounded-lg h5 p-2"
+            controlId="exampleForm.ControlInput1"
+          >
             <Dropzone onDrop={this.handleUploadImages}>
               {({ getRootProps, getInputProps }) => (
                 <div {...getRootProps()}>
