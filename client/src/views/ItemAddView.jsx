@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import styled from "styled-components";
-import Form from "react-bootstrap/Form";
+// import { Form, Button } from "react-bootstrap";
 
 import FoundItemForm from "../components/FoundItemForm";
 import LostItemForm from "../components/LostItemForm";
@@ -12,9 +12,10 @@ import { uploadImage } from "./../services/itemApi";
 
 const Button = styled.button`
   color: white;
+  flex: 0 0 45%;
   width: 35%;
   font-size: 1.5rem;
-  margin: 2rem;
+  margin: 2rem 0.5rem;
   padding: 1rem;
   border-radius: 5px;
   border: 0.5px solid white;
@@ -32,9 +33,11 @@ const Button = styled.button`
   }
 `;
 
-const Positioner = styled.div`
-  margin-top: 30vh;
-`;
+// const Positioner = styled.div`
+//   margin-top: 30vh;
+// `;
+
+const Positioner = styled.div``;
 
 /////////////////////// END OF STYLE ////////////////////
 
@@ -116,7 +119,6 @@ export default class ItemAddView extends Component {
   }
 
   render() {
-    console.log("img uploaded", this.state.item.imageUploaded);
     const isEnabled = this.state.item.imageUploaded === "loading";
     return (
       <Positioner>

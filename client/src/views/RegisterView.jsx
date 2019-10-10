@@ -208,14 +208,17 @@ export default class RegisterView extends Component {
               <h6 id="message"></h6>
             </strong>
 
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>Upload A Profile Picture</Form.Label>
+            <Form.Label>Upload A Profile Picture</Form.Label>
+            <Form.Group
+              className="text-align-center"
+              controlId="exampleForm.ControlInput1"
+            >
               <Form.Control
                 as="input"
                 type="file"
                 name="imageUrl"
                 size="sm"
-                className="btn-sm pl-0"
+                className="btn-sm mr-n5 border"
                 onChange={e => this.handleFileUpload(e)}
               />
             </Form.Group>

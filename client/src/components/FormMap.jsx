@@ -35,13 +35,13 @@ export class MapContainer extends Component {
 
   render() {
     const mapStyles = {
-      width: "85%",
+      width: "91%",
       height: "350px",
       display: "block",
       position: "static"
     };
 
-    const containerStyle = { height: "350px", width: "85%" };
+    const containerStyle = { height: "350px", width: "100%" };
 
     const lat = this.state.point.lat;
     const lng = this.state.point.lng;

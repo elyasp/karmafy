@@ -190,14 +190,17 @@ export default class ItemFormView extends Component {
             />
           </Form.Group>
 
-          <Form.Group controlId="exampleForm.ControlInput1">
+          <Form.Group
+            className="mt-5 border rounded-lg h5 p-2"
+            controlId="exampleForm.ControlInput1"
+          >
             <Dropzone onDrop={this.handleUploadImages}>
               {({ getRootProps, getInputProps, isDragActive }) => (
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
-                  {isDragActive
-                    ? "Drop it like it's hot!"
-                    : "Click me or drag a picture to upload!"}
+                  <strong>
+                    <h4>Click me to upload pictures</h4>
+                  </strong>
                 </div>
               )}
             </Dropzone>
