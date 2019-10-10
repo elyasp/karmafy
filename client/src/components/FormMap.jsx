@@ -2,7 +2,7 @@
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
 import React, { Component } from "react";
-
+import styles from "../images/GoogleMapStyles.json";
 export class MapContainer extends Component {
   constructor(props) {
     super(props);
@@ -54,6 +54,10 @@ export class MapContainer extends Component {
         initialCenter={{ lat: 38.7223, lng: -9.1393 }}
         onClick={this.onMapClick}
         containerStyle={containerStyle}
+        disableDefaultUI={true} // disable default map UI
+        draggable={true} // make map draggable
+        zoomControl={true} // allow scale controle
+        styles={styles} // change default map styles
       >
         <Marker position={{ lat, lng }} />
       </Map>

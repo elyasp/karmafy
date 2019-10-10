@@ -190,21 +190,8 @@ export default class UserView extends Component {
 
   deleteItem(event) {
     let id = event.target.name;
-    let clickedObj = this.state.item.filter(item => {
-      return item._id === id;
-    });
-    let karmaNum = parseInt(this.props.user.karmaCount);
-    if (clickedObj[0].itemStatus === "Found") {
-      karmaNum += 1;
-    }
 
-    let data = {
-      itemId: id,
-      userId: this.props.user._id,
-      karmaNum: karmaNum
-    };
-
-    remove(data)
+    remove(id)
       .then(item => {
         this.loadItem();
       })

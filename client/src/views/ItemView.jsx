@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MessageSent from "./MessageSentView";
 
 import Carousel from "react-bootstrap/Carousel";
-import { Card, Form } from "react-bootstrap";
+import { Card, Form, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import { remove } from "./../services/itemApi";
 import { edit } from "../services/itemApi";
@@ -16,9 +16,7 @@ import FoundContactForm from "../components/FoundContactForm";
 //////////////////////// STYLE ////////////////////////
 
 const PageWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-weight: 200;
+  font-weight: 400;
 
   .accessdenied {
     display: flex;
@@ -29,21 +27,38 @@ const PageWrapper = styled.div`
 
 const CardWrapper = styled.div`
   color: black;
-  max-width: 50vw;
+  width: 80%;
+  border-radius: 2px;
+  margin: 0 auto;
+  box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
+    10px 10px 30px 15px rgba(0, 0, 0, 0.22);
 `;
 
 const MailWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 40px;
+  font-weight: 600;
 `;
 
+// const Button = styled.button`
+//   color: white;
+//   border-radius: 5px;
+//   border: 2px solid white;
+//   background: none;
+//   margin-right: 30px;
+//   &:hover {
+//     color: black;
+//     background: hsla(360, 100%, 49%, 0.34);
+//   }
+// `;
+
 const Button = styled.button`
-  color: white;
+  width: 100%;
+  border: 1px solid black;
   border-radius: 5px;
-  border: 2px solid white;
-  background: none;
-  margin-right: 30px;
+  background-color: white;
+  color: black;
   &:hover {
     color: black;
     background: hsla(360, 100%, 49%, 0.34);
@@ -143,18 +158,14 @@ export default class FoundItemView extends Component {
     const containerStyle = { height: "200px", width: "85%" };
     const item = this.state.item && this.state.item;
     const user = this.props.user;
-    console.log(this.state.item);
-    console.log("USER ", user, "ITEM ", item);
+
     return (
       (item && (
         <PageWrapper className="container">
           {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
           <CardWrapper>
-            <Card
-              className="mt-5 border-0 mx-auto text-center"
-              style={{ width: "90%" }}
-            >
-              <Carousel className="mx-auto" style={{ width: "50%" }}>
+            <Card className="mt-5 border-0 mx-auto text-center">
+              <Carousel className="mx-auto" style={{ width: "100%" }}>
                 {item.imageUrl.map(item => (
                   <Carousel.Item key={item._id}>
                     <img
@@ -166,50 +177,56 @@ export default class FoundItemView extends Component {
                 ))}
               </Carousel>
               <Card.Body className="px-0">
-                <Card.Title className="mt-3" style={{ fontSize: "2.6rem" }}>
+                <Card.Title className="" style={{ fontSize: "2.6rem" }}>
                   {item.title}
                 </Card.Title>
 
                 <Card.Text className="mt-3" style={{ fontSize: "1.25rem" }}>
                   {item.description}
                 </Card.Text>
-                <div style={{ height: "350px" }}>
-                  <Map item={item.location} />
-                </div>
-                {user && item && item.user._id === user._id ? (
-                  <div>
-                    <Link
-                      to={`/item/${item._id}/edit`}
-                      className="mx-3 btn btn-danger"
-                      variant="primary"
-                    >
-                      Edit
-                    </Link>
-                    <Form onSubmit={this.deleteItem}>
-                      <Button
-                        className="mt-4 mx-3 btn btn-danger"
-                        type="submit"
-                      >
-                        Mark As Resolved
-                      </Button>
-                    </Form>
+
+                {user && item && item.user._id === user._id && (
+                  <div className="container">
+                    <Row>
+                      <Col m={6}>
+                        <Button className="h-100">
+                          <Link
+                            to={`/item/${item._id}/edit`}
+                            className="w-100 text-body"
+                          >
+                            Edit
+                          </Link>
+                        </Button>
+                      </Col>
+                      <Col m={6}>
+                        <Button className="" onClick={this.deleteItem}>
+                          Mark As Resolved
+                        </Button>
+
+                        {/* <Form onSubmit={this.deleteItem}>
+                          <Button
+                            className="btn btn-danger w-100"
+                            type="submit"
+                          >
+                            Mark As Resolved
+                          </Button>
+                        </Form> */}
+                      </Col>
+                    </Row>
                   </div>
-                ) : (
-                  <Link
-                    to="#"
-                    className="mx-3 btn btn-danger"
-                    variant="primary"
-                  >
-                    Claim!
-                  </Link>
                 )}
               </Card.Body>
             </Card>
           </CardWrapper>
-
+          <h5 className="mt-4 text-center">
+            Approximate Location {item.itemStatus}
+          </h5>
+          <div className="mx-auto border mt-3" style={{ width: "90%" }}>
+            <Map item={item.location} />
+          </div>
           {this.props.user &&
           this.props.user.email !== this.state.item.user.email ? (
-            <div>
+            <div className="container">
               {!this.state.sent ? (
                 <MailWrapper>
                   {this.state.item.itemStatus === "Found" ? (
@@ -231,7 +248,7 @@ export default class FoundItemView extends Component {
             </div>
           ) : this.props.user &&
             this.props.user.email === this.state.item.user.email ? (
-            <div className="accessdenied">
+            <div className="accessdenied mt-4">
               <h5>
                 Your object has been published and is waiting to be spotted!
               </h5>

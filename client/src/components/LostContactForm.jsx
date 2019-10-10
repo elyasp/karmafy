@@ -7,10 +7,12 @@ import styled from "styled-components";
 
 const Button = styled.button`
   color: white;
+  display: block;
+  padding: 10px;
   border-radius: 5px;
   border: 2px solid white;
   background: none;
-  margin-right: 30px;
+  margin: 0 auto;
   &:hover {
     color: black;
     background: hsla(360, 100%, 49%, 0.34);
@@ -28,10 +30,12 @@ export default class LostContactForm extends Component {
     return (
       <div>
         <Fragment>
-          <h2>Item yours? Contact the finder</h2>
+          <h2 className="mb-4">Item yours? Contact the finder</h2>
           <Form onSubmit={this.props.form}>
             <Form.Group>
-              <Form.Label htmlFor="email">Your Email</Form.Label>
+              <Form.Label htmlFor="email" className="h4">
+                Your Email
+              </Form.Label>
               <Form.Control
                 type="email"
                 name="email"
@@ -39,12 +43,12 @@ export default class LostContactForm extends Component {
                 onChange={this.props.change}
               />
               <Form.Text>
-                <small>You will be replied to this address</small>
+                <p>You will be replied to this address</p>
               </Form.Text>
             </Form.Group>
 
             <Form.Group>
-              <Form.Label htmlFor="contactnumber">
+              <Form.Label htmlFor="contactnumber" className="h4">
                 Add your phone number
               </Form.Label>
               <Form.Control
@@ -56,7 +60,9 @@ export default class LostContactForm extends Component {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label htmlFor="ownerCheck">{this.props.check}</Form.Label>
+              <Form.Label htmlFor="ownerCheck" className="h4">
+                {this.props.check}{" "}
+              </Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -67,7 +73,9 @@ export default class LostContactForm extends Component {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label htmlFor="message">Message</Form.Label>
+              <Form.Label className="h4" htmlFor="message">
+                Message
+              </Form.Label>
               <Form.Control
                 onChange={this.props.change}
                 as="textarea"
@@ -76,7 +84,9 @@ export default class LostContactForm extends Component {
                 placeholder="Be sure to include as much details as you can remember (tip: offer a reward ;)"
               />
             </Form.Group>
-            <Button type="submit">Send Message</Button>
+            <Button className="mb-4" type="submit">
+              Send Message
+            </Button>
           </Form>
         </Fragment>
       </div>
