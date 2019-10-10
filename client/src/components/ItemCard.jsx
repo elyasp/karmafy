@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
 import styled from "styled-components";
 import { loadByType } from "../services/itemApi";
-
+import HomeMap from "./HomeMap";
 ///////////////// STYLE /////////////////////////
 
 const CardWrapper = styled.div`
@@ -80,20 +80,6 @@ export default class ItemCard extends Component {
     this.searchFilter = this.searchFilter.bind(this);
   }
 
-  // found(event) {
-  //   loadByType(event.target.value)
-  //     .then(items => {
-  //       this.setState({
-  //         items
-  //       });
-  //     })
-  //     .catch(error => {
-  //       this.props.history.push(
-  //         `/error/${error.response ? error.response.status : "404"}`
-  //       );
-  //     });
-  // }
-
   lost() {
     if (this.state.lostButton === "clicked") {
       this.setState({
@@ -151,11 +137,34 @@ export default class ItemCard extends Component {
     }
   }
 
+  // get filteredSearchList() {
+  //   const query = this.state.searchTerm;
+  //   const item = this.state.items;
+  //   if (
+  //     this.state.lostButton === "clicked" ||
+  //     this.state.foundButton === "clicked"
+  //   ) {
+  //     this.setState({
+  //       filteredItems: item.filter(item => item.itemStatus === query)
+  //     });
+  //   } else {
+  //     this.setState({
+  //       filteredItems: item.filter(item =>
+  //         item.title.toLowerCase().includes(query.toLowerCase())
+  //       )
+  //     });
+  //   }
+  // }
+
   componentDidMount() {
     list()
       .then(items => {
+        let locations = items.map(place => {
+          return place.location;
+        });
         this.setState({
-          items
+          items,
+          locations: locations
         });
       })
       .catch(error => {
@@ -164,30 +173,23 @@ export default class ItemCard extends Component {
   }
 
   render() {
+    console.log("parent", this.filteredSearchList);
     return (
-      <Fragment>
-        <Center>
-          <div>
-            <input
-              onChange={this.searchFilter}
-              type="text"
-              className="searchbar"
-              placeholder="type to search"
-            ></input>
-          </div>
-          <div className="searchfilter">
-            <Button name="Lost" onClick={this.lost} value="Lost">
-              lost
-            </Button>
-            <Button name="All" onClick={this.all} value="All">
-              all
-            </Button>
-            <Button name="Found" onClick={this.found} value="Found">
-              found
-            </Button>
-          </div>
-        </Center>
+      (this.state.items && (
         <Container>
+          <Button name="Lost" onClick={this.lost} value="Lost">
+            Lost Items
+          </Button>
+          <Button name="Found" onClick={this.found} value="Found">
+            Found Items
+          </Button>
+          <Button name="All" onClick={this.all} value="All">
+            All
+          </Button>
+          <input onChange={this.searchFilter} type="text"></input>
+          <div style={{ height: "500px" }}>
+            <HomeMap items={this.filteredSearchList} />
+          </div>
           <Row>
             {this.filteredSearchList.map(item => (
               <Col md={4}>
@@ -220,7 +222,7 @@ export default class ItemCard extends Component {
                           {item.title}
                         </Card.Title>
                         <Card.Subtitle className="mt-2 cardsubtitle">
-                          Posted By: {item.postedBy}
+                          {/* Posted By: {user.name} */}
                         </Card.Subtitle>
                         <h3>{item.itemStatus}</h3>
                       </Card.Body>
@@ -231,7 +233,11 @@ export default class ItemCard extends Component {
             ))}
           </Row>
         </Container>
-      </Fragment>
+      )) || (
+        <div>
+          <h3> Item Loading...</h3>
+        </div>
+      )
     );
   }
 }
