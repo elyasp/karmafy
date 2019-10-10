@@ -95,6 +95,7 @@ export default class App extends Component {
       width: "100%",
       height: "100%"
     };
+
     return (
       <UniStyle>
         <Router>
@@ -142,7 +143,14 @@ export default class App extends Component {
                     <EditUserView {...props} user={this.state.user} />
                   )}
                 />
-                <Route path="/all" component={ItemCard} />
+                {/* <Route path="/all" component={ItemCard} /> */}
+                <Route
+                  path="/all"
+                  exact
+                  render={props => (
+                    <ItemCard {...props} user={this.state.user} />
+                  )}
+                />
 
                 <RouteProtector
                   path="/item/add"

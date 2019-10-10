@@ -12,12 +12,14 @@ const Center = styled.div`
   align-items: center;
   justify-content: center;
   margin: 2vh;
+
   .searchfilter {
     display: flex;
   }
 `;
 
 const CardWrapper = styled.div`
+  margin-top: 2.5em;
   margin-bottom: 2em;
 
   .carditem {
@@ -30,7 +32,7 @@ const CardWrapper = styled.div`
       10px 10px 30px 15px rgba(0, 0, 0, 0.22);
 
     &:hover {
-      transform: scale(1.1, 1.1);
+      transform: scale(1.05, 1.05);
       transition: 0.4s;
       box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
         10px 10px 30px 15px rgba(0, 0, 0, 0.22);
@@ -97,12 +99,13 @@ const LostCardHeader = styled.div`
   }
 `;
 
-//////////////// END OF STYLE ////////////////////
+//////////////////////////////////////////////// END OF STYLE //////////////////////////////////////////////
 
 export default class ItemCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      item: null,
       items: [],
       searchTerm: "",
       lostButton: "",
