@@ -4,10 +4,24 @@ const authAPI = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/`
 });
 
-export const registerService = ({ name, email, password, profile, location }) =>
+export const registerService = ({
+  name,
+  email,
+  password,
+  profile,
+  location,
+  karmaCount
+}) =>
   new Promise((resolve, reject) => {
     authAPI
-      .post("/register", { name, email, password, profile, location })
+      .post("/register", {
+        name,
+        email,
+        password,
+        profile,
+        location,
+        karmaCount
+      })
       .then(response => {
         const user = response.data.user;
         resolve(user);

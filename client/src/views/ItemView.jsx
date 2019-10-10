@@ -122,6 +122,7 @@ export default class FoundItemView extends Component {
     const containerStyle = { height: "200px" };
     const item = this.state.item && this.state.item;
     const user = this.props.user;
+    console.log(this.state.item);
     console.log("USER ", user, "ITEM ", item);
     return (
       (item && (
@@ -153,7 +154,9 @@ export default class FoundItemView extends Component {
                 <Card.Text className="mt-3" style={{ fontSize: "1.25rem" }}>
                   {item.description}
                 </Card.Text>
-                <Map item={item.location} />
+                <div style={{ height: "350px" }}>
+                  <Map item={item.location} />
+                </div>
                 {user && item && item.user._id === user._id ? (
                   <div>
                     <Link
