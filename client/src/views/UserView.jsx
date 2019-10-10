@@ -229,9 +229,6 @@ export default class UserView extends Component {
                     <h5>Edit Profile</h5>
                   </Button>
                 </Link>
-                <p>◯</p>
-                <p>◯</p>
-                <p>◯</p>
               </ProfileWrapper>
             </ViewWrapper>
             <ViewWrapper>
