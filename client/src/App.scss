@@ -35,17 +35,17 @@
 
 body {
   color: #fff;
-  height: 250vh;
+  height: 100vh;
   color: white;
   background: linear-gradient(
     45deg,
-    #1fffbc,
-    #a219fd,
-    #1d99ff,
-    #a219fd,
-    #1fffbc
+    #1eff00,
+    #5bf7a9,
+    #a2f1fc,
+    #c272f8,
+    #5eeedb
   );
-  background-size: 400% 400%;
+  background-size: 500% 500%;
   position: relative;
   animation-name: delta;
   animation-duration: 35s;
@@ -58,8 +58,122 @@ body {
 }
 
 .title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: hsla(202, 73%, 18%, 0.589);
+  text-shadow: 1px 1px 4px #f9fdfc;
+  transition: all 0.6s ease;
+  -webkit-transition: all 0.6s ease;
+
+  &:hover {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    transition: all 0.8s ease;
+    -webkit-transition: all 0.8s ease;
+  }
+}
+
+.welcomebutton {
+  text-decoration: none;
+  color: #ffffffea;
+  text-shadow: 1px 1px 4px #2b3d3a;
+  padding: 0.3em;
+  font-weight: 200;
   font-size: 25px;
+  margin-right: 20px;
+  transition: all 0.6s ease;
+  -webkit-transition: all 0.6s ease;
+
+  &:hover {
+    text-decoration: none;
+    color: rgb(0, 25, 54);
+    transition: all 0.6s ease;
+    -webkit-transition: all 0.6s ease;
+    text-shadow: 1px 1px 4px #fbfffe;
+  }
+}
+
+.auth {
+  h5 {
+    color: #ffffffea;
+    text-shadow: 1px 1px 4px #021f19;
+    font-weight: 200;
+    font-size: 23px;
+    transition: all 0.6s ease;
+    -webkit-transition: all 0.6s ease;
+
+    &:hover {
+      text-decoration: none;
+      color: rgb(0, 25, 54);
+      transition: all 0.6s ease;
+      -webkit-transition: all 0.6s ease;
+      text-shadow: 1px 1px 4px #fbfffe;
+      text-shadow: 1px 1px 4px #ff4f42;
+    }
+  }
+}
+
+.addbutton {
+  border: 0.5px solid #ffffffb0;
+  border-radius: 3px;
+  display: flex;
+  justify-self: center;
+  font-size: 20px;
+  margin: 0.5em;
+  background: none;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+
+  height: 1.7em;
+  &:hover {
+    background: hsla(0, 0%, 98%, 0.514);
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    color: black;
+  }
+
+  .addlink {
+    text-decoration: none;
+    color: #ffffff;
+    text-shadow: 1px 1px 9px #2c0401;
+    transition: all 0.6s ease;
+    font-weight: 200;
+    -webkit-transition: all 0.6s ease;
+    &:hover {
+      transition: all 0.6s ease;
+      -webkit-transition: all 0.6s ease;
+      color: rgb(0, 0, 0);
+    }
+  }
+}
+
+.logoutbutton {
+  border: none;
+  border-radius: 3px;
+  display: flex;
+  justify-self: center;
+  font-size: 15px;
+  margin: 0.5em;
+  background: none;
   font-weight: 600;
-  letter-spacing: 0.15em;
-  color: hsla(0, 0%, 0%, 0.473);
+
+  color: #3a050567;
+  height: 1.7em;
+  &:hover {
+    color: hsl(0, 0%, 2%);
+    transition: all 0.6s ease;
+    -webkit-transition: all 0.6s ease;
+    color: black;
+    text-shadow: 1px 1px 4px #fbfffe;
+  }
+}
+
+.searchbar {
+  border: 3px solid white;
+  background: rgba(255, 255, 255, 0.445);
+  border-radius: 3px;
+  width: 60vw;
+  margin: 1em;
+  padding: 0.4em;
 }

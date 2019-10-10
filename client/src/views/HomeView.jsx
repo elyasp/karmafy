@@ -13,10 +13,12 @@ const PageWrapper = styled.div`
 
   h1 {
     font-size: 60px;
+    text-shadow: 1px 1px 10px #2d423f;
     font-weight: 200;
   }
   h4 {
     font-size: 15px;
+    text-shadow: 1px 1px 10px #2d423f;
   }
 `;
 
@@ -28,7 +30,9 @@ export default class HomeView extends Component {
       <div>
         <PageWrapper>
           <h1>Lost or Found something?</h1>
-          <h4>Return it or find it back in Karmafy's exchange</h4>
+          <h4>
+            Unite or find it back on Karmafy's exchange of lost belongings
+          </h4>
         </PageWrapper>
         <ItemCard />
       </div>

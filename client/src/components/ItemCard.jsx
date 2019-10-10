@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { list } from "./../services/itemApi";
 import { Link } from "react-router-dom";
-import { Card, Col, Row, Container, Carousel, Button } from "react-bootstrap";
+import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
 import styled from "styled-components";
 import { loadByType } from "../services/itemApi";
 
@@ -23,6 +23,34 @@ const CardWrapper = styled.div`
 
   .cardsubtitle {
     font-size: 15px;
+    color: black;
+  }
+`;
+
+const Center = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh;
+`;
+
+const Button = styled.div`
+  border: 0.5px solid #ffffffb0;
+  border-radius: 3px;
+  display: flex;
+  justify-self: center;
+  font-size: 20px;
+  margin: 0.5em;
+  background: none;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+
+  height: 1.7em;
+  &:hover {
+    background: hsla(0, 0%, 98%, 0.514);
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
     color: black;
   }
 `;
@@ -128,60 +156,73 @@ export default class ItemCard extends Component {
 
   render() {
     return (
-      <Container>
-        <Button name="Lost" onClick={this.lost} value="Lost">
-          Lost Items
-        </Button>
-        <Button name="Found" onClick={this.found} value="Found">
-          Found Items
-        </Button>
-        <Button name="All" onClick={this.all} value="All">
-          All
-        </Button>
-        <input onChange={this.searchFilter} type="text"></input>
-        <Row>
-          {this.filteredSearchList.map(item => (
-            <Col md={4}>
-              <Link
-                to={`/item/${item._id}`}
-                key={item._id}
-                style={{ textDecoration: "none" }}
-              >
-                <CardWrapper>
-                  <Card
-                    className="text-center carditem"
-                    style={{ width: "100%" }}
-                  >
-                    <Carousel className="mx-auto" style={{ width: "100%" }}>
-                      {item.imageUrl.map(item => (
-                        <Carousel.Item>
-                          <img
-                            className="d-block w-100"
-                            src={item.image
-                              .split("upload/")
-                              .join("upload/h_350,w_500,c_scale/")}
-                            alt="First slide"
-                          />
-                        </Carousel.Item>
-                      ))}
-                    </Carousel>
+      <Fragment>
+        <Center>
+          <div>
+            <input
+              onChange={this.searchFilter}
+              type="text"
+              className="searchbar"
+              placeholder="type to search"
+            ></input>
+          </div>
+          <div>
+            <Button name="Lost" onClick={this.lost} value="Lost">
+              Lost Items
+            </Button>
+            <Button name="Found" onClick={this.found} value="Found">
+              Found Items
+            </Button>
+            <Button name="All" onClick={this.all} value="All">
+              All
+            </Button>
+          </div>
+        </Center>
+        <Container>
+          <Row>
+            {this.filteredSearchList.map(item => (
+              <Col md={4}>
+                <Link
+                  to={`/item/${item._id}`}
+                  key={item._id}
+                  style={{ textDecoration: "none" }}
+                >
+                  <CardWrapper>
+                    <Card
+                      className="text-center carditem"
+                      style={{ width: "100%" }}
+                    >
+                      <Carousel className="mx-auto" style={{ width: "100%" }}>
+                        {item.imageUrl.map(item => (
+                          <Carousel.Item>
+                            <img
+                              className="d-block w-100"
+                              src={item.image
+                                .split("upload/")
+                                .join("upload/h_350,w_500,c_scale/")}
+                              alt="First slide"
+                            />
+                          </Carousel.Item>
+                        ))}
+                      </Carousel>
 
-                    <Card.Body className="px-0">
-                      <Card.Title className="mt-1 cardtitle">
-                        {item.title}
-                      </Card.Title>
-                      <Card.Subtitle className="mt-2 cardsubtitle">
-                        Posted By: {item.postedBy}
-                      </Card.Subtitle>
-                      <h3>{item.itemStatus}</h3>
-                    </Card.Body>
-                  </Card>
-                </CardWrapper>
-              </Link>
-            </Col>
-          ))}
-        </Row>
-      </Container>
+                      <Card.Body className="px-0">
+                        <Card.Title className="mt-1 cardtitle">
+                          {item.title}
+                        </Card.Title>
+                        <Card.Subtitle className="mt-2 cardsubtitle">
+                          Posted By: {item.postedBy}
+                        </Card.Subtitle>
+                        <h3>{item.itemStatus}</h3>
+                      </Card.Body>
+                    </Card>
+                  </CardWrapper>
+                </Link>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </Fragment>
     );
   }
 }
