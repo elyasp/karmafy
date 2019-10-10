@@ -8,12 +8,23 @@ import HomeMap from "./HomeMap";
 ///////////////// STYLE /////////////////////////
 
 const CardWrapper = styled.div`
+  margin-bottom: 2em;
+
   .carditem {
-    border-radius: 20px;
+    min-height: 20em;
     border: none;
-    background: hsla(0, 96%, 52%, 0.4);
-    height: 400px;
-    margin: 10px;
+    background: hsl(0, 0%, 100%);
+    transition: 0.4s;
+    cursor: pointer;
+    box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
+      10px 10px 30px 15px rgba(0, 0, 0, 0.22);
+
+    &:hover {
+      transform: scale(1.1, 1.1);
+      transition: 0.4s;
+      box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
+        10px 10px 30px 15px rgba(0, 0, 0, 0.22);
+    }
   }
 
   .cardtitle {
@@ -61,6 +72,30 @@ const Button = styled.div`
     transition: all 0.4s ease;
     -webkit-transition: all 0.4s ease;
     color: black;
+  }
+`;
+
+const FoundCardHeader = styled.div`
+  background: black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  h4 {
+    margin-top: 0.2em;
+    color: #5bf7a9;
+    font-family: "Courier New", Courier, monospace;
+    letter-spacing: 0.3em;
+  }
+`;
+
+const LostCardHeader = styled.div`
+  background: black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  h4 {
+    margin-top: 0.2em;
+    color: #ff3c00;
+    font-family: "Courier New", Courier, monospace;
+    letter-spacing: 0.3em;
   }
 `;
 
@@ -193,14 +228,17 @@ export default class ItemCard extends Component {
           <div style={{ height: "500px" }}>
             <HomeMap items={this.filteredSearchList} />
           </div>
-          <div>
-            <input
-              onChange={this.searchFilter}
-              type="text"
-              className="searchbar"
-              placeholder="type to search"
-            ></input>
-          </div>
+          <Center>
+            <div>
+              <input
+                onChange={this.searchFilter}
+                type="text"
+                className="searchbar"
+                placeholder="type to search"
+              ></input>
+            </div>
+          </Center>
+
           <Row>
             {this.filteredSearchList.map(item => (
               <Col md={4}>
@@ -214,9 +252,19 @@ export default class ItemCard extends Component {
                       className="text-center carditem"
                       style={{ width: "100%" }}
                     >
+                      {item.itemStatus === "Found" ? (
+                        <FoundCardHeader>
+                          <h4>FOUND</h4>
+                        </FoundCardHeader>
+                      ) : (
+                        <LostCardHeader>
+                          <h4>LOST</h4>
+                        </LostCardHeader>
+                      )}
+
                       <Carousel className="mx-auto" style={{ width: "100%" }}>
                         {item.imageUrl.map(item => (
-                          <Carousel.Item>
+                          <Carousel.Item className="carouselimage">
                             <img
                               className="d-block w-100"
                               src={item.image
@@ -234,7 +282,6 @@ export default class ItemCard extends Component {
                         <Card.Subtitle className="mt-2 cardsubtitle">
                           {/* Posted By: {user.name} */}
                         </Card.Subtitle>
-                        <h3>{item.itemStatus}</h3>
                       </Card.Body>
                     </Card>
                   </CardWrapper>
