@@ -35,10 +35,11 @@ export class MapContainer extends Component {
 
   displayMarkers = () => {
     return this.state.locations.map((place, index) => {
-      let markerImg = "OrgMarker";
+      let markerImg = OrgMarker;
       if (place.itemStatus === "Found") {
         markerImg = GreenMarker;
       }
+      const dfe = { color: "blue" };
       return (
         <Marker
           key={place._id}
@@ -48,6 +49,7 @@ export class MapContainer extends Component {
             lng: place.location.lng
           }}
           label={place.title}
+          labelStyle={dfe}
           icon={{
             url: markerImg
           }}

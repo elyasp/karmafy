@@ -13,6 +13,7 @@ require("dotenv").config();
 
 router.get("/all", (req, res, next) => {
   Item.find({ resolved: false })
+    .populate("user")
     .then(items => {
       res.json({ type: "success", data: { items } });
     })

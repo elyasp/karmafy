@@ -105,7 +105,8 @@ export default class ItemCard extends Component {
     this.state = {
       items: [],
       searchTerm: "",
-      lostButton: ""
+      lostButton: "",
+      foundButton: ""
     };
     this.all = this.all.bind(this);
     this.lost = this.lost.bind(this);
@@ -122,20 +123,22 @@ export default class ItemCard extends Component {
     } else {
       this.setState({
         lostButton: "clicked",
+        foundButton: "",
         searchTerm: "Lost"
       });
     }
   }
 
   found() {
-    if (this.state.lostButton === "clicked") {
+    if (this.state.foundButton === "clicked") {
       this.setState({
-        lostButton: "",
+        foundButton: "",
         searchTerm: ""
       });
     } else {
       this.setState({
-        lostButton: "clicked",
+        foundButton: "clicked",
+        lostButton: "",
         searchTerm: "Found"
       });
     }
@@ -160,7 +163,7 @@ export default class ItemCard extends Component {
     const item = this.state.items;
     if (
       this.state.lostButton === "clicked" ||
-      this.state.founcButton === "clicked"
+      this.state.foundButton === "clicked"
     ) {
       return item.filter(item => item.itemStatus === query);
     } else {
@@ -169,25 +172,6 @@ export default class ItemCard extends Component {
       );
     }
   }
-
-  // get filteredSearchList() {
-  //   const query = this.state.searchTerm;
-  //   const item = this.state.items;
-  //   if (
-  //     this.state.lostButton === "clicked" ||
-  //     this.state.foundButton === "clicked"
-  //   ) {
-  //     this.setState({
-  //       filteredItems: item.filter(item => item.itemStatus === query)
-  //     });
-  //   } else {
-  //     this.setState({
-  //       filteredItems: item.filter(item =>
-  //         item.title.toLowerCase().includes(query.toLowerCase())
-  //       )
-  //     });
-  //   }
-  // }
 
   componentDidMount() {
     list()
@@ -278,7 +262,7 @@ export default class ItemCard extends Component {
                           {item.title}
                         </Card.Title>
                         <Card.Subtitle className="mt-2 cardsubtitle">
-                          {/* Posted By: {user.name} */}
+                          Posted By: {item.user.name}
                         </Card.Subtitle>
                       </Card.Body>
                     </Card>
