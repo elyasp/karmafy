@@ -33,9 +33,11 @@ const Button = styled.button`
   }
 `;
 
-const Positioner = styled.div`
-  margin-top: 30vh;
-`;
+// const Positioner = styled.div`
+//   margin-top: 30vh;
+// `;
+
+const Positioner = styled.div``;
 
 /////////////////////// END OF STYLE ////////////////////
 
@@ -119,29 +121,6 @@ export default class ItemAddView extends Component {
   render() {
     const isEnabled = this.state.item.imageUploaded === "loading";
     return (
-<<<<<<< HEAD
-      <div class="container">
-        <h1 className="text-center">Add an item to the exchange</h1>
-        <div class="container mx-auto">
-          <div class="row justify-content-center">
-            <Button onClick={this.addLost} class="col-6" variant="light">
-              Lost
-            </Button>
-            <Button onClick={this.addFound} class="col-6" variant="light">
-              Found
-            </Button>
-||||||| merged common ancestors
-      <div class="container">
-        <h1 className="text-center ">Add an item to the exchange</h1>
-        <div class="container mx-auto ">
-          <div class="row justify-content-center">
-            <Button onClick={this.addLost} class="col-6 my-3" variant="light">
-              Lost
-            </Button>
-            <Button onClick={this.addFound} class="col-6" variant="light">
-              Found
-            </Button>
-=======
       <Positioner>
         <div class="container">
           <h1 className="text-center ">Add an item to the exchange</h1>
@@ -154,7 +133,6 @@ export default class ItemAddView extends Component {
                 Found
               </Button>
             </div>
->>>>>>> 8d9a4e524a241a483fefe861a284a8ca05bd444c
           </div>
 
           {this.state.item.itemStatus === "Lost" && (

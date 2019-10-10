@@ -110,76 +110,9 @@ export default class ItemFormView extends Component {
       display: "block",
       position: "static"
     };
-<<<<<<< HEAD
-    const containerStyle = { height: "400px", position: "static" };
-||||||| merged common ancestors
-    const containerStyle = { height: "400px" };
-=======
     const containerStyle = { height: "400px", width: "85%" };
->>>>>>> 8d9a4e524a241a483fefe861a284a8ca05bd444c
     return (
       <Form onSubmit={this.onFormSubmit}>
-<<<<<<< HEAD
-        <h3>Lost Item</h3>
-        <h5>
-          Lost something? Poor you! Describe it below and redeem your karma
-          points.
-        </h5>
-
-        <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>What did you lose?</Form.Label>
-          <Form.Control
-            type="text"
-            name="title"
-            placeholder="e.g. Green Cotton Wallet near Central Park"
-            size="lg"
-            value={this.props.value.title}
-            onChange={this.onValueChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows="4"
-            name="description"
-            placeholder="Add as much detail as you can"
-            size="lg"
-            value={this.props.value.description}
-            onChange={this.onValueChange}
-          />
-        </Form.Group>
-||||||| merged common ancestors
-        <h1>Lost Item</h1>
-        <h4>
-          Lost something? Poor you! Describe it below and redeem your karma
-          points.
-        </h4>
-
-        <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>What did you lose?</Form.Label>
-          <Form.Control
-            type="text"
-            name="title"
-            placeholder="e.g. Green Cotton Wallet near Central Park"
-            size="lg"
-            value={this.props.value.title}
-            onChange={this.onValueChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows="4"
-            name="description"
-            placeholder="Add as much detail as you can"
-            size="lg"
-            value={this.props.value.description}
-            onChange={this.onValueChange}
-          />
-        </Form.Group>
-=======
         <TextStyler>
           <br />
           <h3>Describe your item below</h3>
@@ -211,7 +144,6 @@ export default class ItemFormView extends Component {
               onChange={this.onValueChange}
             />
           </Form.Group>
->>>>>>> 8d9a4e524a241a483fefe861a284a8ca05bd444c
 
           <Form.Group style={{ height: "400px" }}>
             <Form.Label>
@@ -227,13 +159,13 @@ export default class ItemFormView extends Component {
             />
           </Form.Group>
 
-          <Form.Group controlId="exampleForm.ControlInput1">
+          <Form.Group className="mt-4 h5" controlId="exampleForm.ControlInput1">
             <Dropzone onDrop={this.handleUploadImages}>
               {({ getRootProps, getInputProps }) => (
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
                   <strong>
-                    <h4>Click me to upload a picture</h4>
+                    <h4>Click me to upload pictures</h4>
                   </strong>
                 </div>
               )}
