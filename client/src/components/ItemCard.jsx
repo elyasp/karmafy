@@ -112,6 +112,7 @@ export default class ItemCard extends Component {
   componentDidMount() {
     list()
       .then(items => {
+        console.log(items);
         this.setState({
           items
         });
@@ -166,7 +167,7 @@ export default class ItemCard extends Component {
                         {item.title}
                       </Card.Title>
                       <Card.Subtitle className="mt-2 cardsubtitle">
-                        Posted By: {item.postedBy}
+                        {/* Posted By: {user.name} */}
                       </Card.Subtitle>
                       <h3>{item.itemStatus}</h3>
                     </Card.Body>

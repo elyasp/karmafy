@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   if (req.session && req.session.user) {
     const id = req.session.user._id;
     User.findById(id)
-      .select("_id name email profile location")
+      .select("_id name email profile location karmaCount")
       .then(user => {
         req.user = user;
         next();

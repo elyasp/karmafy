@@ -2,10 +2,17 @@
 
 const bcrypt = require("bcryptjs");
 
-module.exports = function({ name, email, password, profile, location }) {
+module.exports = function({
+  name,
+  email,
+  password,
+  profile,
+  location,
+  karmaCount
+}) {
   const Model = this;
 
-  //   console.log("THE USER IS", name, email, password, profile, location);
+  //   console.log("THE USER IS", name, email, password, profile, location, karmaCount);
   return Model.findOne({ email })
     .then(user => {
       if (user) {
@@ -20,7 +27,8 @@ module.exports = function({ name, email, password, profile, location }) {
         email,
         password: hash,
         profile,
-        location
+        location,
+        karmaCount
       });
     })
     .then(user => {
