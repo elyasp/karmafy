@@ -45,7 +45,8 @@ export default class RegisterView extends Component {
       email: "",
       password: "",
       profile: "",
-      location: ""
+      location: "",
+      karmaCount: 0
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -56,7 +57,8 @@ export default class RegisterView extends Component {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
-      [name]: value
+      [name]: value,
+      imageUploaded: ""
     });
   }
 
@@ -66,13 +68,14 @@ export default class RegisterView extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    const { name, email, password, profile, location } = this.state;
+    const { name, email, password, profile, location, karmaCount } = this.state;
     AuthenticationServices.registerService({
       name,
       email,
       password,
       profile,
-      location
+      location,
+      karmaCount
     })
       .then(user => {
         this.props.loadUser(user);
@@ -84,12 +87,16 @@ export default class RegisterView extends Component {
   }
 
   handleFileUpload = e => {
+    this.setState({
+      imageUploaded: "loading"
+    });
     const uploadData = new FormData();
     uploadData.append("imageUrl", e.target.files[0]);
     uploadImage(uploadData)
       .then(response => {
         this.setState({
-          profile: response.data.secure_url
+          profile: response.data.secure_url,
+          imageUploaded: "done"
         });
       })
       .catch(err => {
@@ -139,6 +146,7 @@ export default class RegisterView extends Component {
   }
 
   render() {
+    const isEnabled = this.state.imageUploaded === "loading";
     return (
       <div>
         <Positioner>
@@ -212,7 +220,7 @@ export default class RegisterView extends Component {
               />
             </Form.Group>
 
-            <Button type="submit" id="regbutton">
+            <Button disabled={isEnabled} type="submit" id="regbutton">
               REGISTER
             </Button>
           </Form>

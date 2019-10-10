@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Dropzone from "react-dropzone";
 import axios from "axios";
-import Map from "./Map";
+import Map from "./FormMap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -12,7 +12,8 @@ export default class ItemFormView extends Component {
     super(props);
     this.state = {
       files: [],
-      location: {}
+      location: {},
+      imageUploaded: ""
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.onButtonValueChange = this.onButtonValueChange.bind(this);
@@ -49,23 +50,13 @@ export default class ItemFormView extends Component {
     this.props.onFormSubmit();
   }
 
-  // handleFileUpload = e => {
-  //   const uploadData = new FormData();
-  //   uploadData.append("imageUrl", e.target.files[0]);
-  //   uploadImage(uploadData)
-  //     .then(response => {
-  //       const name = "imageUrl";
-  //       const value = response.data.secure_url;
-  //       this.props.onValueChange({
-  //         [name]: value
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log("Error while uploading the file: ", err);
-  //     });
-  // };
-
   handleUploadImages = images => {
+    const name = "imageUploaded";
+    const value = "loading";
+    this.props.onValueChange({
+      [name]: value
+    });
+
     const final = [];
     // uploads is an array that would hold all the post methods for each image to be uploaded, then we'd use axios.all()
     const uploads = images.map(image => {
@@ -86,7 +77,6 @@ export default class ItemFormView extends Component {
         )
         .then(response => {
           final.push({ image: response.data.url });
-          console.log("this", response.data.url);
           const name = "imageUrl";
           const value = final;
           this.props.onValueChange({
@@ -97,14 +87,25 @@ export default class ItemFormView extends Component {
 
     // We would use axios `.all()` method to perform concurrent image upload to cloudinary.
     axios.all(uploads).then(() => {
-      // ... do anything after successful upload. You can setState() or save the data
-      console.log("Images have all being uploaded", uploads);
+      const name = "imageUploaded";
+      const value = "done";
+      this.props.onValueChange({
+        [name]: value
+      });
 
-      console.log(final);
+      console.log("Images have all being uploaded", uploads);
     });
   };
 
   render() {
+    console.log(this.state.imageUploaded);
+    const mapStyles = {
+      width: "50%",
+      height: "300px",
+      display: "block",
+      position: "static"
+    };
+    const containerStyle = { height: "400px" };
     return (
       <Form onSubmit={this.onFormSubmit}>
         <h1>Lost Item</h1>
@@ -137,22 +138,16 @@ export default class ItemFormView extends Component {
           />
         </Form.Group>
 
-        {/* <Form.Group controlId="exampleForm.ControlInput1">
+        <Form.Group style={{ height: "400px" }}>
           <Form.Label>
-            Upload An Image Optional, but it would help a possible finder
+            Click to add a marker near where you think you lost the item.
           </Form.Label>
-          <Form.Control
-            as="input"
-            type="file"
-            name="imageUrl"
-            size="lg"
-            className="btn-lg pl-0"
-            onChange={e => this.handleFileUpload(e)}
+          <Map
+            style={mapStyles}
+            updateCoord={this.mapCoord}
+            value={this.state.item}
+            containerStyle={containerStyle}
           />
-        </Form.Group> */}
-
-        <Form.Group style={{ height: "300px" }}>
-          <Map updateCoord={this.mapCoord} value={this.state.item} />
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput1">

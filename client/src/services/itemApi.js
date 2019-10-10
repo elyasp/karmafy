@@ -70,12 +70,12 @@ export const edit = (id, updatedItem) => {
   });
 };
 
-export const remove = id => {
+export const remove = data => {
   return new Promise((resolve, reject) => {
     itemApi
-      .delete(`/item/${id}`)
-      .then(() => {
-        resolve();
+      .post(`/item/${data.itemId}`, data)
+      .then(response => {
+        resolve(response.data);
       })
       .catch(error => {
         reject(error);
