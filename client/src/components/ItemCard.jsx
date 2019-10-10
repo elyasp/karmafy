@@ -5,7 +5,14 @@ import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
 import styled from "styled-components";
 import { loadByType } from "../services/itemApi";
 import HomeMap from "./HomeMap";
-///////////////// STYLE /////////////////////////
+//////////////////////////////////////// STYLE //////////////////////////////////////
+
+const Map = styled.div`
+  height: 500px;
+  max-width: 90vh;
+  margin-left: 8%;
+`;
+
 const Center = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,8 +52,11 @@ const CardWrapper = styled.div`
   }
 
   .cardsubtitle {
-    font-size: 15px;
-    color: black;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 14px;
+    color: rgba(3, 0, 0, 0.808);
+    margin-left: 1em;
   }
 `;
 
@@ -55,12 +65,11 @@ const Button = styled.div`
   border-radius: 2px;
   display: flex;
   justify-self: center;
-  font-size: 20px;
-  margin: 0.2em;
+  font-size: 16px;
+  margin: 1em;
   color: black;
-  padding-right: 2em;
-  padding-left: 2em;
-  padding-bottom: 1em;
+  padding-right: 3em;
+  padding-left: 3em;
 
   background: white;
   transition: all 0.4s ease;
@@ -111,7 +120,7 @@ export default class ItemCard extends Component {
       lostButton: "",
       foundButton: ""
     };
-    this.all = this.all.bind(this);
+
     this.lost = this.lost.bind(this);
     this.found = this.found.bind(this);
     this.searchFilter = this.searchFilter.bind(this);
@@ -145,14 +154,6 @@ export default class ItemCard extends Component {
         searchTerm: "Found"
       });
     }
-  }
-
-  all() {
-    this.setState({
-      lostButton: "",
-      foundButton: "",
-      searchTerm: ""
-    });
   }
 
   searchFilter(event) {
@@ -199,26 +200,24 @@ export default class ItemCard extends Component {
           <Center>
             <div className="searchfilter">
               <Button name="Lost" onClick={this.lost} value="Lost">
-                Lost Items
+                Lost
               </Button>
               <Button name="Found" onClick={this.found} value="Found">
-                Found Items
-              </Button>
-              <Button name="All" onClick={this.all} value="All">
-                All
+                Found
               </Button>
             </div>
           </Center>
-          <div style={{ height: "500px" }}>
+
+          <Map>
             <HomeMap items={this.filteredSearchList} />
-          </div>
+          </Map>
           <Center>
             <div>
               <input
                 onChange={this.searchFilter}
                 type="text"
                 className="searchbar"
-                placeholder="type to search"
+                placeholder="type to search map and items"
               ></input>
             </div>
           </Center>
@@ -239,11 +238,11 @@ export default class ItemCard extends Component {
                     >
                       {item.itemStatus === "Found" ? (
                         <FoundCardHeader>
-                          <h4>FOUND</h4>
+                          <h4>᛫ ᛫ ᛫ FOUND ᛫ ᛫ ᛫</h4>
                         </FoundCardHeader>
                       ) : (
                         <LostCardHeader>
-                          <h4>LOST</h4>
+                          <h4>᛫ ᛫ ᛫ LOST ᛫ ᛫ ᛫</h4>
                         </LostCardHeader>
                       )}
 
@@ -260,13 +259,13 @@ export default class ItemCard extends Component {
                           </Carousel.Item>
                         ))}
                       </Carousel>
+                      <Card.Subtitle className="mt-2 cardsubtitle">
+                        {item.user.name}
+                      </Card.Subtitle>
                       <Card.Body className="px-0">
                         <Card.Title className="mt-1 cardtitle">
                           {item.title}
                         </Card.Title>
-                        <Card.Subtitle className="mt-2 cardsubtitle">
-                          Posted By: {item.user.name}
-                        </Card.Subtitle>
                       </Card.Body>
                     </Card>
                   </CardWrapper>
