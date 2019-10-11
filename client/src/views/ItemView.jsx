@@ -144,9 +144,22 @@ export default class FoundItemView extends Component {
   deleteItem(event) {
     event.preventDefault();
     const id = this.props.match.params.id;
-    remove(id)
+
+    let karmaNum = this.props.user.karmaCount;
+
+    if (this.state.item.itemStatus === "Found") {
+      karmaNum += 1;
+    }
+    console.log("2t num", karmaNum);
+    let data = {
+      itemId: id,
+      userId: this.props.user._id,
+      karmaNum: karmaNum
+    };
+
+    remove(data)
       .then(item => {
-        this.props.history.push(`/`);
+        this.loadItem();
       })
       .catch(error => {
         console.log(error);
@@ -227,7 +240,29 @@ export default class FoundItemView extends Component {
                   <div className="container">
                     <Row>
                       <Col m={6}>
-                        <Button className="h-100">
+                        {item.resolved ? (
+                          <h3>Item Reunited!</h3>
+                        ) : (
+                          <div className="d-flex">
+                            <Link
+                              to={`/item/${item._id}/edit`}
+                              className="mx-3 editlink"
+                            >
+                              <Button className="editbutton">Edit Item</Button>
+                            </Link>
+
+                            <Button
+                              className="markbutton"
+                              type="submit"
+                              value={item._id}
+                              name={item._id}
+                              onClick={this.deleteItem}
+                            >
+                              Mark As Resolved
+                            </Button>
+                          </div>
+                        )}
+                        {/* <Button className="h-100">
                           <Link
                             to={`/item/${item._id}/edit`}
                             className="w-100 text-body"
@@ -239,7 +274,7 @@ export default class FoundItemView extends Component {
                       <Col m={6}>
                         <Button className="" onClick={this.deleteItem}>
                           Mark As Resolved
-                        </Button>
+                        </Button> */}
                       </Col>
                     </Row>
                   </div>

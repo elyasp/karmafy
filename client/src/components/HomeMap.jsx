@@ -12,6 +12,10 @@ import styled from "styled-components";
 import styles from "../images/GoogleMapStyles.json";
 require("dotenv").config();
 
+// const {
+//   MarkerWithLabel
+// } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
+
 const Sizer = styled.div`
   display: flex;
   height: 500px;
@@ -49,40 +53,38 @@ export class MapContainer extends Component {
       const labelSize = { width: 220 };
       const labelPadding = 8;
       return (
-        // <Marker
-        //   key={place._id}
-        //   id={place}
-        //   position={{
-        //     lat: place.location.lat,
-        //     lng: place.location.lng
-        //   }}
-        //   label={place.title}
-
-        //   icon={{
-        //     url: markerImg
-        //   }}
-        //   onClick={this.zoom}
-
-        // />
-        <MarkerWithLabel
-          labelStyle={{
-            textAlign: "center",
-            width: labelSize.width + "px",
-            backgroundColor: "#7fffd4",
-            fontSize: "14px",
-            padding: labelPadding + "px"
-          }}
+        <Marker
+          key={place._id}
           id={place}
-          labelAnchor={{ x: labelSize.width / 2 + labelPadding, y: 80 }}
-          key={place.title}
-          position={{ lat: place.location.lat, lng: place.location.lng }}
+          position={{
+            lat: place.location.lat,
+            lng: place.location.lng
+          }}
+          label={place.title}
           icon={{
             url: markerImg
           }}
           onClick={this.zoom}
-        >
-          <span>{place.name}</span>
-        </MarkerWithLabel>
+        />
+        // <MarkerWithLabel
+        //   labelStyle={{
+        //     textAlign: "center",
+        //     width: labelSize.width + "px",
+        //     backgroundColor: "#7fffd4",
+        //     fontSize: "14px",
+        //     padding: labelPadding + "px"
+        //   }}
+        //   id={place}
+        //   labelAnchor={{ x: labelSize.width / 2 + labelPadding, y: 80 }}
+        //   key={place.title}
+        //   position={{ lat: place.location.lat, lng: place.location.lng }}
+        //   icon={{
+        //     url: markerImg
+        //   }}
+        //   onClick={this.zoom}
+        // >
+        //   <span>{place.name}</span>
+        // </MarkerWithLabel>
       );
     });
   };
