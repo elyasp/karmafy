@@ -41,6 +41,10 @@ const ProfileWrapper = styled.div`
   span {
     letter-spacing: 0.4em;
   }
+
+  .editlink {
+    text-decoration: none;
+  }
 `;
 
 const CardWrapper = styled.div`

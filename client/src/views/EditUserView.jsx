@@ -14,7 +14,7 @@ const ViewWrapper = styled.div`
   width: 100%;
   height: 100vh;
   padding: 5px;
-  background: hsla(254, 100%, 42%, 0.8);
+  background: hsla(254, 100%, 42%, 0.2);
 `;
 
 const ProfileWrapper = styled.div`
@@ -27,11 +27,10 @@ const Button = styled.button`
   margin: 10px;
   color: white;
   border-radius: 5px;
-  border: 2px solid white;
+  border: none;
   background: none;
   &:hover {
     color: black;
-    background: hsla(248, 100%, 50%, 0.659);
   }
 `;
 
