@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
+import {
+  Map,
+  GoogleApiWrapper,
+  InfoWindow,
+  Marker,
+  MarkerWithLabel
+} from "google-maps-react";
 import OrgMarker from "../images/marker.png";
 import GreenMarker from "../images/greenMarker.png";
 import styled from "styled-components";
@@ -25,14 +31,6 @@ export class MapContainer extends Component {
   zoom = event => {
     window.location = "#" + event.id._id;
   };
-  onClose = props => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      });
-    }
-  };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.items !== prevProps.items) {
@@ -48,23 +46,43 @@ export class MapContainer extends Component {
       if (place.itemStatus === "Found") {
         markerImg = GreenMarker;
       }
-      const dfe = { color: "blue" };
+      const labelSize = { width: 220 };
+      const labelPadding = 8;
       return (
-        <Marker
-          key={place._id}
-          id={place}
-          position={{
-            lat: place.location.lat,
-            lng: place.location.lng
+        // <Marker
+        //   key={place._id}
+        //   id={place}
+        //   position={{
+        //     lat: place.location.lat,
+        //     lng: place.location.lng
+        //   }}
+        //   label={place.title}
+
+        //   icon={{
+        //     url: markerImg
+        //   }}
+        //   onClick={this.zoom}
+
+        // />
+        <MarkerWithLabel
+          labelStyle={{
+            textAlign: "center",
+            width: labelSize.width + "px",
+            backgroundColor: "#7fffd4",
+            fontSize: "14px",
+            padding: labelPadding + "px"
           }}
-          label={place.title}
-          labelStyle={dfe}
+          id={place}
+          labelAnchor={{ x: labelSize.width / 2 + labelPadding, y: 80 }}
+          key={place.title}
+          position={{ lat: place.location.lat, lng: place.location.lng }}
           icon={{
             url: markerImg
           }}
           onClick={this.zoom}
-          style={{ backgroundColor: "blue", cursor: "pointer" }}
-        />
+        >
+          <span>{place.name}</span>
+        </MarkerWithLabel>
       );
     });
   };
