@@ -157,9 +157,12 @@ router.get("/byUser/:id", (req, res, next) => {
 
 router.post("/item/:id", (req, res, next) => {
   const id = req.params.id;
-
-  Item.findOneAndUpdate({ _id: id }, { resolved: true })
-
+  const userId = req.body.userId;
+  const karma = req.body.karmaNum;
+  Promise.all([
+    User.findOneAndUpdate({ _id: userId }, { karmaCount: karma }),
+    Item.findOneAndUpdate({ _id: id }, { resolved: true })
+  ])
     .then(item => {
       if (item) {
         res.json({ type: "success", data: { item } });

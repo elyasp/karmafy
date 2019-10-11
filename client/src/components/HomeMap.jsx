@@ -1,10 +1,20 @@
 import React, { Component } from "react";
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
-import OrgMarker from "../images/marker.png";
-import GreenMarker from "../images/greenMarker.png";
+import {
+  Map,
+  GoogleApiWrapper,
+  InfoWindow,
+  Marker,
+  MarkerWithLabel
+} from "google-maps-react";
+import OrgMarker from "../images/marker.svg";
+import GreenMarker from "../images/greenMarker.svg";
 import styled from "styled-components";
 import styles from "../images/GoogleMapStyles.json";
 require("dotenv").config();
+
+// const {
+//   MarkerWithLabel
+// } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
 
 const Sizer = styled.div`
   display: flex;
@@ -25,14 +35,6 @@ export class MapContainer extends Component {
   zoom = event => {
     window.location = "#" + event.id._id;
   };
-  onClose = props => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      });
-    }
-  };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.items !== prevProps.items) {
@@ -48,22 +50,31 @@ export class MapContainer extends Component {
       if (place.itemStatus === "Found") {
         markerImg = GreenMarker;
       }
-      const dfe = { color: "blue" };
+      const markerStyles = {
+        textShadow: "4px 4px 5px red"
+      };
       return (
         <Marker
+          style={{ markerStyles }}
           key={place._id}
           id={place}
           position={{
             lat: place.location.lat,
             lng: place.location.lng
           }}
-          label={place.title}
-          labelStyle={dfe}
+          label={{
+            text: place.title,
+            color: "black",
+            backgroundColor: "red",
+            textShadow: "4px 4px 5px red",
+            fontSize: "15px",
+            fontFamily: "Krub",
+            fontWeight: "600"
+          }}
           icon={{
             url: markerImg
           }}
           onClick={this.zoom}
-          style={{ backgroundColor: "blue", cursor: "pointer" }}
         />
       );
     });

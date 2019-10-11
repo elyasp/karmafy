@@ -18,7 +18,7 @@ export default class ItemFormView extends Component {
     this.state = {
       files: [],
       location: {},
-      imageUploaded: ""
+      imageStatus: "Click to upload images"
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.onButtonValueChange = this.onButtonValueChange.bind(this);
@@ -61,6 +61,9 @@ export default class ItemFormView extends Component {
     this.props.onValueChange({
       [name]: value
     });
+    this.setState({
+      imageStatus: "Loading..."
+    });
 
     const final = [];
     // uploads is an array that would hold all the post methods for each image to be uploaded, then we'd use axios.all()
@@ -92,6 +95,9 @@ export default class ItemFormView extends Component {
 
     // We would use axios `.all()` method to perform concurrent image upload to cloudinary.
     axios.all(uploads).then(() => {
+      this.setState({
+        imageStatus: "Done"
+      });
       const name = "imageUploaded";
       const value = "done";
       this.props.onValueChange({
@@ -168,7 +174,7 @@ export default class ItemFormView extends Component {
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
                   <strong>
-                    <h4>Click me to upload pictures</h4>
+                    <h4>{this.state.imageStatus}</h4>
                   </strong>
                 </div>
               )}

@@ -70,10 +70,11 @@ export const edit = (id, updatedItem) => {
   });
 };
 
-export const remove = item => {
+export const remove = data => {
+  console.log(data);
   return new Promise((resolve, reject) => {
     itemApi
-      .post(`/item/${item}`)
+      .post(`/item/${data.itemId}`, data)
       .then(response => {
         resolve(response.data);
       })
