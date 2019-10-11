@@ -177,6 +177,13 @@ export default class UserView extends Component {
     this.loadItem = this.loadItem.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.user !== prevProps.user) {
+      this.fetchData(this.props.user);
+    }
+  }
+
   itemUpdate(event) {
     let id = event.target.name;
     this.setState({

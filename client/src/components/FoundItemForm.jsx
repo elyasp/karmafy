@@ -194,6 +194,7 @@ export default class ItemFormView extends Component {
           </Form.Group>
           <br />
           <Form.Group style={{ height: "400px" }}>
+            <Form.Control required></Form.Control>
             <Form.Label>
               <h5>Click to add a marker near where you found the item.</h5>
             </Form.Label>
