@@ -15,7 +15,8 @@ const Button = styled.button`
   flex: 0 0 45%;
   width: 35%;
   font-size: 1.5rem;
-  margin: 2rem 0.5rem;
+  margin: 2rem auto;
+  display: block;
   padding: 1rem;
   border-radius: 5px;
   border: 0.5px solid white;
