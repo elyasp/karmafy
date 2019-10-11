@@ -77,7 +77,6 @@ export default class ItemAddView extends Component {
   }
 
   addItem() {
-    console.log("adding");
     const item = this.state.item;
     add(item)
       .then(item => {
@@ -119,6 +118,7 @@ export default class ItemAddView extends Component {
   }
 
   render() {
+    console.log("imgup", this.state.imageUploaded);
     const isEnabled = this.state.item.imageUploaded === "loading";
     return (
       <Positioner>

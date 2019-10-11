@@ -50,10 +50,12 @@ export class MapContainer extends Component {
       if (place.itemStatus === "Found") {
         markerImg = GreenMarker;
       }
-      const labelSize = { width: 220 };
-      const labelPadding = 8;
+      const markerStyles = {
+        textShadow: "4px 4px 5px red"
+      };
       return (
         <Marker
+          style={{ markerStyles }}
           key={place._id}
           id={place}
           position={{
@@ -63,7 +65,8 @@ export class MapContainer extends Component {
           label={{
             text: place.title,
             color: "black",
-            textShadow: "4px 4px 5px 5px red",
+            backgroundColor: "red",
+            textShadow: "4px 4px 5px red",
             fontSize: "15px",
             fontFamily: "Krub",
             fontWeight: "600"
