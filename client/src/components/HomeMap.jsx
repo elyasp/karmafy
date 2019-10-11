@@ -6,8 +6,8 @@ import {
   Marker,
   MarkerWithLabel
 } from "google-maps-react";
-import OrgMarker from "../images/marker.png";
-import GreenMarker from "../images/greenMarker.png";
+import OrgMarker from "../images/marker.svg";
+import GreenMarker from "../images/greenMarker.svg";
 import styled from "styled-components";
 import styles from "../images/GoogleMapStyles.json";
 require("dotenv").config();
@@ -60,31 +60,19 @@ export class MapContainer extends Component {
             lat: place.location.lat,
             lng: place.location.lng
           }}
-          label={place.title}
+          label={{
+            text: place.title,
+            color: "black",
+            textShadow: "4px 4px 5px 5px red",
+            fontSize: "15px",
+            fontFamily: "Krub",
+            fontWeight: "600"
+          }}
           icon={{
             url: markerImg
           }}
           onClick={this.zoom}
         />
-        // <MarkerWithLabel
-        //   labelStyle={{
-        //     textAlign: "center",
-        //     width: labelSize.width + "px",
-        //     backgroundColor: "#7fffd4",
-        //     fontSize: "14px",
-        //     padding: labelPadding + "px"
-        //   }}
-        //   id={place}
-        //   labelAnchor={{ x: labelSize.width / 2 + labelPadding, y: 80 }}
-        //   key={place.title}
-        //   position={{ lat: place.location.lat, lng: place.location.lng }}
-        //   icon={{
-        //     url: markerImg
-        //   }}
-        //   onClick={this.zoom}
-        // >
-        //   <span>{place.name}</span>
-        // </MarkerWithLabel>
       );
     });
   };
