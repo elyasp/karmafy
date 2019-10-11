@@ -18,7 +18,7 @@ export default class NavbarItem extends Component {
       <div>
         <Navbar className="sticky-top" expand="md">
           <Link to="/" className="btn">
-            <h4 className="title">KARMAFY</h4>
+            <h4 className="title">❁ KARMAFY</h4>
           </Link>
 
           {(!this.props.user && (

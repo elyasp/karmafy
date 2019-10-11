@@ -30,7 +30,7 @@ const CardWrapper = styled.div`
   margin-bottom: 2em;
 
   .carditem {
-    min-height: 20em;
+    min-height: 25em;
     border: none;
     background: hsl(0, 0%, 100%);
     transition: 0.4s;

@@ -111,7 +111,7 @@ export default class ItemFormView extends Component {
   render() {
     console.log(this.state.imageUploaded);
     const mapStyles = {
-      width: "50%",
+      width: "100%",
       height: "300px",
       display: "block",
       position: "static"

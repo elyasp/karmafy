@@ -129,13 +129,13 @@ export default class ItemFormView extends Component {
 
   render() {
     const mapStyles = {
-      width: "20px",
+      width: "100%",
       height: "300px",
       display: "block",
       position: "static"
     };
-    const containerStyle = { height: "300px", width: "85%" };
 
+    const containerStyle = { height: "300px", width: "100%" };
     return (
       <Form onSubmit={this.onFormSubmit}>
         <TextStyler>
@@ -193,8 +193,14 @@ export default class ItemFormView extends Component {
             </small>
           </Form.Group>
           <br />
+<<<<<<< HEAD
           <Form.Group style={{ height: "400px" }}>
             <Form.Control required></Form.Control>
+||||||| merged common ancestors
+          <Form.Group style={{ height: "400px" }}>
+=======
+          <Form.Group style={{ height: "400px", textAlign: "center" }}>
+>>>>>>> 794835051c474be0c6641ed5280d5e41e52a0bbe
             <Form.Label>
               <h5>Click to add a marker near where you found the item.</h5>
             </Form.Label>
