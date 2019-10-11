@@ -45,7 +45,6 @@ const CardWrapper = styled.div`
     max-height: 4em;
   }
   .markbutton {
-    padding: 1em 3em;
     min-height: 4em;
     max-height: 4em;
   }

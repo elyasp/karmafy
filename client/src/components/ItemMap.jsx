@@ -20,7 +20,7 @@ export class MapContainer extends Component {
 
     const containerStyle = {
       height: "300px",
-      width: "85%",
+      width: "100%",
       position: "static"
     };
     const item = this.props.item;

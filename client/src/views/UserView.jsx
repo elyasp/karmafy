@@ -188,6 +188,7 @@ export default class UserView extends Component {
     if (this.props.user !== prevProps.user) {
       this.fetchData(this.props.user);
     }
+    this.loadItem();
   }
 
   itemUpdate(event) {
@@ -200,7 +201,6 @@ export default class UserView extends Component {
   loadItem() {
     loadByUser(this.props.user._id)
       .then(item => {
-        console.log("new", item);
         this.setState({
           item
         });
@@ -219,11 +219,11 @@ export default class UserView extends Component {
     });
 
     let karmaNum = this.props.user.karmaCount;
-    console.log("1st num", clickedObj[0].itemStatus);
+
     if (clickedObj[0].itemStatus === "Found") {
       karmaNum += 1;
     }
-    console.log("2t num", karmaNum);
+
     let data = {
       itemId: id,
       userId: this.props.user._id,
