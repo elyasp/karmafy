@@ -159,6 +159,7 @@ router.post("/item/:id", (req, res, next) => {
   const id = req.params.id;
   const userId = req.body.userId;
   const karma = req.body.karmaNum;
+  console.log(karma);
   Promise.all([
     User.findOneAndUpdate({ _id: userId }, { karmaCount: karma }),
     Item.findOneAndUpdate({ _id: id }, { resolved: true })
@@ -166,7 +167,6 @@ router.post("/item/:id", (req, res, next) => {
     .then(item => {
       if (item) {
         res.json({ type: "success", data: { item } });
-        console.log("is this it", item);
       } else {
         next(new Error("POST_COULD_NOT_BE_EDITED"));
       }
