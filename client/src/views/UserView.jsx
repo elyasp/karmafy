@@ -30,9 +30,7 @@ const ProfileWrapper = styled.div`
     font-weight: 200;
     font-size: 2em;
   }
-  .editlink {
-    text-decoration: none;
-  }
+
   h3 {
     font-weight: 200;
     font-size: 1em;
@@ -80,6 +78,16 @@ const CardWrapper = styled.div`
   }
   .editlink {
     text-decoration: none;
+  }
+
+  .editbutton {
+    border-radius: 2px solid black;
+    background: rgb(0, 199, 133);
+  }
+
+  .markbutton {
+    border-radius: 2px solid black;
+    background: rgb(0, 199, 133);
   }
 `;
 
@@ -228,7 +236,7 @@ export default class UserView extends Component {
 
                 <h3>{this.props.user.email}</h3>
                 <Link to={`${this.props.user._id}/edit`} className="editlink">
-                  <Button>
+                  <Button className="editbutton">
                     <h5>Edit Profile</h5>
                   </Button>
                 </Link>
@@ -287,7 +295,9 @@ export default class UserView extends Component {
                                     to={`/item/${item._id}/edit`}
                                     className="mx-3 editlink"
                                   >
-                                    <Button>Edit Item</Button>
+                                    <Button className="editbutton">
+                                      Edit Item
+                                    </Button>
                                   </Link>
 
                                   <Button
