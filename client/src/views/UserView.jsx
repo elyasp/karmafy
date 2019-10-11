@@ -30,9 +30,7 @@ const ProfileWrapper = styled.div`
     font-weight: 200;
     font-size: 2em;
   }
-  .editlink {
-    text-decoration: none;
-  }
+
   h3 {
     font-weight: 200;
     font-size: 1em;
@@ -77,6 +75,19 @@ const CardWrapper = styled.div`
     font-size: 14px;
     color: rgba(3, 0, 0, 0.808);
     margin-left: 1em;
+  }
+  .editlink {
+    text-decoration: none;
+  }
+
+  .editbutton {
+    border-radius: 2px solid black;
+    background: rgb(0, 199, 133);
+  }
+
+  .markbutton {
+    border-radius: 2px solid black;
+    background: rgb(0, 199, 133);
   }
 `;
 
@@ -225,13 +236,10 @@ export default class UserView extends Component {
 
                 <h3>{this.props.user.email}</h3>
                 <Link to={`${this.props.user._id}/edit`} className="editlink">
-                  <Button>
+                  <Button className="editbutton">
                     <h5>Edit Profile</h5>
                   </Button>
                 </Link>
-                <p>◯</p>
-                <p>◯</p>
-                <p>◯</p>
               </ProfileWrapper>
             </ViewWrapper>
             <ViewWrapper>
@@ -249,9 +257,9 @@ export default class UserView extends Component {
                             className="text-center carditem"
                             style={{ width: "100%" }}
                           >
-                            {item.resolved === "false" ? (
+                            {item.resolved === false ? (
                               <FoundCardHeader>
-                                <h6>᛫ ᛫ PENDING ᛫ ᛫ </h6>
+                                <h6>᛫ ᛫ PENDING ᛫ ᛫</h6>
                               </FoundCardHeader>
                             ) : (
                               <LostCardHeader>
@@ -282,18 +290,18 @@ export default class UserView extends Component {
                               {item.resolved ? (
                                 <h3>Item Reunited!</h3>
                               ) : (
-                                <div>
-                                  <h3>{item.itemStatus}</h3>
+                                <div className="d-flex">
                                   <Link
                                     to={`/item/${item._id}/edit`}
-                                    className="mx-3 btn btn-danger"
-                                    variant="primary"
+                                    className="mx-3 editlink"
                                   >
-                                    Edit
+                                    <Button className="editbutton">
+                                      Edit Item
+                                    </Button>
                                   </Link>
-                                  {/* <Form onSubmit={this.deleteItem}> */}
+
                                   <Button
-                                    className="mt-4 mx-3 btn btn-danger"
+                                    className="markbutton"
                                     type="submit"
                                     value={item._id}
                                     name={item._id}
@@ -301,7 +309,6 @@ export default class UserView extends Component {
                                   >
                                     Mark As Resolved
                                   </Button>
-                                  {/* </Form> */}
                                 </div>
                               )}
                             </Card.Body>
