@@ -43,36 +43,37 @@ body {
     #1eff00,
     #5bf7a9,
     #a2f1fc,
-    #c272f8,
+    #ce93f5,
+    #a2f1fc,
     #5eeedb,
     #1eff00
   );
   background-size: 600% 600%;
   position: relative;
   animation-name: delta;
-  animation-duration: 20s;
+  animation-duration: 25s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
 * {
-  font-family: "Krub", sans-serif;
+  font-family: "Krub", "Segoe UI", sans-serif;
 }
 
 .title {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
   letter-spacing: 0.2em;
-  color: hsla(202, 73%, 18%, 0.589);
-  text-shadow: 1px 1px 4px #f9fdfc;
-  transition: all 0.6s ease;
-  -webkit-transition: all 0.6s ease;
+  color: hsla(202, 74%, 21%, 0.815);
+  text-shadow: 1px 1px 10px #fcfcfc;
+  transition: all 1s ease;
+  -webkit-transition: all 0.8s ease;
 
   &:hover {
     text-decoration: none;
-    color: rgb(0, 0, 0);
-    transition: all 0.8s ease;
-    -webkit-transition: all 0.8s ease;
+    color: rgba(255, 196, 0, 0.973);
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
   }
 }
 
