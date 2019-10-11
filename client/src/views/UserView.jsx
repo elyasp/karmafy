@@ -52,6 +52,8 @@ const CardWrapper = styled.div`
     border: none;
     background: hsl(0, 0%, 100%);
     transition: 0.4s;
+    width: 100%;
+    min-height: 25em;
     cursor: pointer;
     box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
       10px 10px 30px 15px rgba(0, 0, 0, 0.22);
@@ -253,10 +255,7 @@ export default class UserView extends Component {
                     {this.state.item.map(item => (
                       <Col md={4}>
                         <CardWrapper>
-                          <Card
-                            className="text-center carditem"
-                            style={{ width: "100%" }}
-                          >
+                          <Card className="text-center carditem">
                             {item.resolved === false ? (
                               <FoundCardHeader>
                                 <h6>᛫ ᛫ PENDING ᛫ ᛫</h6>

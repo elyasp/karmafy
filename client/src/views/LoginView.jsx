@@ -75,7 +75,7 @@ export default class LoginView extends Component {
     })
       .then(user => {
         this.props.loadUser(user);
-        this.props.history.push(`/all`);
+        this.props.history.push(`/`);
       })
       .catch(error => {
         this.loginError();

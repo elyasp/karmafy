@@ -114,13 +114,13 @@ export default class ItemFormView extends Component {
 
   render() {
     const mapStyles = {
-      width: "20px",
+      width: "100%",
       height: "300px",
       display: "block",
       position: "static"
     };
-    const containerStyle = { height: "300px", width: "85%" };
 
+    const containerStyle = { height: "300px", width: "100%" };
     return (
       <Form onSubmit={this.onFormSubmit}>
         <TextStyler>
@@ -178,7 +178,7 @@ export default class ItemFormView extends Component {
             </small>
           </Form.Group>
           <br />
-          <Form.Group style={{ height: "400px" }}>
+          <Form.Group style={{ height: "400px", textAlign: "center" }}>
             <Form.Label>
               <h5>Click to add a marker near where you found the item.</h5>
             </Form.Label>

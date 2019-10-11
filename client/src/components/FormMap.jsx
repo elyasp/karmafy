@@ -41,7 +41,7 @@ export class MapContainer extends Component {
       position: "static"
     };
 
-    const containerStyle = { height: "350px", width: "100%" };
+    const containerStyle = { height: "350px", width: "93%" };
 
     const lat = this.state.point.lat;
     const lng = this.state.point.lng;

@@ -18,10 +18,12 @@ import styled from "styled-components";
 
 const PageWrapper = styled.div`
   font-weight: 400;
+  margin-bottom: 10vh;
 
   .accessdenied {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
   }
 `;
@@ -33,6 +35,20 @@ const CardWrapper = styled.div`
   margin: 0 auto;
   box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
     10px 10px 30px 15px rgba(0, 0, 0, 0.22);
+
+  .map {
+    display: flex;
+    justify-content: center;
+  }
+
+  .editbutton {
+    max-height: 4em;
+  }
+  .markbutton {
+    padding: 1em 3em;
+    min-height: 4em;
+    max-height: 4em;
+  }
 `;
 
 const MailWrapper = styled.div`
@@ -42,24 +58,16 @@ const MailWrapper = styled.div`
   font-weight: 600;
 `;
 
-// const Button = styled.button`
-//   color: white;
-//   border-radius: 5px;
-//   border: 2px solid white;
-//   background: none;
-//   margin-right: 30px;
-//   &:hover {
-//     color: black;
-//     background: hsla(360, 100%, 49%, 0.34);
-//   }
-// `;
-
 const Button = styled.button`
   width: 100%;
   border: 1px solid black;
+
+  min-height: 3em;
+  margin: 1em 0;
   border-radius: 5px;
   background-color: white;
   color: black;
+
   &:hover {
     color: black;
     background: hsla(360, 100%, 49%, 0.34);
@@ -227,7 +235,7 @@ export default class FoundItemView extends Component {
                   <div className="container">
                     <Row>
                       <Col m={6}>
-                        <Button className="h-100">
+                        <Button className="h-100 editbutton">
                           <Link
                             to={`/item/${item._id}/edit`}
                             className="w-100 text-body"
@@ -237,7 +245,10 @@ export default class FoundItemView extends Component {
                         </Button>
                       </Col>
                       <Col m={6}>
-                        <Button className="" onClick={this.deleteItem}>
+                        <Button
+                          className="markbutton"
+                          onClick={this.deleteItem}
+                        >
                           Mark As Resolved
                         </Button>
                       </Col>
@@ -254,7 +265,7 @@ export default class FoundItemView extends Component {
           </h5>
           <br />
 
-          <div className="mx-auto mt-3" style={{ width: "100%" }}>
+          <div className="mx-auto mt-3 map" style={{ width: "100%" }}>
             <Map item={item.location} />
           </div>
 
@@ -297,6 +308,7 @@ export default class FoundItemView extends Component {
             </div>
           ) : (
             <div className="accessdenied">
+              <h5 className="text-center">Login or sign up to contact </h5>
               <Link to="/login">
                 <Button>LOG IN</Button>
               </Link>
