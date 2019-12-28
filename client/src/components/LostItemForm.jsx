@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
 import Dropzone from "react-dropzone";
 import axios from "axios";
 import Map from "./FormMap";
 import Form from "react-bootstrap/Form";
-import styled from "styled-components";
-
-const TextStyler = styled.div`
-  text-shadow: 1px 1px 9px #000;
-  text-align: center;
-`;
+import { TextStyler } from "./styles/lostcontactform";
 
 export default class ItemFormView extends Component {
   constructor(props) {

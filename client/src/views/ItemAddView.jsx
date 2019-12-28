@@ -1,46 +1,8 @@
 import React, { Component } from "react";
-
-import styled from "styled-components";
-// import { Form, Button } from "react-bootstrap";
-
 import FoundItemForm from "../components/FoundItemForm";
 import LostItemForm from "../components/LostItemForm";
 import { add } from "./../services/itemApi";
-import { uploadImage } from "./../services/itemApi";
-
-////////////////////// STYLE ////////////////////////
-
-const Button = styled.button`
-  color: white;
-  flex: 0 0 45%;
-  width: 35%;
-  font-size: 1.5rem;
-  margin: 2rem auto;
-  display: block;
-  padding: 1rem;
-  border-radius: 5px;
-  border: 0.5px solid white;
-  background: none;
-  transition: all 0.6s ease;
-  -webkit-transition: all 0.6s ease;
-  text-shadow: 1px 1px 9px #2c0401;
-  &:hover {
-    color: black;
-    text-shadow: 1px 1px 7px #2c0401;
-    background: hsla(360, 100%, 49%, 0.5);
-    transform: scale(1.1, 1.1);
-    transition: all 0.6s ease;
-    -webkit-transition: all 0.6s ease;
-  }
-`;
-
-// const Positioner = styled.div`
-//   margin-top: 30vh;
-// `;
-
-const Positioner = styled.div``;
-
-/////////////////////// END OF STYLE ////////////////////
+import { Button } from "./styles/itemaddview";
 
 export default class ItemAddView extends Component {
   constructor(props) {
@@ -122,7 +84,7 @@ export default class ItemAddView extends Component {
     console.log("imgup", this.state.imageUploaded);
     const isEnabled = this.state.item.imageUploaded === "loading";
     return (
-      <Positioner>
+      <div>
         <div class="container">
           <h1 className="text-center ">Add an item to the exchange</h1>
           <div class="container mx-auto ">
@@ -160,7 +122,7 @@ export default class ItemAddView extends Component {
             </FoundItemForm>
           )}
         </div>
-      </Positioner>
+      </div>
     );
   }
 }

@@ -2,39 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import HomeView from "./HomeView";
-
-import styled from "styled-components";
 import { editUser, removeUser } from "./../services/authServices";
-// import Importer from "./ItemAddView";
-
-/////////////////////// STYLE //////////////////////////
-
-const ViewWrapper = styled.div`
-  color: #fff;
-  width: 100%;
-  height: 100vh;
-  padding: 5px;
-  background: hsla(254, 100%, 42%, 0.2);
-`;
-
-const ProfileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Button = styled.button`
-  margin: 10px;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  background: none;
-  &:hover {
-    color: black;
-  }
-`;
-
-///////////////////// END OF STYLE //////////////////////
+import { ViewWrapper, ProfileWrapper, Button } from "./styles/edituserview.js";
 
 export default class EditUserView extends Component {
   constructor(props) {

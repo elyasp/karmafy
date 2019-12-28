@@ -1,114 +1,15 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { list } from "./../services/itemApi";
 import { Link } from "react-router-dom";
-import { Card, Col, Row, Container, Carousel } from "react-bootstrap";
-import styled from "styled-components";
-import { loadByType } from "../services/itemApi";
+import { Card, Col, Row, Container, Carousel, Button } from "react-bootstrap";
 import HomeMap from "./HomeMap";
-//////////////////////////////////////// STYLE //////////////////////////////////////
-
-const Map = styled.div`
-  height: 500px;
-  max-width: 90vh;
-  margin-left: 8%;
-`;
-
-const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 2vh;
-
-  .searchfilter {
-    display: flex;
-  }
-`;
-
-const CardWrapper = styled.div`
-  margin-top: 2.5em;
-  margin-bottom: 2em;
-
-  .carditem {
-    min-height: 25em;
-    border: none;
-    background: hsl(0, 0%, 100%);
-    transition: 0.4s;
-    cursor: pointer;
-    box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
-      10px 10px 30px 15px rgba(0, 0, 0, 0.22);
-
-    &:hover {
-      transform: scale(1.05, 1.05);
-      transition: 0.4s;
-      box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
-        10px 10px 30px 15px rgba(0, 0, 0, 0.22);
-    }
-  }
-
-  .cardtitle {
-    font-size: 20px;
-    color: black;
-  }
-
-  .cardsubtitle {
-    display: flex;
-    justify-content: flex-start;
-    font-size: 14px;
-    color: rgba(3, 0, 0, 0.808);
-    margin-left: 1em;
-  }
-`;
-
-const Button = styled.div`
-  border: 0.5px solid #ffffffb0;
-  border-radius: 2px;
-  display: flex;
-  justify-self: center;
-  font-size: 16px;
-  margin: 1em;
-  color: black;
-  padding: .75em 3em
-
-
-  background: white;
-  transition: all 0.4s ease;
-  -webkit-transition: all 0.4s ease;
-
-  
-  &:hover {
-    background: hsla(0, 0%, 98%, 0.514);
-    transition: all 0.4s ease;
-    -webkit-transition: all 0.4s ease;
-    color: black;
-  }
-`;
-
-const FoundCardHeader = styled.div`
-  background: black;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  h4 {
-    margin-top: 0.2em;
-    color: #5bf7a9;
-    font-family: "Courier New", Courier, monospace;
-    letter-spacing: 0.3em;
-  }
-`;
-
-const LostCardHeader = styled.div`
-  background: black;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  h4 {
-    margin-top: 0.2em;
-    color: #ff3c00;
-    font-family: "Courier New", Courier, monospace;
-    letter-spacing: 0.3em;
-  }
-`;
-
-//////////////////////////////////////////////// END OF STYLE //////////////////////////////////////////////
+import {
+  Center,
+  Map,
+  CardWrapper,
+  FoundCardHeader,
+  LostCardHeader
+} from "./styles/itemcard";
 
 export default class ItemCard extends Component {
   constructor(props) {
@@ -117,43 +18,12 @@ export default class ItemCard extends Component {
       item: null,
       items: [],
       searchTerm: "",
-      lostButton: "",
-      foundButton: ""
+      itemType: "",
+      className: "filterBtn"
     };
 
-    this.lost = this.lost.bind(this);
-    this.found = this.found.bind(this);
+    this.buttonFilter = this.buttonFilter.bind(this);
     this.searchFilter = this.searchFilter.bind(this);
-  }
-
-  lost() {
-    if (this.state.lostButton === "clicked") {
-      this.setState({
-        lostButton: "",
-        searchTerm: ""
-      });
-    } else {
-      this.setState({
-        lostButton: "clicked",
-        foundButton: "",
-        searchTerm: "Lost"
-      });
-    }
-  }
-
-  found() {
-    if (this.state.foundButton === "clicked") {
-      this.setState({
-        foundButton: "",
-        searchTerm: ""
-      });
-    } else {
-      this.setState({
-        foundButton: "clicked",
-        lostButton: "",
-        searchTerm: "Found"
-      });
-    }
   }
 
   searchFilter(event) {
@@ -162,18 +32,25 @@ export default class ItemCard extends Component {
     });
   }
 
+  buttonFilter(event) {
+    this.setState({
+      itemType: event.target.value
+    });
+  }
+
   get filteredSearchList() {
     const query = this.state.searchTerm;
     const item = this.state.items;
-    if (
-      this.state.lostButton === "clicked" ||
-      this.state.foundButton === "clicked"
-    ) {
-      return item.filter(item => item.itemStatus === query);
-    } else {
+    const type = this.state.itemType;
+
+    if (!type) {
       return item.filter(item =>
         item.title.toLowerCase().includes(query.toLowerCase())
       );
+    } else if (type) {
+      return item
+        .filter(item => item.itemStatus === type)
+        .filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
     }
   }
 
@@ -194,15 +71,28 @@ export default class ItemCard extends Component {
   }
 
   render() {
+    console.log(this.state.itemType);
     return (
       (this.state.items && (
         <Container>
           <Center>
             <div className="searchfilter">
-              <Button name="Lost" onClick={this.lost} value="Lost">
+              <Button
+                className="filterBtn"
+                id={this.state.itemType === "Lost" ? "clicked" : ""}
+                name="Lost"
+                onClick={this.buttonFilter}
+                value="Lost"
+              >
                 Lost
               </Button>
-              <Button name="Found" onClick={this.found} value="Found">
+              <Button
+                className="filterBtn"
+                id={this.state.itemType === "Found" ? "clicked" : ""}
+                name="Found"
+                onClick={this.buttonFilter}
+                value="Found"
+              >
                 Found
               </Button>
             </div>
@@ -217,6 +107,7 @@ export default class ItemCard extends Component {
               ></input>
             </div>
           </Center>
+
           <Map>
             <HomeMap items={this.filteredSearchList} />
           </Map>

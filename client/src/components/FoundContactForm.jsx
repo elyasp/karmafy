@@ -1,31 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Card, Form } from "react-bootstrap";
-
-import styled from "styled-components";
-
-///////////////// STYLE /////////////////////
-
-const Button = styled.button`
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  border: 2px solid white;
-  background: none;
-  margin-right: 30px;
-  &:hover {
-    color: black;
-    background: hsla(360, 100%, 49%, 0.34);
-  }
-`;
-
-const TextStyler = styled.div`
-  text-shadow: 1px 1px 9px #000;
-  text-align: center;
-  font-weight: 200;
-  margin-bottom: 10vh;
-`;
-
-//////////////////// END OF STYLE //////////
+import { Form } from "react-bootstrap";
+import { Button, TextStyler } from "./styles/foundcontactform";
 
 export default class FoundContactForm extends Component {
   render() {

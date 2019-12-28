@@ -1,118 +1,23 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import MessageSent from "./MessageSentView";
-
 import Carousel from "react-bootstrap/Carousel";
-import { Card, Form, Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import axios from "axios";
-import { remove } from "./../services/itemApi";
-import { edit } from "../services/itemApi";
-import { load } from "../services/itemApi";
+import { remove, load } from "./../services/itemApi";
 import Map from "../components/ItemMap";
-
 import LostContactForm from "../components/LostContactForm";
 import FoundContactForm from "../components/FoundContactForm";
-import styled from "styled-components";
-
-//////////////////////// STYLE ////////////////////////
-
-const PageWrapper = styled.div`
-  font-weight: 400;
-  margin-bottom: 10vh;
-
-  .accessdenied {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  }
-`;
-
-const CardWrapper = styled.div`
-  color: black;
-  width: 80%;
-  border-radius: 2px;
-  margin: 0 auto;
-  box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
-    10px 10px 30px 15px rgba(0, 0, 0, 0.22);
-
-  .map {
-    display: flex;
-    justify-content: center;
-  }
-
-  .editbutton {
-    max-height: 4em;
-  }
-  .markbutton {
-    min-height: 4em;
-    max-height: 4em;
-  }
-`;
-
-const MailWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 40px;
-  font-weight: 600;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  border: 1px solid black;
-
-  min-height: 3em;
-  margin: 1em 0;
-  border-radius: 5px;
-  background-color: white;
-  color: black;
-
-  &:hover {
-    color: black;
-    background: hsla(360, 100%, 49%, 0.34);
-  }
-`;
-
-const Center = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 30vh;
-
-  h3 {
-    font-size: 50px;
-    font-weight: 200;
-  }
-`;
-const TextStyler = styled.div`
-  text-shadow: 1px 1px 9px #000;
-  text-align: center;
-`;
-
-const FoundCardHeader = styled.div`
-  background: black;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  h4 {
-    margin-top: 0.2em;
-    color: #5bf7a9;
-    font-family: "Courier New", Courier, monospace;
-    letter-spacing: 0.3em;
-  }
-`;
-
-const LostCardHeader = styled.div`
-  background: black;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  h4 {
-    margin-top: 0.2em;
-    color: #ff3c00;
-    font-family: "Courier New", Courier, monospace;
-    letter-spacing: 0.3em;
-  }
-`;
-
-//////////////////// END OF STYLE ////////////////////
+import {
+  PageWrapper,
+  CardWrapper,
+  FoundCardHeader,
+  LostCardHeader,
+  Button,
+  MailWrapper,
+  TextStyler,
+  Center
+} from "./styles/itemview";
 
 export default class FoundItemView extends Component {
   constructor(props) {
@@ -191,7 +96,6 @@ export default class FoundItemView extends Component {
   }
 
   render() {
-    const containerStyle = { height: "200px", width: "85%" };
     const item = this.state.item && this.state.item;
     const user = this.props.user;
 

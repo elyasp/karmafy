@@ -8,20 +8,8 @@ import {
 } from "google-maps-react";
 import OrgMarker from "../images/marker.svg";
 import GreenMarker from "../images/greenMarker.svg";
-import styled from "styled-components";
 import styles from "../images/GoogleMapStyles.json";
 require("dotenv").config();
-
-// const {
-//   MarkerWithLabel
-// } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
-
-const Sizer = styled.div`
-  display: flex;
-  height: 500px;
-  max-width: 90vh;
-  margin-left: 4%;
-`;
 
 export class MapContainer extends Component {
   constructor(props) {
@@ -45,7 +33,7 @@ export class MapContainer extends Component {
   }
 
   displayMarkers = () => {
-    return this.state.locations.map((place, index) => {
+    return this.state.locations.map(place => {
       let markerImg = OrgMarker;
       if (place.itemStatus === "Found") {
         markerImg = GreenMarker;
@@ -88,26 +76,24 @@ export class MapContainer extends Component {
       position: "static"
     };
 
-    const containerStyle = { height: "450px", width: "85%" };
+    const containerStyle = { height: "450px", width: "80%" };
 
     return (
-      <Sizer>
-        <Map
-          google={this.props.google}
-          zoom={14}
-          style={mapStyles}
-          initialCenter={{ lat: 38.7223, lng: -9.1393 }}
-          onClick={this.onMapClick}
-          containerStyle={containerStyle}
-          onBoundsChange={this._onBoundsChange}
-          disableDefaultUI={true} // disable default map UI
-          draggable={true} // make map draggable
-          zoomControl={true} // allow scale controle
-          styles={styles} // change default map styles
-        >
-          {this.displayMarkers()}
-        </Map>
-      </Sizer>
+      <Map
+        google={this.props.google}
+        zoom={14}
+        style={mapStyles}
+        initialCenter={{ lat: 38.7223, lng: -9.1393 }}
+        onClick={this.onMapClick}
+        containerStyle={containerStyle}
+        onBoundsChange={this._onBoundsChange}
+        disableDefaultUI={true} // disable default map UI
+        draggable={true} // make map draggable
+        zoomControl={true} // allow scale controle
+        styles={styles} // change default map styles
+      >
+        {this.displayMarkers()}
+      </Map>
     );
   }
 }

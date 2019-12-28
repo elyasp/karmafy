@@ -1,18 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Navbar, Nav, Form } from "react-bootstrap";
-import ItemAddView from "./../views/ItemAddView";
 import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-
-/////////////////////////// STYLE //////////////////////
-
-////////////////////// END OF STYLE ///////////////////////
 
 export default class NavbarItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>

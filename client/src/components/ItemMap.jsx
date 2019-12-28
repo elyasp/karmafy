@@ -1,14 +1,9 @@
-// require("dotenv").config();
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-
 import React, { Component } from "react";
-// const styles = require("../images/GoogleMapStyles.json");
 import styles from "../images/GoogleMapStyles.json";
-export class MapContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
+require("dotenv").config();
 
+export class MapContainer extends Component {
   render() {
     const mapStyles = {
       width: "100%",
@@ -20,7 +15,7 @@ export class MapContainer extends Component {
 
     const containerStyle = {
       height: "300px",
-      width: "100%",
+      width: "85%",
       position: "static"
     };
     const item = this.props.item;

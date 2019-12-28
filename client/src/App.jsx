@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
 
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";

@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
 import Dropzone from "react-dropzone";
 import axios from "axios";
 import Map from "./FormMap";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { uploadImage } from "../services/itemApi";
 import styled from "styled-components";
 
 const TextStyler = styled.div`
@@ -129,13 +125,13 @@ export default class ItemFormView extends Component {
 
   render() {
     const mapStyles = {
-      width: "100%",
+      width: "80%",
       height: "300px",
       display: "block",
       position: "static"
     };
 
-    const containerStyle = { height: "300px", width: "100%" };
+    const containerStyle = { height: "300px", width: "80%" };
     return (
       <Form onSubmit={this.onFormSubmit}>
         <TextStyler>

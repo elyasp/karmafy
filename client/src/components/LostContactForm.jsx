@@ -1,37 +1,8 @@
 import React, { Component, Fragment } from "react";
-import { Card, Form } from "react-bootstrap";
-
-import styled from "styled-components";
-
-///////////////// STYLE /////////////////////
-
-const Button = styled.button`
-  color: white;
-  display: block;
-  padding: 10px;
-  border-radius: 5px;
-  border: 2px solid white;
-  background: none;
-  margin: 0 auto;
-  &:hover {
-    color: black;
-    background: hsla(360, 100%, 49%, 0.34);
-  }
-`;
-
-const TextStyler = styled.div`
-  text-shadow: 1px 1px 9px #000;
-  text-align: center;
-  margin-bottom: 10vh;
-`;
-
-//////////////////// END OF STYLE //////////
+import { Form } from "react-bootstrap";
+import { Button, TextStyler } from "./styles/lostcontactform";
 
 export default class LostContactForm extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>
