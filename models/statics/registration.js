@@ -12,16 +12,15 @@ module.exports = function({
 }) {
   const Model = this;
 
-  //   console.log("THE USER IS", name, email, password, profile, location, karmaCount);
   return Model.findOne({ email })
-    .then(user => {
+    .then((user) => {
       if (user) {
         throw new Error("EXISTING USER");
       } else {
         return bcrypt.hash(password, 10);
       }
     })
-    .then(hash => {
+    .then((hash) => {
       return Model.create({
         name,
         email,
@@ -31,10 +30,10 @@ module.exports = function({
         karmaCount
       });
     })
-    .then(user => {
+    .then((user) => {
       return Promise.resolve(user);
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(`Error signing up: ${error}`);
       return Promise.reject(error);
     });

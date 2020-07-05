@@ -20,7 +20,7 @@ const terminate = () => {
 process.on("SIGINT", terminate);
 process.on("SIGTERM", terminate);
 
-const onError = error => {
+const onError = (error) => {
   const { syscall, port, code } = error;
   if (syscall !== "listen") throw error;
   switch (code) {
@@ -37,7 +37,7 @@ const onError = error => {
   }
 };
 
-const onListening = server => {
+const onListening = (server) => {
   const { port } = server.address();
   debug(`Node server listening on ${port}`);
 };
@@ -46,7 +46,7 @@ const initiate = () => {
   app.set("port", PORT);
 
   const server = app.listen(PORT);
-  server.on("error", error => onError(error));
+  server.on("error", (error) => onError(error));
   server.on("listening", () => onListening(server));
 };
 
@@ -56,8 +56,9 @@ database
     debug(`Lost and Found Database connected to URI "${URI}"`);
     initiate();
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(`There was an error connecting the database to URI "${URI}"`);
+    console.log(">>>>>>>>>>>>> ERROR CATCHED ON DBCONNECT", error.message);
     debug(error);
     process.exit(1);
   });

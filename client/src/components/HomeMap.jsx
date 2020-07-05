@@ -46,10 +46,10 @@ export class MapContainer extends Component {
           style={{ markerStyles }}
           key={place._id}
           id={place}
-          position={{
-            lat: place.location.lat,
-            lng: place.location.lng
-          }}
+          // position={{
+          //   lat: place.location.lat,
+          //   lng: place.location.lng
+          // }}
           label={{
             text: place.title,
             color: "black",

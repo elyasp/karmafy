@@ -12,11 +12,14 @@
       "jsx": true,
       "impliedStrict": false
     }
-},
+  },
   "rules": {
     "comma-dangle": ["warn", "never"],
     "func-call-spacing": ["warn", "never"],
-    "keyword-spacing": ["warn",  { "before": true, "after": true }],
+    "keyword-spacing": ["warn", {
+      "before": true,
+      "after": true
+    }],
     "no-unused-vars": ["warn"],
     "no-undef": ["error"],
     "no-var": ["warn"],
@@ -25,14 +28,17 @@
     "no-labels": ["error"],
     "prefer-arrow-callback": ["warn"],
     "prefer-const": ["warn"],
-    "quote-props": [ "off" ],
+    "quote-props": ["off"],
     "semi": ["warn", "always"],
-    "space-before-function-paren": ["warn", {
-      "anonymous": "never",
-      "named": "never",
-      "asyncArrow": "always"
-    }],
-    "strict": ["error", "global" ],
+    "space-before-function-paren": [
+      "warn",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "strict": ["error", "global"],
     "space-before-blocks": ["warn", "always"]
   }
 }

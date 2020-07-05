@@ -27,6 +27,7 @@ export const registerService = ({
         resolve(user);
       })
       .catch(error => {
+        console.log(">>>>>>>>", error)
         reject(error);
       });
   });

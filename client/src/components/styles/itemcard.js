@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Map = styled.div `
+export const Map = styled.div`
   height: 500px;
   max-width: 90vh;
   margin-left: 8%;
 `;
 
-export const Center = styled.div `
+export const Center = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +49,7 @@ export const Center = styled.div `
     }
 `;
 
-export const CardWrapper = styled.div `
+export const CardWrapper = styled.div`
   margin-top: 2.5em;
   margin-bottom: 2em;
 
@@ -84,7 +84,7 @@ export const CardWrapper = styled.div `
   }
 `;
 
-export const FoundCardHeader = styled.div `
+export const FoundCardHeader = styled.div`
   background: black;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -96,7 +96,7 @@ export const FoundCardHeader = styled.div `
   }
 `;
 
-export const LostCardHeader = styled.div `
+export const LostCardHeader = styled.div`
   background: black;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;

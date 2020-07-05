@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const mongooseConnectionOptions = {
   useNewUrlParser: true,
@@ -8,5 +8,5 @@ const mongooseConnectionOptions = {
   useUnifiedTopology: true
 };
 
-exports.connect = uri => mongoose.connect(uri, mongooseConnectionOptions);
+exports.connect = (uri) => mongoose.connect(uri, mongooseConnectionOptions);
 exports.disconnect = mongoose.disconnect;
